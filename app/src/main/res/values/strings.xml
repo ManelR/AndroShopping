@@ -1,7 +1,25 @@
 <resources>
-    <string name="app_name">AndroShopping</string>
 
-    <string name="hello_world">Hello world!</string>
+    <!-- Generic Strings -->
+    <string name="app_name">AndroShopping</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_splash_scree">SplashScreee</string>
+
+
+    <!-- Splash Screen Activity Strings -->
+    <string name="title_activity_splash_scree">SplashScreen</string>
+
+
+    <!-- Login Activity Strings -->
+    <string name="activity_login_lblLoginHeader">Autenticación</string>
+    <string name="activity_login_lblEmail">Correo Electrónico:</string>
+    <string name="activity_login_txtEmailHint">ejemplo@dominio.com</string>
+    <string name="activity_login_lblContraseña">Contraseña:</string>
+    <string name="activity_login_txtContraseñaHint">Introduce tu contraseña...</string>
+    <string name="activity_login_lblCheckbox">Recuerdame la próxima vez</string>
+    <string name="activity_login_btnLogin">Entrar</string>
+    <string name="activity_login_linkNewAccount">No tienes cuenta? Registrate</string>
+
+
+
+
 </resources>

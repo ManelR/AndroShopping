@@ -52,6 +52,7 @@ public class BaseActivity extends AppCompatActivity {
         fragmentManager = getSupportFragmentManager();
 
         //Import Typefaces
+
         normalFont = Typeface.createFromAsset(getAssets(),"fonts/OpenSans-Regular.ttf");
         boldFont = Typeface.createFromAsset(getAssets(),"fonts/OpenSans-Bold.ttf");
         italicFont = Typeface.createFromAsset(getAssets(),"fonts/OpenSans-Italic.ttf");

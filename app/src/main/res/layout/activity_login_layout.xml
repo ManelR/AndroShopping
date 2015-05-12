@@ -1,0 +1,146 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/solid_orange"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerInParent="true">
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="vertical">
+
+
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:orientation="horizontal"
+                   android:layout_margin="8dp"
+                   android:padding="8dp"
+                   android:gravity="center">
+
+                   <ImageView
+                       android:id="@+id/acticity_login_imgHeader"
+                       android:layout_width="40dp"
+                       android:layout_height="40dp"
+                       android:src="@mipmap/ic_launcher"/>
+
+                   <TextView
+                       android:id="@+id/activity_login_lblHeader"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="@string/activity_login_lblLoginHeader"
+                       android:padding="8dp"
+                       android:textSize="30sp"
+                       android:textStyle="bold"
+                       android:textColor="@color/solid_black"/>
+
+               </LinearLayout>
+
+               <TextView
+                   android:id="@+id/activity_login_lblEmail"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:text="@string/activity_login_lblEmail"
+                   android:textColor="@color/solid_black"
+                   android:layout_margin="12dp"
+                   android:paddingLeft="8dp"
+                   android:paddingRight="8dp"
+                   android:textSize="18sp"/>
+
+               <EditText
+                   android:id="@+id/activity_login_txtEmail"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:padding="8dp"
+                   android:layout_marginLeft="12dp"
+                   android:layout_marginRight="12dp"
+                   android:textSize="18sp"
+                   android:hint="@string/activity_login_txtEmailHint"
+                   android:textColorHint="@color/solid_black"/>
+
+               <TextView
+                   android:id="@+id/activity_login_lblContraseña"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:text="@string/activity_login_lblContraseña"
+                   android:textColor="@color/solid_black"
+                   android:layout_margin="12dp"
+                   android:paddingLeft="8dp"
+                   android:paddingRight="8dp"
+                   android:textSize="18sp"/>
+
+               <EditText
+                   android:id="@+id/activity_login_txtContraseña"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:padding="8dp"
+                   android:layout_marginLeft="12dp"
+                   android:layout_marginRight="12dp"
+                   android:textSize="18sp"
+                   android:hint="@string/activity_login_txtContraseñaHint"
+                   android:textColorHint="@color/solid_black"/>
+
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:orientation="horizontal"
+                   android:padding="8dp"
+                   android:layout_margin="12dp"
+                   android:gravity="center">
+
+                   <CheckBox
+                       android:id="@+id/acticity_login_chckRemember"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content" />
+
+                   <TextView
+                       android:id="@+id/activity_login_lblRemember"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="@string/activity_login_lblCheckbox"
+                       android:padding="8dp"
+                       android:textColor="@color/solid_black"/>
+
+               </LinearLayout>
+
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:orientation="horizontal"
+                   android:gravity="center">
+
+                   <Button
+                       android:id="@+id/activity_login_btnEntrar"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_margin="12dp"
+                       android:padding="8dp"
+                       android:textColor="@color/solid_black"
+                       android:text="@string/activity_login_btnLogin"
+                       android:background="@color/solid_very_light_orange"
+                       />
+
+               </LinearLayout>
+
+           </LinearLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>

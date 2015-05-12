@@ -1,15 +1,27 @@
 package org.projectes.androidshopping.activities;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.os.Message;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import org.projectes.androidshopping.Constants.Constants;
+import org.projectes.androidshopping.DAObject.Product;
+import org.projectes.androidshopping.Listeners.IResult;
 import org.projectes.androidshopping.R;
+import org.projectes.androidshopping.Task.WSTask;
+import org.projectes.androidshopping.WS.JacksonJSONHelper;
+
+import java.io.IOException;
 
 
 public class SplashScreenActivity extends BaseActivity {
@@ -17,6 +29,8 @@ public class SplashScreenActivity extends BaseActivity {
     private ImageView imgLogo = null;
     private TextView lblSplash = null;
     private Animation fadeIn = null;
+
+    private WSTask productsTask = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +70,28 @@ public class SplashScreenActivity extends BaseActivity {
         if(imgLogo != null && fadeIn != null){
             imgLogo.startAnimation(fadeIn);
         }
+
+        this.productsTask = new WSTask();
+        this.productsTask.setResultListener(new IResult<Message>() {
+            @Override
+            public void onSuccess(Message IRresult) {
+                ObjectMapper objMapper = JacksonJSONHelper.Initialize();
+                try {
+                    Product[] wsResult = objMapper.readValue(IRresult.obj.toString(), Product[].class);
+                    Log.d("Hola", "Hola Hola");
+                    Toast.makeText(SplashScreenActivity.this, (String) wsResult[0].getNombre(), Toast.LENGTH_LONG).show();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFail(String missatgeError) {
+                Toast.makeText(SplashScreenActivity.this, missatgeError, Toast.LENGTH_LONG).show();
+            }
+        });
+        this.productsTask.execute(this, Constants.URL_PRODUCTES);
+
 
     }
 

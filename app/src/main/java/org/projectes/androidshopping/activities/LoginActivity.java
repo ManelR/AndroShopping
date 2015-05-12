@@ -1,6 +1,5 @@
 package org.projectes.androidshopping.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,22 +10,15 @@ import android.widget.TextView;
 
 import org.projectes.androidshopping.R;
 
-
-public class SplashScreenActivity extends BaseActivity {
-
-    private ImageView imgLogo = null;
-    private TextView lblSplash = null;
-    private Animation fadeIn = null;
+/**
+ * Created by alloveras on 12/05/15.
+ */
+public class LoginActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash_screen);
-
-        associateControls();
-
-        Intent i = new Intent(getApplicationContext(),LoginActivity.class);
-        startActivity(i);
+        setContentView(R.layout.activity_login_layout);
 
     }
 
@@ -45,21 +37,5 @@ public class SplashScreenActivity extends BaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void associateControls(){
-        imgLogo = (ImageView) findViewById(R.id.splash_screen_activity_imgApp);
-        lblSplash = (TextView) findViewById(R.id.splash_screen_activity_lblAppName);
-        fadeIn = AnimationUtils.loadAnimation(this, R.anim.fadein);
-
-        if(lblSplash != null){
-            lblSplash.setTypeface(boldFont);
-            if(fadeIn != null) {
-                lblSplash.startAnimation(fadeIn);
-            }
-        }
-        if(imgLogo != null && fadeIn != null){
-            imgLogo.startAnimation(fadeIn);
-        }
-
-    }
 
 }

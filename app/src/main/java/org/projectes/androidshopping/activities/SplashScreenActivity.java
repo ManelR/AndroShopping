@@ -3,7 +3,6 @@ package org.projectes.androidshopping.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.animation.Animation;
@@ -12,17 +11,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import org.projectes.androidshopping.Constants.Constants;
-import org.projectes.androidshopping.DAObject.Product;
 import org.projectes.androidshopping.Listeners.IResult;
 import org.projectes.androidshopping.MyApplication;
 import org.projectes.androidshopping.R;
 import org.projectes.androidshopping.Task.WSTask;
-import org.projectes.androidshopping.WS.JacksonJSONHelper;
 
-import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -32,8 +26,8 @@ public class SplashScreenActivity extends BaseActivity {
     private ImageView imgLogo = null;
     private TextView lblSplash = null;
     private Animation fadeIn = null;
-    private int BoolIntent1 = 0;
-    private int BoolIntent2 = 0;
+    private int boolIntent1 = 0;
+    private int boolIntent2 = 0;
 
     private WSTask productsTask = null;
     private Timer timer;
@@ -66,7 +60,7 @@ public class SplashScreenActivity extends BaseActivity {
         lblSplash = (TextView) findViewById(R.id.splash_screen_activity_lblAppName);
         fadeIn = AnimationUtils.loadAnimation(this, R.anim.fadein);
 
-        /*if(lblSplash != null){
+        if(lblSplash != null){
             lblSplash.setTypeface(boldFont);
             if(fadeIn != null) {
                 lblSplash.startAnimation(fadeIn);
@@ -75,27 +69,26 @@ public class SplashScreenActivity extends BaseActivity {
         if(imgLogo != null && fadeIn != null){
             imgLogo.startAnimation(fadeIn);
         }
-            */
+
         this.productsTask = new WSTask();
         this.productsTask.setResultListener(new IResult<Message>() {
             @Override
             public void onSuccess(Message IRresult) {
                 synchronized (MyApplication.mutexSplash){
-                    BoolIntent2 = 1;
-                    if (BoolIntent1 == 1){
+                    boolIntent2 = 1;
+                    if (boolIntent1 == 1){
                         Intent i = new Intent(getApplicationContext(),LoginActivity.class);
                         startActivity(i);
                     }
                 }
-                Log.d("Splash:", "WS task!");
             }
 
             @Override
             public void onFail(String missatgeError) {
                 Toast.makeText(SplashScreenActivity.this, missatgeError, Toast.LENGTH_LONG).show();
                 synchronized (MyApplication.mutexSplash){
-                    BoolIntent2 = 1;
-                    if (BoolIntent1 == 1){
+                    boolIntent2 = 1;
+                    if (boolIntent1 == 1){
                         Intent i = new Intent(getApplicationContext(),LoginActivity.class);
                         startActivity(i);
                     }
@@ -108,19 +101,16 @@ public class SplashScreenActivity extends BaseActivity {
             @Override
             public void run() {
                 synchronized (MyApplication.mutexSplash){
-                    BoolIntent1 = 1;
-                    if (BoolIntent2 == 1){
+                    boolIntent1 = 1;
+                    if (boolIntent2 == 1){
                         Intent i = new Intent(getApplicationContext(),LoginActivity.class);
                         startActivity(i);
                     }
-                    Log.d("Splash:", "Timer task!");
                 }
             }
         }, 2000);
 
         this.productsTask.execute(this, Constants.URL_PRODUCTES);
-
-
 
     }
 

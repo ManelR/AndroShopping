@@ -1,0 +1,25 @@
+<!-- Layout que defineix l'interior de cada objecte dins del GridView del menú principal -->
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical">
+
+    <!-- Imatge que funciona de logo descriptiu de l'objecte en qüestió -->
+    <ImageView
+        android:id="@+id/img_item_menu_principal"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center_horizontal"
+        />
+
+    <!-- Text associat a la imatge i que serveix de descripció de l'objecte -->
+    <TextView
+        android:id="@+id/txt_item_menu_principal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:textAlignment="center"/>
+
+</LinearLayout>

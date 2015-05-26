@@ -1,16 +1,20 @@
 package org.projectes.androidshopping.DAO;
 
 import android.content.Context;
+import android.content.res.AssetManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
 import android.util.Log;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 /**
  * Created by mrr on 12/05/15.
+ * DAO Base per gestionar la base de dades.
  */
 
 
@@ -19,21 +23,31 @@ public abstract class DAOBase<T> extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
     protected String TABLE_NAME = " ";
     protected SQLiteDatabase myDB;
-
-    //TODO crear el database create
-    private static final String DATABASE_CREATE_1 = "CREATE TABLE Product(id INTEGER PRIMARY KEY AUTOINCREMENT, nombre TEXT, descripcion TEXT, precio REAL , activo INTEGER, stock INTEGER, foto TEXT, deleted INTEGER)";
-    private static final String DATABASE_CREATE_2 = "CREATE TABLE Tag(id INTEGER PRIMARY KEY AUTOINCREMENT, nombre TEXT)";
-    private static final String DATABASE_CREATE_3 = "CREATE TABLE R_Product_Tag(id INTEGER PRIMARY KEY AUTOINCREMENT, id_product INTEGER, id_tag INTEGER, FOREIGN KEY (id_product) REFERENCES Product (id), FOREIGN KEY (id_tag) REFERENCES Tag (id))";
+    private Context context;
 
 
     public DAOBase(Context context, String table_name){
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         this.TABLE_NAME = table_name;
+        this.context = context;
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(DATABASE_CREATE_1);
+        AssetManager mng = this.context.getAssets();
+        InputStream input;
+        try {
+            input = mng.open("database/schema.sql");
+            int size = input.available();
+            byte[] buffer = new byte[size];
+            input.read(buffer);
+            input.close();
+            // byte buffer into a string
+            String schema = new String(buffer);
+            db.execSQL(schema);
+        } catch (IOException e) {
+            Log.e("BBDD", "Error al obrir el fitxer schema.sql\n");
+        }
     }
 
     @Override
@@ -59,7 +73,7 @@ public abstract class DAOBase<T> extends SQLiteOpenHelper {
     public T selectByID(long id){
         openReadOnly();
         String sql="SELECT * FROM " + TABLE_NAME + " where id = ? AND deleted = 0 LIMIT 1" ;
-        Cursor cursor = myDB.rawQuery(sql, new String []{new Long(id).toString()});
+        Cursor cursor = myDB.rawQuery(sql, new String []{Long.toString(id)});
         cursor.moveToFirst();
         T element = LoadFromCursor(cursor);
         cursor.close();
@@ -73,7 +87,7 @@ public abstract class DAOBase<T> extends SQLiteOpenHelper {
         String sql = "SELECT * FROM " + TABLE_NAME + " WHERE deleted = 0";
         Cursor cursor = myDB.rawQuery(sql, null);
         cursor.moveToFirst();
-        while (cursor.isAfterLast() == false){
+        while (!cursor.isAfterLast()){
             Log.d("HA ENTRAT", "ha entrat en el bucle del select de la BBDD");
             T element = LoadFromCursor(cursor);
             listT.add(element);
@@ -90,7 +104,7 @@ public abstract class DAOBase<T> extends SQLiteOpenHelper {
             openWrite();
             String sql = "UPDATE " + TABLE_NAME + " SET deleted = 1 WHERE id = ?";
             SQLiteStatement statement = myDB.compileStatement(sql);
-            statement.bindAllArgsAsStrings(new String[]{new Integer(id).toString()});
+            statement.bindAllArgsAsStrings(new String[]{Integer.toString(id)});
             nError = statement.executeUpdateDelete();
             Log.i("--DELETE--", "Ha entrat al delete");
             statement.close();
@@ -103,4 +117,5 @@ public abstract class DAOBase<T> extends SQLiteOpenHelper {
     }
 
     public abstract T LoadFromCursor(Cursor cursor);
+
 }

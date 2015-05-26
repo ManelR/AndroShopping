@@ -53,7 +53,7 @@ CREATE TABLE compra_historialProducte(
 	quantitat INTEGER,
 	preu REAL,
 	FOREIGN KEY (id_compra) REFERENCES compra(id),
-	FOREIGN KEY (id_historialProdute) REFERENCES historialProducte(id)
+	FOREIGN KEY (id_historialProducte) REFERENCES historialProducte(id)
 ); 
 
 CREATE TABLE producte_tag(

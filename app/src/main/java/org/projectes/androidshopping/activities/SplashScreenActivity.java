@@ -17,11 +17,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.projectes.androidshopping.Constants.Constants;
 import org.projectes.androidshopping.DAObject.Product;
 import org.projectes.androidshopping.Listeners.IResult;
+import org.projectes.androidshopping.MyApplication;
 import org.projectes.androidshopping.R;
 import org.projectes.androidshopping.Task.WSTask;
 import org.projectes.androidshopping.WS.JacksonJSONHelper;
 
 import java.io.IOException;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class SplashScreenActivity extends BaseActivity {
@@ -29,8 +32,11 @@ public class SplashScreenActivity extends BaseActivity {
     private ImageView imgLogo = null;
     private TextView lblSplash = null;
     private Animation fadeIn = null;
+    private int BoolIntent1 = 0;
+    private int BoolIntent2 = 0;
 
     private WSTask productsTask = null;
+    private Timer timer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,10 +44,6 @@ public class SplashScreenActivity extends BaseActivity {
         setContentView(R.layout.activity_splash_screen);
 
         associateControls();
-
-        Intent i = new Intent(getApplicationContext(),LoginActivity.class);
-        startActivity(i);
-
     }
 
     @Override
@@ -64,7 +66,7 @@ public class SplashScreenActivity extends BaseActivity {
         lblSplash = (TextView) findViewById(R.id.splash_screen_activity_lblAppName);
         fadeIn = AnimationUtils.loadAnimation(this, R.anim.fadein);
 
-        if(lblSplash != null){
+        /*if(lblSplash != null){
             lblSplash.setTypeface(boldFont);
             if(fadeIn != null) {
                 lblSplash.startAnimation(fadeIn);
@@ -73,27 +75,51 @@ public class SplashScreenActivity extends BaseActivity {
         if(imgLogo != null && fadeIn != null){
             imgLogo.startAnimation(fadeIn);
         }
-
+            */
         this.productsTask = new WSTask();
         this.productsTask.setResultListener(new IResult<Message>() {
             @Override
             public void onSuccess(Message IRresult) {
-                ObjectMapper objMapper = JacksonJSONHelper.Initialize();
-                try {
-                    Product[] wsResult = objMapper.readValue(IRresult.obj.toString(), Product[].class);
-                    Log.d("Hola", "Hola Hola");
-                    Toast.makeText(SplashScreenActivity.this, (String) wsResult[0].getNombre(), Toast.LENGTH_LONG).show();
-                } catch (IOException e) {
-                    e.printStackTrace();
+                synchronized (MyApplication.mutexSplash){
+                    BoolIntent2 = 1;
+                    if (BoolIntent1 == 1){
+                        Intent i = new Intent(getApplicationContext(),LoginActivity.class);
+                        startActivity(i);
+                    }
                 }
+                Log.d("Splash:", "WS task!");
             }
 
             @Override
             public void onFail(String missatgeError) {
                 Toast.makeText(SplashScreenActivity.this, missatgeError, Toast.LENGTH_LONG).show();
+                synchronized (MyApplication.mutexSplash){
+                    BoolIntent2 = 1;
+                    if (BoolIntent1 == 1){
+                        Intent i = new Intent(getApplicationContext(),LoginActivity.class);
+                        startActivity(i);
+                    }
+                }
             }
         });
+
+        this.timer = new Timer();
+        this.timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                synchronized (MyApplication.mutexSplash){
+                    BoolIntent1 = 1;
+                    if (BoolIntent2 == 1){
+                        Intent i = new Intent(getApplicationContext(),LoginActivity.class);
+                        startActivity(i);
+                    }
+                    Log.d("Splash:", "Timer task!");
+                }
+            }
+        }, 2000);
+
         this.productsTask.execute(this, Constants.URL_PRODUCTES);
+
 
 
     }

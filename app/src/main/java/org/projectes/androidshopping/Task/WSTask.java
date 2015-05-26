@@ -47,8 +47,8 @@ public class WSTask extends AsyncTask<Object, Integer, Message> {
 
     public void onPostExecute(Message message){
         if (this.listener != null){
-            if (message.what == 200){
-                //listener.onSuccess(message);
+            if (message != null && message.what == 200){
+                listener.onSuccess(message);
                 Toast.makeText(this.context, productes.get(2).getNombre(), Toast.LENGTH_LONG).show();
             }else{
                 listener.onFail("Error HTTP");

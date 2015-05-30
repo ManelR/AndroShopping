@@ -34,6 +34,7 @@ public abstract class DAOBase<T> extends SQLiteOpenHelper {
             "\tedat INTEGER,\n" +
             "\trol INTEGER,\n" +
             "\tlogged_in INTEGER\n" +
+            "\tdeleted INTEGER\n" +
             ");";
 
     private String CREATE_COMPRA = "CREATE TABLE compra(\n" +

@@ -81,6 +81,9 @@
     <string name="error_pass_nomatch">Los campos de contraseña no coinciden</string>
     <string name="error_gender_empty">Tienes que seleccionar un género</string>
     <string name="activity_register_spinnerDefault">Edad</string>
+    <string name="error_name_empty">El campo \"Nombre\" no puede estar vacío</string>
+    <string name="error_chckTerm_notChecked">Tienes que aceptar los terminos</string>
+    <string name="error_ageSpinner_empty">Tienes que seleccionar una edad</string>
 
 
 </resources>

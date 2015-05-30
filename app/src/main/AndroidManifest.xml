@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="org.projectes.androidshopping" >
 
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".MyApplication"
@@ -21,12 +21,14 @@
         </activity>
         <activity
             android:name=".activities.LoginActivity"
-            android:label="@string/app_name"
-            ></activity>
+            android:label="@string/app_name" />
         <activity
             android:name=".activities.MainMenuActivity"
-            android:label="@string/app_name">
-
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".activities.ShowUserActivity"
+            android:label="@string/title_activity_show_user" >
         </activity>
     </application>
 

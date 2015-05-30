@@ -21,5 +21,14 @@
 
 
 
+    <!-- ShowUser Activity Strings -->
+    <string name="title_activity_show_user">ShowUserActivity</string>
+    <string name="activity_showUser_lblEmail">Email:</string>
+    <string name="activity_showUser_lblGenere">Género:</string>
+    <string name="activity_showUser_radioMale">Hombre</string>
+    <string name="activity_showUser_radioFemale">Mujer</string>
+
+
+
 
 </resources>

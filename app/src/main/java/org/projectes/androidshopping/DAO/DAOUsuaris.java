@@ -19,7 +19,7 @@ public class DAOUsuaris extends DAOBase<Usuari> {
         super(context, TABLE_NAME_USER);
     }
 
-    public boolean emailExist(String email){
+    public Usuari selectByEmail(String email){
         openReadOnly();
         String sql="SELECT * FROM " + TABLE_NAME_USER + " where email = ? LIMIT 1" ;
         Cursor cursor = myDB.rawQuery(sql, new String []{email});
@@ -27,7 +27,7 @@ public class DAOUsuaris extends DAOBase<Usuari> {
         Usuari element = LoadFromCursor(cursor);
         cursor.close();
         closeDatabase();
-        return element != null;
+        return element;
     }
 
     @Override

@@ -21,6 +21,7 @@ import org.projectes.androidshopping.DAObject.Usuari;
 import org.projectes.androidshopping.Listeners.IResult;
 import org.projectes.androidshopping.R;
 import org.projectes.androidshopping.Task.DBTask_Base_Modify;
+import org.projectes.androidshopping.Task.DBTask_Usuari_Select_Email;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -71,6 +72,7 @@ public class RegisterActivity extends BaseActivity {
             public void onClick(View v) {
                 boolean valid = validarCampsRegistre();
                 if (valid) {
+                    //TODO Validar que el mail no existeixi
                     //Guardar l'usuari a la base de dades
                     DBTask_Base_Modify<DAOUsuaris, Usuari> DBTask = new DBTask_Base_Modify<DAOUsuaris, Usuari>();
                     int genere = sGender.equals("Hombre") ? 1 : 2;
@@ -100,6 +102,7 @@ public class RegisterActivity extends BaseActivity {
         boolean result = true;
         Pattern emailPattern;
         Matcher emailMatcher;
+        DBTask_Usuari_Select_Email BBDD = new DBTask_Usuari_Select_Email();
 
         Editable emailText = this.txtEmail.getText();
         if (!emailText.toString().matches("") && result){
@@ -108,12 +111,6 @@ public class RegisterActivity extends BaseActivity {
             if (!emailMatcher.matches()){
                 result = false;
                 errorMessage = this.getString(R.string.error_email_message);
-            }
-            if (result){
-                if(BBDDUsers.emailExist(emailText.toString())){
-                    result = false;
-                    errorMessage = this.getString(R.string.error_email_repeat);
-                }
             }
         }else{
             result = false;

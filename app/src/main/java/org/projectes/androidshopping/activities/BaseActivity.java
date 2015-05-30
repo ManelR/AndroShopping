@@ -49,6 +49,10 @@ public class BaseActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void onBackPressed(){
+        finish();
+    }
+
     private void allocateMemory(){
 
         //Get App Singleton

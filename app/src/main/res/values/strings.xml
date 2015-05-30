@@ -33,13 +33,26 @@
     <string name="activity_register_lblGender">Género</string>
 
     <!-- ShowUser Activity Strings -->
-    <string name="title_activity_show_user">ShowUserActivity</string>
+    <string name="activity_showUser_title">Ver Usuario</string>
     <string name="activity_showUser_lblEmail">Email:</string>
     <string name="activity_showUser_lblGenere">Género:</string>
     <string name="activity_showUser_radioMale">Hombre</string>
     <string name="activity_showUser_radioFemale">Mujer</string>
     <string name="activity_showUser_lblAge">Edad:</string>
     <string name="activity_showUser_lblTotalAmount">Dinero total invertido:</string>
+
+    <!-- SellList Activity -->
+    <string name="activity_sell_list_activityName">Ventas</string>
+    <string name="item_sell_list_lblPrice">Precio Total:</string>
+    <string name="item_sell_list_lblCustomer">Cliente:</string>
+    <string name="item_sell_list_lblQuantity">Cantidad:</string>
+    <string name="item_sell_list_lblProduct">Producto:</string>
+
+    <!-- PurchaseHistory Activity -->
+    <string name="activity_purchaseHistory_activityName">Histórico</string>
+    <string name="item_purchase_history_lblPrice">Precio Total:</string>
+    <string name="item_purchase_history_lblQuantity">Cantidad:</string>
+    <string name="item_purchase_history_lblProduct">Producto:</string>
 
     <!-- ProductsManager Activity -->
     <string name="title_activity_products_manager">ProductsManagerActivity</string>
@@ -49,7 +62,6 @@
     <string name="title_activity_new_user">NewUserActivity</string>
     <string name="title_activity_user_profile">UserProfileActivity</string>
     <string name="title_activity_buy">BuyActivity</string>
-    <string name="title_activity_purchase_history">PurchaseHistoryActivity</string>
     <string name="activity_register_txtName">Nombre</string>
     <string name="activity_register_chckTerms">Acepto las condiciones de servicio</string>
     <string name="title_activity_sell_list">SellListActivity</string>

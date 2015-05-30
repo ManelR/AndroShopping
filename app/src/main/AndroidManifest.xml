@@ -29,15 +29,10 @@
         <activity
             android:name=".activities.RegisterActivity"
             android:label="@string/app_name" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".activities.ShowUserActivity"
-            android:label="@string/app_name"
+            android:label="@string/activity_showUser_title"
             android:theme="@style/Theme.AppCompat.Light">
         </activity>
         <activity
@@ -67,6 +62,11 @@
         <activity
             android:name=".activities.BuyActivity"
             android:label="@string/title_activity_buy" >
+        </activity>
+        <activity
+            android:name=".activities.SellListActivity"
+            android:theme="@style/Theme.AppCompat.Light"
+            android:label="@string/activity_sell_list_activityName" >
         </activity>
         <activity
             android:name=".activities.PurchaseHistoryActivity"

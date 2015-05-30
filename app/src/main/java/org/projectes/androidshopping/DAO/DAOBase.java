@@ -125,7 +125,7 @@ public abstract class DAOBase<T> extends SQLiteOpenHelper {
 
     public T selectByID(long id){
         openReadOnly();
-        String sql="SELECT * FROM " + TABLE_NAME + " where id = ? AND deleted = 0 LIMIT 1" ;
+        String sql="SELECT * FROM " + TABLE_NAME + " where id = ? LIMIT 1" ;
         Cursor cursor = myDB.rawQuery(sql, new String []{Long.toString(id)});
         cursor.moveToFirst();
         T element = LoadFromCursor(cursor);
@@ -134,10 +134,27 @@ public abstract class DAOBase<T> extends SQLiteOpenHelper {
         return element;
     }
 
-    public ArrayList<T> selectAll(){
+    public ArrayList<T> selectAllNotDeleted(){
         ArrayList<T> listT = new ArrayList<T>();
         openReadOnly();
         String sql = "SELECT * FROM " + TABLE_NAME + " WHERE deleted = 0";
+        Cursor cursor = myDB.rawQuery(sql, null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()){
+            Log.d("HA ENTRAT", "ha entrat en el bucle del select de la BBDD");
+            T element = LoadFromCursor(cursor);
+            listT.add(element);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        this.closeDatabase();
+        return listT;
+    }
+
+    public ArrayList<T> selectAll(){
+        ArrayList<T> listT = new ArrayList<T>();
+        openReadOnly();
+        String sql = "SELECT * FROM " + TABLE_NAME;
         Cursor cursor = myDB.rawQuery(sql, null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()){

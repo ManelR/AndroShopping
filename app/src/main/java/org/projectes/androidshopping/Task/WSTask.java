@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.module.SimpleAbstractTypeResolver;
 
 import org.projectes.androidshopping.Constants.Constants;
 import org.projectes.androidshopping.DAO.DAOWS_Data;
@@ -45,18 +46,22 @@ public class WSTask extends AsyncTask<Object, Integer, Message> {
         WSConnector WS = new WSConnector();
         this.context = (Context)params[Constants.POSICIO_CONTEXT_WSTask];
         this.Mess = null;
+
+
         //Primer és necessari consultar si s'ha modificat el contingut
         try{
+
+            //Obtenim la data de LastUpdate del WS
             this.Mess = WS.get(Constants.URL_UPDATE, null);
             this.mapper = JacksonJSONHelper.Initialize();
             this.jsonTree = this.mapper.readTree((String)this.Mess.obj);
-            this.formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-            this.date = (Date)this.formatter.parse(this.jsonTree.get("last_update").textValue());
-            this.unixTimeUpdate = this.date.getTime()/1000;
+            this.unixTimeUpdate = getUnixTimestamp(this.jsonTree.get("last_update").textValue());
+
             //Recuperar dades BBDD
             DAOWS_Data DBTime = new DAOWS_Data(this.context);
             WS_Data updateTime = DBTime.selectBynomTaula("producte");
 
+            //Comprovem si cal fer actualització
             if (updateTime != null){
                 //TODO Comparar si s'ha d'actualitzar
                 this.flag = 1;
@@ -73,9 +78,9 @@ public class WSTask extends AsyncTask<Object, Integer, Message> {
 
         } catch (IOException e){
             e.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();
+
         }
+
         try {
             this.Mess = WS.get((String)params[Constants.POSICIO_URL_WSTask], null);
             this.mapper = JacksonJSONHelper.Initialize();
@@ -106,5 +111,15 @@ public class WSTask extends AsyncTask<Object, Integer, Message> {
 
     public void setResultListener(IResult<Message> listener){
         this.listener = listener;
+    }
+
+    private long getUnixTimestamp(String lastUpdate){
+        try{
+            DateFormat dFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+            Date date = dFormat.parse(lastUpdate);
+            return date.getTime()/1000;
+        }catch(java.text.ParseException en){
+            return 0;
+        }
     }
 }

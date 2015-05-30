@@ -1,7 +1,9 @@
 package org.projectes.androidshopping.activities;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.text.Editable;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,6 +17,9 @@ import android.widget.Toast;
 
 import org.projectes.androidshopping.R;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class RegisterActivity extends BaseActivity {
     private String sGender;
     private Spinner spinGender;
@@ -24,7 +29,9 @@ public class RegisterActivity extends BaseActivity {
     private EditText txtRepeatPass;
     private EditText txtName;
     private CheckBox chckTerm;
-    private String errorMessage;
+    private String errorMessage = null;
+
+    private static final String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +64,8 @@ public class RegisterActivity extends BaseActivity {
             public void onClick(View v) {
                 boolean valid = validarCampsRegistre();
                 if (valid){
+                    Intent i = new Intent(RegisterActivity.this, LoginActivity.class);
+                    startActivity(i);
                     finish();
                 }else{
                     Toast.makeText(RegisterActivity.this, errorMessage, Toast.LENGTH_LONG).show();
@@ -67,6 +76,39 @@ public class RegisterActivity extends BaseActivity {
 
     private boolean validarCampsRegistre() {
         boolean result = true;
+        Pattern emailPattern;
+        Matcher emailMatcher;
+
+        Editable emailText = this.txtEmail.getText();
+        if (!emailText.toString().matches("") && result){
+            emailPattern = Pattern.compile(EMAIL_PATTERN);
+            emailMatcher = emailPattern.matcher(emailText.toString());
+            if (!emailMatcher.matches()){
+                result = false;
+                errorMessage = this.getString(R.string.error_email_message);
+            }
+        }else{
+            result = false;
+            errorMessage = this.getString(R.string.error_email_message);
+        }
+        Editable passText = this.txtPassword.getText();
+        if (passText.toString().matches("") && result){
+            errorMessage = this.getString(R.string.error_pass_empty);
+            result = false;
+        }
+        Editable repeatPassText = this.txtRepeatPass.getText();
+        if (repeatPassText.toString().matches("") && result){
+            errorMessage = this.getString(R.string.error_rePass_empty);
+            result = false;
+        }
+        if (!passText.toString().equals(repeatPassText.toString()) && result){
+            errorMessage = this.getString(R.string.error_pass_nomatch);
+            result = false;
+        }
+        if (this.sGender == null && result){
+            errorMessage = this.getString(R.string.error_gender_empty);
+            result = false;
+        }
 
         return result;
     }

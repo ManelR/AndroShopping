@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="spinner_age">
+        <item>Edad</item>
         <item>18</item>
         <item>19</item>
         <item>20</item>

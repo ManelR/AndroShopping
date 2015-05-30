@@ -64,6 +64,8 @@ public class RegisterActivity extends BaseActivity {
             public void onClick(View v) {
                 boolean valid = validarCampsRegistre();
                 if (valid){
+                    //Guardar l'usuari a la base de dades
+
                     Intent i = new Intent(RegisterActivity.this, LoginActivity.class);
                     startActivity(i);
                     finish();
@@ -107,6 +109,20 @@ public class RegisterActivity extends BaseActivity {
         }
         if (this.sGender == null && result){
             errorMessage = this.getString(R.string.error_gender_empty);
+            result = false;
+        }
+        Editable nameText = this.txtName.getText();
+        if (nameText.toString().equals("") && result){
+            errorMessage = this.getString(R.string.error_name_empty);
+            result = false;
+        }
+        String optionSpinner = (String) this.spinGender.getSelectedItem();
+        if (optionSpinner.matches("Edad") && result){
+            errorMessage = this.getString(R.string.error_ageSpinner_empty);
+            result = false;
+        }
+        if (!this.chckTerm.isChecked() && result){
+            errorMessage = this.getString(R.string.error_chckTerm_notChecked);
             result = false;
         }
 

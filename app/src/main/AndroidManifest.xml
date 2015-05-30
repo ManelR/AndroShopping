@@ -66,7 +66,7 @@
         </activity>
         <activity
             android:name=".activities.PurchaseHistoryActivity"
-            android:label="@string/title_activity_purchase_history" >
+            android:label="@string/activity_purchaseHistory_activityName" >
         </activity>
     </application>
 

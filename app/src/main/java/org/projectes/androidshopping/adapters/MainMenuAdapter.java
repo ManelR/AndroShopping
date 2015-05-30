@@ -12,7 +12,10 @@ import android.widget.TextView;
 
 import org.projectes.androidshopping.R;
 import org.projectes.androidshopping.activities.BuyActivity;
+import org.projectes.androidshopping.activities.ManageUsersActivity;
+import org.projectes.androidshopping.activities.ProductsManagerActivity;
 import org.projectes.androidshopping.activities.PurchaseHistoryActivity;
+import org.projectes.androidshopping.activities.SellListActivity;
 import org.projectes.androidshopping.activities.UserProfileActivity;
 import org.projectes.androidshopping.objects.MainMenuObject;
 
@@ -97,7 +100,15 @@ public class MainMenuAdapter extends BaseAdapter {
 
     private void inflateElements(boolean isAdmin){
         if(isAdmin){
-
+            MainMenuObject objProductsManager = new MainMenuObject(context.getString(R.string.activity_mainMenu_lblManageProducts),R.mipmap.products, ProductsManagerActivity.class);
+            MainMenuObject objUsersManager = new MainMenuObject(context.getString(R.string.activity_mainMenu_lblManageUsers),R.mipmap.users, ManageUsersActivity.class);
+            MainMenuObject objSellList = new MainMenuObject(context.getString(R.string.activity_mainMenu_lblSellList),R.mipmap.list, SellListActivity.class);
+            MainMenuObject objExit = new MainMenuObject(context.getString(R.string.activity_mainMenu_lblExit),R.mipmap.exit,null);
+            objExit.setIsExit(true);
+            lObjectes.add(objProductsManager);
+            lObjectes.add(objUsersManager);
+            lObjectes.add(objSellList);
+            lObjectes.add(objExit);
         }else{
             MainMenuObject objPerfil = new MainMenuObject(context.getString(R.string.activity_mainMenu_lblPerfil),R.mipmap.user, UserProfileActivity.class);
             MainMenuObject objComprar = new MainMenuObject(context.getString(R.string.activity_mainMenu_lblComprar),R.mipmap.buy, BuyActivity.class);

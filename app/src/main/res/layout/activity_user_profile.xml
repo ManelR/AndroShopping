@@ -1,12 +1,137 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="org.projectes.androidshopping.activities.UserProfileActivity">
+    android:background="@color/default_background_color">
 
-    <TextView android:text="@string/hello_world" android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/activity_userProfile_btnRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/activity_userProfile_btnModifier"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerInParent="true"/>
+
+
+    <ScrollView
+        android:layout_above="@id/activity_userProfile_btnRegister"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:id="@+id/activity_userProfile_txtEmail"
+                android:layout_width="match_parent"
+                android:textColor="#000"
+                android:textColorHint="#000"
+                android:layout_height="wrap_content"
+                android:hint="@string/activity_register_txtEmail"
+                android:inputType="textEmailAddress"/>
+
+            <TextView
+                android:id="@+id/activity_userProfile_lblPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#000"
+                android:layout_marginTop="10dp"
+                android:text="@string/activity_register_lblPassword"
+                android:layout_below="@id/activity_userProfile_txtEmail"/>
+
+            <EditText
+                android:id="@+id/activity_userProfile_txtPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#000"
+                android:textColorHint="#000"
+                android:inputType="textPassword"
+                android:layout_below="@id/activity_userProfile_lblPassword"/>
+
+            <TextView
+                android:id="@+id/activity_userProfile_lblRepeatPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#000"
+                android:layout_marginTop="10dp"
+                android:hint="@string/activity_register_txtPassword"
+                android:text="@string/activity_register_lblRepeatPassword"
+                android:layout_below="@id/activity_userProfile_txtPassword"/>
+
+            <EditText
+                android:id="@+id/activity_userProfile_txtRepeatPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#000"
+                android:textColorHint="#000"
+                android:inputType="textPassword"
+                android:layout_below="@id/activity_userProfile_lblRepeatPassword"/>
+
+            <TextView
+                android:id="@+id/activity_userProfile_lblGender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#000"
+                android:text="@string/activity_register_lblGender"
+                android:layout_below="@id/activity_userProfile_txtRepeatPassword"/>
+            <RadioGroup
+                android:id="@+id/activity_userProfile_rdioGrpGender"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+
+                android:layout_below="@id/activity_userProfile_lblGender">
+                <RadioButton
+                    android:id="@+id/activity_userProfile_rdioMale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#000"
+                    android:text="@string/activity_register_masculino"
+                    android:onClick="onRadioButtonClicked"/>
+                <RadioButton
+                    android:id="@+id/activity_userProfile_rdioFemale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#000"
+                    android:text="@string/activity_register_femenino"
+                    android:onClick="onRadioButtonClicked"/>
+            </RadioGroup>
+
+            <EditText
+                android:id="@+id/activity_userProfile_txtName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="#000"
+                android:textColor="#000"
+                android:hint="@string/activity_register_txtName"
+                android:layout_below="@id/activity_userProfile_rdioGrpGender"/>
+
+            <Spinner
+                android:id="@+id/activity_userProfile_spinAge"
+                android:layout_width="match_parent"
+
+                android:layout_height="wrap_content"
+                android:layout_below="@id/activity_userProfile_txtName">
+
+            </Spinner>
+
+            <CheckBox
+                android:id="@+id/activity_userProfile_chckTerms"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/activity_register_chckTerms"
+                android:layout_marginBottom="50dp"
+                android:textColor="#000"
+                android:layout_below="@id/activity_userProfile_spinAge"/>
+
+        </RelativeLayout>
+    </ScrollView>
+
+
 
 </RelativeLayout>

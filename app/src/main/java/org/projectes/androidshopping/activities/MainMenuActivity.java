@@ -12,7 +12,7 @@ public class MainMenuActivity extends BaseActivity {
 
     private GridView gridView = null;
     private MainMenuAdapter adapter = null;
-    private boolean isAdmin = false;
+    private boolean isAdmin = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

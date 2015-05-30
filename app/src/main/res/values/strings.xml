@@ -4,7 +4,6 @@
     <string name="app_name">AndroShopping</string>
     <string name="action_settings">Settings</string>
 
-
     <!-- Splash Screen Activity Strings -->
     <string name="title_activity_splash_scree">SplashScreen</string>
 
@@ -16,6 +15,7 @@
     <string name="activity_mainMenu_lblManageProducts">Gestionar Productos</string>
     <string name="activity_mainMenu_lblManageUsers">Gestionar Usuarios</string>
     <string name="activity_mainMenu_lblSellList">Estado de ventas</string>
+
     <!-- Login Activity Strings -->
     <string name="activity_login_lblLoginHeader">Autenticación</string>
     <string name="activity_login_lblEmail">Correo Electrónico:</string>
@@ -24,7 +24,7 @@
     <string name="activity_login_txtContraseñaHint">Introduce tu contraseña...</string>
     <string name="activity_login_lblCheckbox">Recuerdame la próxima vez</string>
     <string name="activity_login_btnLogin">Entrar</string>
-    <string name="activity_login_linkNewAccount">No tienes cuenta? Registrate</string>
+    <string name="activity_login_linkNewAccount"><a href="">No tienes cuenta? Registrate</a></string>
     <string name="errorHTTP">Error connexió WS</string>
     <string name="title_activity_register">RegisterActivity</string>
 

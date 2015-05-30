@@ -18,110 +18,6 @@
         android:layout_marginBottom="10dp"
         android:text="@string/activity_register_lblTitle" />
 
-    <EditText
-        android:id="@+id/activity_register_txtEmail"
-        android:layout_width="match_parent"
-        android:textColor="#000"
-        android:textColorHint="#000"
-        android:layout_height="wrap_content"
-        android:hint="@string/activity_register_txtEmail"
-        android:inputType="textEmailAddress"
-        android:layout_below="@id/activity_register_lblTitle"/>
-
-    <TextView
-        android:id="@+id/activity_register_lblPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="#000"
-        android:layout_marginTop="10dp"
-        android:text="@string/activity_register_lblPassword"
-        android:layout_below="@id/activity_register_txtEmail"/>
-
-    <EditText
-        android:id="@+id/activity_register_txtPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="#000"
-        android:textColorHint="#000"
-        android:inputType="textPassword"
-        android:layout_below="@id/activity_register_lblPassword"/>
-
-    <TextView
-        android:id="@+id/activity_register_lblRepeatPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="#000"
-        android:layout_marginTop="10dp"
-        android:hint="@string/activity_register_txtPassword"
-        android:text="@string/activity_register_lblRepeatPassword"
-        android:layout_below="@id/activity_register_txtPassword"/>
-
-    <EditText
-        android:id="@+id/activity_register_txtRepeatPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="#000"
-        android:textColorHint="#000"
-        android:inputType="textPassword"
-        android:layout_below="@id/activity_register_lblRepeatPassword"/>
-
-    <TextView
-        android:id="@+id/activity_register_lblGender"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="#000"
-        android:text="@string/activity_register_lblGender"
-        android:layout_below="@id/activity_register_txtRepeatPassword"/>
-    <RadioGroup
-        android:id="@+id/activity_register_rdioGrpGender"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-
-        android:layout_below="@id/activity_register_lblGender">
-        <RadioButton
-            android:id="@+id/activity_register_rdioMale"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#000"
-            android:text="@string/activity_register_masculino"
-            android:onClick="onRadioButtonClicked"/>
-        <RadioButton
-            android:id="@+id/activity_register_rdioFemale"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#000"
-            android:text="@string/activity_register_femenino"
-            android:onClick="onRadioButtonClicked"/>
-    </RadioGroup>
-
-    <EditText
-        android:id="@+id/activity_register_txtName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColorHint="#000"
-        android:textColor="#000"
-        android:hint="@string/activity_register_txtName"
-        android:layout_below="@id/activity_register_rdioGrpGender"/>
-
-    <Spinner
-        android:id="@+id/activity_register_spinAge"
-        android:layout_width="match_parent"
-
-        android:layout_height="wrap_content"
-        android:layout_below="@id/activity_register_txtName">
-
-    </Spinner>
-
-    <CheckBox
-        android:id="@+id/activity_register_chckTerms"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/activity_register_chckTerms"
-        android:layout_marginBottom="50dp"
-        android:textColor="#000"
-        android:layout_below="@id/activity_register_spinAge"/>
-
     <Button
         android:id="@+id/activity_register_btnRegister"
         android:layout_width="wrap_content"
@@ -129,5 +25,125 @@
         android:text="@string/activity_regiser_btnRegister"
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"/>
+
+
+
+    <ScrollView
+        android:layout_above="@id/activity_register_btnRegister"
+        android:layout_below="@id/activity_register_lblTitle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:id="@+id/activity_register_txtEmail"
+                android:layout_width="match_parent"
+                android:textColor="#000"
+                android:textColorHint="#000"
+                android:layout_height="wrap_content"
+                android:hint="@string/activity_register_txtEmail"
+                android:inputType="textEmailAddress"
+                android:layout_below="@id/activity_register_lblTitle"/>
+
+            <TextView
+                android:id="@+id/activity_register_lblPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#000"
+                android:layout_marginTop="10dp"
+                android:text="@string/activity_register_lblPassword"
+                android:layout_below="@id/activity_register_txtEmail"/>
+
+            <EditText
+                android:id="@+id/activity_register_txtPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#000"
+                android:textColorHint="#000"
+                android:inputType="textPassword"
+                android:layout_below="@id/activity_register_lblPassword"/>
+
+            <TextView
+                android:id="@+id/activity_register_lblRepeatPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#000"
+                android:layout_marginTop="10dp"
+                android:hint="@string/activity_register_txtPassword"
+                android:text="@string/activity_register_lblRepeatPassword"
+                android:layout_below="@id/activity_register_txtPassword"/>
+
+            <EditText
+                android:id="@+id/activity_register_txtRepeatPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#000"
+                android:textColorHint="#000"
+                android:inputType="textPassword"
+                android:layout_below="@id/activity_register_lblRepeatPassword"/>
+
+            <TextView
+                android:id="@+id/activity_register_lblGender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#000"
+                android:text="@string/activity_register_lblGender"
+                android:layout_below="@id/activity_register_txtRepeatPassword"/>
+            <RadioGroup
+                android:id="@+id/activity_register_rdioGrpGender"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+
+                android:layout_below="@id/activity_register_lblGender">
+                <RadioButton
+                    android:id="@+id/activity_register_rdioMale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#000"
+                    android:text="@string/activity_register_masculino"
+                    android:onClick="onRadioButtonClicked"/>
+                <RadioButton
+                    android:id="@+id/activity_register_rdioFemale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#000"
+                    android:text="@string/activity_register_femenino"
+                    android:onClick="onRadioButtonClicked"/>
+            </RadioGroup>
+
+            <EditText
+                android:id="@+id/activity_register_txtName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="#000"
+                android:textColor="#000"
+                android:hint="@string/activity_register_txtName"
+                android:layout_below="@id/activity_register_rdioGrpGender"/>
+
+            <Spinner
+                android:id="@+id/activity_register_spinAge"
+                android:layout_width="match_parent"
+
+                android:layout_height="wrap_content"
+                android:layout_below="@id/activity_register_txtName">
+
+            </Spinner>
+
+            <CheckBox
+                android:id="@+id/activity_register_chckTerms"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/activity_register_chckTerms"
+                android:layout_marginBottom="50dp"
+                android:textColor="#000"
+                android:layout_below="@id/activity_register_spinAge"/>
+
+        </RelativeLayout>
+    </ScrollView>
+
+
 
 </RelativeLayout>

@@ -4,10 +4,11 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.BaseAdapter;
 
 import org.projectes.androidshopping.R;
 
-public class NewProductActivity extends ActionBarActivity {
+public class NewProductActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

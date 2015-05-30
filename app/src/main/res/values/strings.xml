@@ -52,6 +52,7 @@
     <string name="title_activity_purchase_history">PurchaseHistoryActivity</string>
     <string name="activity_register_txtName">Nombre</string>
     <string name="activity_register_chckTerms">Acepto las condiciones de servicio</string>
+    <string name="title_activity_sell_list">SellListActivity</string>
 
 
 </resources>

@@ -7,7 +7,7 @@ import android.view.MenuItem;
 
 import org.projectes.androidshopping.R;
 
-public class UserProfileActivity extends ActionBarActivity {
+public class UserProfileActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

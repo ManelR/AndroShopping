@@ -7,7 +7,7 @@ import android.view.MenuItem;
 
 import org.projectes.androidshopping.R;
 
-public class ShowProductActivity extends ActionBarActivity {
+public class ShowProductActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

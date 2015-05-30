@@ -38,6 +38,14 @@
     <string name="activity_showUser_lblGenere">Género:</string>
     <string name="activity_showUser_radioMale">Hombre</string>
     <string name="activity_showUser_radioFemale">Mujer</string>
+    <string name="title_activity_products_manager">ProductsManagerActivity</string>
+    <string name="title_activity_new_product">NewProductActivity</string>
+    <string name="title_activity_show_product">ShowProductActivity</string>
+    <string name="title_activity_manage_users">ManageUsersActivity</string>
+    <string name="title_activity_new_user">NewUserActivity</string>
+    <string name="title_activity_user_profile">UserProfileActivity</string>
+    <string name="title_activity_buy">BuyActivity</string>
+    <string name="title_activity_purchase_history">PurchaseHistoryActivity</string>
 
 
 

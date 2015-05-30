@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="org.projectes.androidshopping" >
 
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".MyApplication"
@@ -21,23 +21,51 @@
         </activity>
         <activity
             android:name=".activities.LoginActivity"
-            android:label="@string/app_name">
-
+            android:label="@string/app_name" >
         </activity>
         <activity
             android:name=".activities.MainMenuActivity"
-            android:label="@string/app_name">
-
+            android:label="@string/app_name" >
         </activity>
         <activity
             android:name=".activities.RegisterActivity"
-            android:label="@string/app_name">
-
+            android:label="@string/app_name" >
         </activity>
         <activity
             android:name=".activities.ShowUserActivity"
-            android:label="@string/app_name">
-
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".activities.ProductsManagerActivity"
+            android:label="@string/title_activity_products_manager" >
+        </activity>
+        <activity
+            android:name=".activities.NewProductActivity"
+            android:label="@string/title_activity_new_product" >
+        </activity>
+        <activity
+            android:name=".activities.ShowProductActivity"
+            android:label="@string/title_activity_show_product" >
+        </activity>
+        <activity
+            android:name=".activities.ManageUsersActivity"
+            android:label="@string/title_activity_manage_users" >
+        </activity>
+        <activity
+            android:name=".activities.NewUserActivity"
+            android:label="@string/title_activity_new_user" >
+        </activity>
+        <activity
+            android:name=".activities.UserProfileActivity"
+            android:label="@string/title_activity_user_profile" >
+        </activity>
+        <activity
+            android:name=".activities.BuyActivity"
+            android:label="@string/title_activity_buy" >
+        </activity>
+        <activity
+            android:name=".activities.PurchaseHistoryActivity"
+            android:label="@string/title_activity_purchase_history" >
         </activity>
     </application>
 

@@ -11,8 +11,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.projectes.androidshopping.Constants.Constants;
 import org.projectes.androidshopping.DAO.DAOProductes;
+import org.projectes.androidshopping.DAO.DAOTags;
 import org.projectes.androidshopping.DAO.DAOWS_Data;
 import org.projectes.androidshopping.DAObject.Producte;
+import org.projectes.androidshopping.DAObject.Tag;
 import org.projectes.androidshopping.DAObject.WS_Data;
 import org.projectes.androidshopping.Listeners.IResult;
 import org.projectes.androidshopping.WS.JacksonJSONHelper;
@@ -63,6 +65,7 @@ public class WSTask extends AsyncTask<Object, Integer, Message> {
             if (updateTime != null){
                 this.flag = 1;
                 if(this.unixTimeUpdate > updateTime.getDate()){
+                    this.flag = 2;
                     getProductWS();
                     updateTime.setDate(this.unixTimeUpdate);
                     DBTime.updateFromID(updateTime);
@@ -80,25 +83,13 @@ public class WSTask extends AsyncTask<Object, Integer, Message> {
             e.printStackTrace();
 
         }
-        /*
-        try {
-            this.Mess = WS.get((String)params[Constants.POSICIO_URL_WSTask], null);
-            this.mapper = JacksonJSONHelper.Initialize();
-            this.productes = this.mapper.readValue(
-                    (String)this.Mess.obj,
-                    mapper.getTypeFactory().constructCollectionType(
-                            List.class, Producte.class));
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        */
         return this.Mess;
     }
 
     private void actualitzarProductes() {
         DAOProductes BBDDProductes = new DAOProductes(this.context);
         List<Producte> productesDB = BBDDProductes.selectAll();
+        boolean nTrobat = false;
         for (int i = 0; i<this.productes.size(); i++){
             Producte aux = BBDDProductes.selectByRemoteID(this.productes.get(i).getId_remot());
             if (aux != null){
@@ -110,14 +101,37 @@ public class WSTask extends AsyncTask<Object, Integer, Message> {
                 BBDDProductes.insertProduct(this.productes.get(i));
             }
         }
+        for (int i = 0; i < productesDB.size(); i++){
+            nTrobat = productesDB.get(i).getId_remot() < 0;
+            for (int j = 0; j < this.productes.size() && !nTrobat; j++){
+                if (productesDB.get(i).getId_remot() == this.productes.get(j).getId_remot()){
+                    nTrobat = true;
+                }
+            }
+            if (!nTrobat){
+                BBDDProductes.deleteById(productesDB.get(i).getId());
+            }
+        }
     }
 
     private void insertAllProducts() {
         DAOProductes BBDDProductes = new DAOProductes(this.context);
+        DAOTags BBDDTAG = new DAOTags(this.context);
+        long id_product = -1;
         for (int i = 0; i < this.productes.size(); i++){
-            BBDDProductes.insertProduct(this.productes.get(i));
+            id_product = BBDDProductes.insertProduct(this.productes.get(i));
+            for (int j = 0; j <this.productes.get(i).getWS_tags().size(); j++){
+                //Comprovar si existeix
+                Tag tagActual = BBDDTAG.selectByName(this.productes.get(i).getWS_tags().get(j));
+                if (tagActual == null){
+                    tagActual = new Tag();
+                    tagActual.setNom(this.productes.get(i).getWS_tags().get(j));
+                    tagActual.setId((int)BBDDTAG.insertTag(tagActual));
+                    Log.d("TAG INSERT:", tagActual.getNom());
+                }
+                BBDDTAG.insertProducte_Tag(tagActual.getId(), (int)id_product);
+            }
         }
-        Log.d("BBDD COMPROVACIÓ:", BBDDProductes.selectByID(3).getNombre());
     }
 
     public void onPostExecute(Message message){

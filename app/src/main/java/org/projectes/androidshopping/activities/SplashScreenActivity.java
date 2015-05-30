@@ -79,6 +79,7 @@ public class SplashScreenActivity extends BaseActivity {
                     if (boolIntent1 == 1){
                         Intent i = new Intent(getApplicationContext(),LoginActivity.class);
                         startActivity(i);
+                        finish();
                     }
                 }
             }
@@ -91,6 +92,7 @@ public class SplashScreenActivity extends BaseActivity {
                     if (boolIntent1 == 1){
                         Intent i = new Intent(getApplicationContext(),LoginActivity.class);
                         startActivity(i);
+                        finish();
                     }
                 }
             }
@@ -105,6 +107,7 @@ public class SplashScreenActivity extends BaseActivity {
                     if (boolIntent2 == 1){
                         Intent i = new Intent(getApplicationContext(),LoginActivity.class);
                         startActivity(i);
+                        finish();
                     }
                 }
             }

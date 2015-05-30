@@ -19,8 +19,9 @@ public class Producte {
     @JsonProperty("activo") public boolean activo;
     @JsonProperty("stock") public int stock;
     @JsonProperty("foto") public String image;
-    @JsonProperty("tags") public List<String> tags;
-    public int deleted;
+    @JsonIgnore public List<Tag> DB_tags;
+    @JsonProperty("tags") public List<String> WS_tags;
+    @JsonIgnore public int deleted;
 
     public Producte(){
 
@@ -82,12 +83,20 @@ public class Producte {
         this.image = image;
     }
 
-    public List<String> getTags() {
-        return tags;
+    public List<String> getWS_tags() {
+        return WS_tags;
     }
 
-    public void setTags(List<String> tags) {
-        this.tags = tags;
+    public void setWS_tags(List<String> WS_tags) {
+        this.WS_tags = WS_tags;
+    }
+
+    public List<Tag> getDB_tags() {
+        return DB_tags;
+    }
+
+    public void setDB_tags(List<Tag> DB_tags) {
+        this.DB_tags = DB_tags;
     }
 
     public int getId_remot() {

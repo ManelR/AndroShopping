@@ -1,0 +1,83 @@
+package org.projectes.androidshopping.DAO;
+
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteStatement;
+import android.util.Log;
+
+import org.projectes.androidshopping.DAObject.Producte;
+import org.projectes.androidshopping.DAObject.Tag;
+
+/**
+ * Created by mrr on 30/05/15.
+ */
+public class DAOTags extends DAOBase<Tag> {
+    private static final String TAULA_TAG = "tag";
+    private static final String TAULA_PRODUCTE_TAG = "producte_tag";
+
+
+    public DAOTags(Context context) {
+        super(context, TAULA_TAG);
+    }
+
+    public Tag selectByName(String name){
+        openReadOnly();
+        String sql="SELECT * FROM " + TAULA_TAG + " where nom = ? LIMIT 1" ;
+        Cursor cursor = myDB.rawQuery(sql, new String []{name});
+        cursor.moveToFirst();
+        Tag element = LoadFromCursor(cursor);
+        cursor.close();
+        closeDatabase();
+        return element;
+    }
+
+    public long insertTag(Tag tag){
+        long id = -1;
+        try{
+            openWrite();
+            String sql="INSERT INTO "+TAULA_TAG+" (nom) VALUES(?)";
+            SQLiteStatement statement = this.myDB.compileStatement(sql);
+            statement.bindAllArgsAsStrings(new String[]{tag.getNom()});
+            id=statement.executeInsert();
+            Log.i("---ID---", new Long(id).toString());
+            Log.i("---SQL---", sql);
+            statement.close();
+        }catch(Exception ex){
+            Log.e("ERROR", ex.toString());
+        }finally{
+            super.closeDatabase();
+        }
+        return id;
+    }
+
+    public void insertProducte_Tag(int id_tag, int id_product){
+        long id = -1;
+        try{
+            openWrite();
+            String sql="INSERT INTO "+TAULA_PRODUCTE_TAG+" (id_tag, id_producte) VALUES(?, ?)";
+            SQLiteStatement statement = this.myDB.compileStatement(sql);
+            statement.bindAllArgsAsStrings(new String[]{Integer.toString(id_tag), Integer.toString(id_product)});
+            id=statement.executeInsert();
+            Log.i("---ID---", new Long(id).toString());
+            Log.i("---SQL---", sql);
+            statement.close();
+        }catch(Exception ex){
+            Log.e("ERROR", ex.toString());
+        }finally{
+            super.closeDatabase();
+        }
+    }
+
+    @Override
+    protected Tag LoadFromCursor(Cursor cursor) {
+        Tag result = null;
+        if (cursor != null){
+            if (!cursor.isAfterLast()){
+                result = new Tag();
+                result.setId(cursor.getInt(cursor.getColumnIndex("id")));
+                result.setNom(cursor.getString(cursor.getColumnIndex("nom")));
+            }
+        }
+        return result;
+    }
+}

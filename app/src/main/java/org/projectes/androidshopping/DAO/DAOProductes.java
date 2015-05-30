@@ -18,7 +18,7 @@ public class DAOProductes extends DAOBase<Producte> {
         super(context, TABLE_NAME_PRODUCTE);
     }
 
-    public void insertProduct (Producte producte){
+    public long insertProduct (Producte producte){
         long inserted_id = -1;
         try{
             openWrite();
@@ -34,11 +34,12 @@ public class DAOProductes extends DAOBase<Producte> {
         }finally{
             super.closeDatabase();
         }
+        return inserted_id;
     }
 
     public Producte selectByRemoteID(long id){
         openReadOnly();
-        String sql="SELECT * FROM " + TABLE_NAME + " where id_remot = ? AND deleted = 0 LIMIT 1" ;
+        String sql="SELECT * FROM " + TABLE_NAME + " where id_remot = ? LIMIT 1" ;
         Cursor cursor = myDB.rawQuery(sql, new String []{Long.toString(id)});
         cursor.moveToFirst();
         Producte element = LoadFromCursor(cursor);
@@ -55,7 +56,7 @@ public class DAOProductes extends DAOBase<Producte> {
             SQLiteStatement statement = myDB.compileStatement(sql);
             statement.bindAllArgsAsStrings(new String[]{Integer.toString(p.getId_remot()), p.getNombre(), p.getDescripcion(), Float.toString(p.getPrecio()), Integer.toString(p.isActivo() ? 1 : 0), Integer.toString(p.getStock()), p.getImage(), Integer.toString(p.getDeleted()), Integer.toString(p.getId())});
             nError = statement.executeUpdateDelete();
-            Log.i("--UPDATE--", Integer.toString(nError));
+            Log.i("--UPDATE--", Integer.toString(p.getId_remot()));
             statement.close();
         }catch (Exception ex){
             Log.e("ERROR", ex.toString());

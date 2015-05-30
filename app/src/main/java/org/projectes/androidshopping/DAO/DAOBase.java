@@ -19,12 +19,73 @@ import java.util.ArrayList;
 
 
 public abstract class DAOBase<T> extends SQLiteOpenHelper {
-    private static final String DATABASE_NAME = "app_db.db";
+    private static final String DATABASE_NAME = "app_db.s3db";
     private static final int DATABASE_VERSION = 1;
     protected String TABLE_NAME = " ";
     protected SQLiteDatabase myDB;
     private Context context;
 
+    private String CREATE_USUARIS = "CREATE TABLE usuaris(\n" +
+            "\tid INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+            "\temail TEXT NOT NULL,\n" +
+            "\thash_password TEXT NOT NULL,\n" +
+            "\tgenere INTEGER,\n" +
+            "\tnom TEXT,\n" +
+            "\tedat INTEGER,\n" +
+            "\trol INTEGER,\n" +
+            "\tlogged_in INTEGER\n" +
+            ");";
+
+    private String CREATE_COMPRA = "CREATE TABLE compra(\n" +
+            "\tid INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+            "\tid_usuari INTEGER,\n" +
+            "\tdata INTEGER,\n" +
+            "\tFOREIGN KEY (id_usuari) REFERENCES usuaris(id)\n" +
+            ");";
+
+    private String CREATE_PRODUCTE = "CREATE TABLE producte(\n" +
+            "\tid INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+            "\tid_remot INTEGER,\n" +
+            "\tnom TEXT,\n" +
+            "\tdescripcio TEXT,\n" +
+            "\tpreu REAL,\n" +
+            "\tactiu INTEGER,\n" +
+            "\tstock INTEGER,\n" +
+            "\timatge TEXT\n" +
+            ");";
+
+    private String CREATE_TAG = "CREATE TABLE tag(\n" +
+            "\tid INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+            "\tnom TEXT\n" +
+            ");";
+
+    private String CREATE_HISTORIALPRODUCTE = "CREATE TABLE historialProducte(\n" +
+            "\tid INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+            "\tnom TEXT,\n" +
+            "\tpreu REAL\n" +
+            ");";
+
+    private String CREATE_COMPRA_HISTORIALPRODUCTE = "CREATE TABLE compra_historialProducte(\n" +
+            "\tid_compra INTEGER NOT NULL,\n" +
+            "\tid_historialProducte INTEGER NOT NULL,\n" +
+            "\tquantitat INTEGER,\n" +
+            "\tpreu REAL,\n" +
+            "\tFOREIGN KEY (id_compra) REFERENCES compra(id),\n" +
+            "\tFOREIGN KEY (id_historialProducte) REFERENCES historialProducte(id)\n" +
+            "); ";
+
+    private String CREATE_PRODUCTE_TAG = "CREATE TABLE producte_tag(\n" +
+            "\tid_tag INTEGER NOT NULL,\n" +
+            "\tid_producte INTEGER NOT NULL,\n" +
+            "\tFOREIGN KEY (id_tag) REFERENCES tag(id),\n" +
+            "\tFOREIGN KEY (id_producte) REFERENCES producte(id)\n" +
+            ");";
+
+    private String CREATE_WS_DATA = "CREATE TABLE ws_data(\n" +
+            "\tid INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+            "\tdata INTEGER,\n" +
+            "\tnomTaula TEXT\n" +
+            ");";
 
     public DAOBase(Context context, String table_name){
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -36,23 +97,32 @@ public abstract class DAOBase<T> extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         AssetManager mng = this.context.getAssets();
         InputStream input;
-        try {
-            input = mng.open("database/schema.sql");
-            int size = input.available();
-            byte[] buffer = new byte[size];
-            input.read(buffer);
-            input.close();
-            // byte buffer into a string
-            String schema = new String(buffer);
-            db.execSQL(schema);
-        } catch (IOException e) {
-            Log.e("BBDD", "Error al obrir el fitxer schema.sql\n");
-        }
+
+        /*
+        input = mng.open("database/schema.sql");
+        int size = input.available();
+        byte[] buffer = new byte[size];
+        input.read(buffer);
+        input.close();
+        // byte buffer into a string
+        String schema = new String(buffer);
+        */
+        db.execSQL(CREATE_USUARIS);
+        db.execSQL(CREATE_COMPRA);
+        db.execSQL(CREATE_PRODUCTE);
+        db.execSQL(CREATE_TAG);
+        db.execSQL(CREATE_HISTORIALPRODUCTE);
+        db.execSQL(CREATE_COMPRA_HISTORIALPRODUCTE);
+        db.execSQL(CREATE_PRODUCTE_TAG);
+        db.execSQL(CREATE_WS_DATA);
+
+        Log.d("BBDD:", "Creada!!!");
+
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        Log.d("BBDD:", "onUpgrade");
     }
 
     //Metodes per interectuar amb la BBDD
@@ -116,6 +186,6 @@ public abstract class DAOBase<T> extends SQLiteOpenHelper {
         return nError;
     }
 
-    public abstract T LoadFromCursor(Cursor cursor);
+    protected abstract T LoadFromCursor(Cursor cursor);
 
 }

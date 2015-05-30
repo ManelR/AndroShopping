@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
 import android.util.Log;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
@@ -25,70 +24,6 @@ public abstract class DAOBase<T> extends SQLiteOpenHelper {
     protected SQLiteDatabase myDB;
     private Context context;
 
-    private String CREATE_USUARIS = "CREATE TABLE usuaris(\n" +
-            "\tid INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
-            "\temail TEXT NOT NULL,\n" +
-            "\thash_password TEXT NOT NULL,\n" +
-            "\tgenere INTEGER,\n" +
-            "\tnom TEXT,\n" +
-            "\tedat INTEGER,\n" +
-            "\trol INTEGER,\n" +
-            "\tlogged_in INTEGER\n" +
-            "\tdeleted INTEGER\n" +
-            ");";
-
-    private String CREATE_COMPRA = "CREATE TABLE compra(\n" +
-            "\tid INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
-            "\tid_usuari INTEGER,\n" +
-            "\tdata INTEGER,\n" +
-            "\tFOREIGN KEY (id_usuari) REFERENCES usuaris(id)\n" +
-            ");";
-
-    private String CREATE_PRODUCTE = "CREATE TABLE producte(\n" +
-            "\tid INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
-            "\tid_remot INTEGER,\n" +
-            "\tnom TEXT,\n" +
-            "\tdescripcio TEXT,\n" +
-            "\tpreu REAL,\n" +
-            "\tactiu INTEGER,\n" +
-            "\tstock INTEGER,\n" +
-            "\tdeleted INTEGER,\n" +
-            "\timatge TEXT\n" +
-            ");";
-
-    private String CREATE_TAG = "CREATE TABLE tag(\n" +
-            "\tid INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
-            "\tnom TEXT\n" +
-            ");";
-
-    private String CREATE_HISTORIALPRODUCTE = "CREATE TABLE historialProducte(\n" +
-            "\tid INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
-            "\tnom TEXT,\n" +
-            "\tpreu REAL\n" +
-            ");";
-
-    private String CREATE_COMPRA_HISTORIALPRODUCTE = "CREATE TABLE compra_historialProducte(\n" +
-            "\tid_compra INTEGER NOT NULL,\n" +
-            "\tid_historialProducte INTEGER NOT NULL,\n" +
-            "\tquantitat INTEGER,\n" +
-            "\tpreu REAL,\n" +
-            "\tFOREIGN KEY (id_compra) REFERENCES compra(id),\n" +
-            "\tFOREIGN KEY (id_historialProducte) REFERENCES historialProducte(id)\n" +
-            "); ";
-
-    private String CREATE_PRODUCTE_TAG = "CREATE TABLE producte_tag(\n" +
-            "\tid_tag INTEGER NOT NULL,\n" +
-            "\tid_producte INTEGER NOT NULL,\n" +
-            "\tFOREIGN KEY (id_tag) REFERENCES tag(id),\n" +
-            "\tFOREIGN KEY (id_producte) REFERENCES producte(id)\n" +
-            ");";
-
-    private String CREATE_WS_DATA = "CREATE TABLE ws_data(\n" +
-            "\tid INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
-            "\tdata INTEGER,\n" +
-            "\tnomTaula TEXT\n" +
-            ");";
-
     public DAOBase(Context context, String table_name){
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         this.TABLE_NAME = table_name;
@@ -99,23 +34,69 @@ public abstract class DAOBase<T> extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         AssetManager mng = this.context.getAssets();
         InputStream input;
-
-        /*
-        input = mng.open("database/schema.sql");
-        int size = input.available();
-        byte[] buffer = new byte[size];
-        input.read(buffer);
-        input.close();
-        // byte buffer into a string
-        String schema = new String(buffer);
-        */
+        String CREATE_USUARIS = "CREATE TABLE usuaris(\n" +
+                "\tid INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+                "\temail TEXT NOT NULL,\n" +
+                "\thash_password TEXT NOT NULL,\n" +
+                "\tgenere INTEGER,\n" +
+                "\tnom TEXT,\n" +
+                "\tedat INTEGER,\n" +
+                "\trol INTEGER,\n" +
+                "\tlogged_in INTEGER,\n" +
+                "\tdeleted INTEGER\n" +
+                ");";
         db.execSQL(CREATE_USUARIS);
+        String CREATE_COMPRA = "CREATE TABLE compra(\n" +
+                "\tid INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+                "\tid_usuari INTEGER,\n" +
+                "\tdata INTEGER,\n" +
+                "\tFOREIGN KEY (id_usuari) REFERENCES usuaris(id)\n" +
+                ");";
         db.execSQL(CREATE_COMPRA);
+        String CREATE_PRODUCTE = "CREATE TABLE producte(\n" +
+                "\tid INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+                "\tid_remot INTEGER,\n" +
+                "\tnom TEXT,\n" +
+                "\tdescripcio TEXT,\n" +
+                "\tpreu REAL,\n" +
+                "\tactiu INTEGER,\n" +
+                "\tstock INTEGER,\n" +
+                "\tdeleted INTEGER,\n" +
+                "\timatge TEXT\n" +
+                ");";
         db.execSQL(CREATE_PRODUCTE);
+        String CREATE_TAG = "CREATE TABLE tag(\n" +
+                "\tid INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+                "\tnom TEXT\n" +
+                ");";
         db.execSQL(CREATE_TAG);
+        String CREATE_HISTORIALPRODUCTE = "CREATE TABLE historialProducte(\n" +
+                "\tid INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+                "\tnom TEXT,\n" +
+                "\tpreu REAL\n" +
+                ");";
         db.execSQL(CREATE_HISTORIALPRODUCTE);
+        String CREATE_COMPRA_HISTORIALPRODUCTE = "CREATE TABLE compra_historialProducte(\n" +
+                "\tid_compra INTEGER NOT NULL,\n" +
+                "\tid_historialProducte INTEGER NOT NULL,\n" +
+                "\tquantitat INTEGER,\n" +
+                "\tpreu REAL,\n" +
+                "\tFOREIGN KEY (id_compra) REFERENCES compra(id),\n" +
+                "\tFOREIGN KEY (id_historialProducte) REFERENCES historialProducte(id)\n" +
+                "); ";
         db.execSQL(CREATE_COMPRA_HISTORIALPRODUCTE);
+        String CREATE_PRODUCTE_TAG = "CREATE TABLE producte_tag(\n" +
+                "\tid_tag INTEGER NOT NULL,\n" +
+                "\tid_producte INTEGER NOT NULL,\n" +
+                "\tFOREIGN KEY (id_tag) REFERENCES tag(id),\n" +
+                "\tFOREIGN KEY (id_producte) REFERENCES producte(id)\n" +
+                ");";
         db.execSQL(CREATE_PRODUCTE_TAG);
+        String CREATE_WS_DATA = "CREATE TABLE ws_data(\n" +
+                "\tid INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+                "\tdata INTEGER,\n" +
+                "\tnomTaula TEXT\n" +
+                ");";
         db.execSQL(CREATE_WS_DATA);
 
         Log.d("BBDD:", "Creada!!!");
@@ -187,6 +168,12 @@ public abstract class DAOBase<T> extends SQLiteOpenHelper {
         }
         return nError;
     }
+
+    public abstract void delete(T obj);
+
+    public abstract long insert(T obj);
+
+    public abstract void update(T obj);
 
     protected abstract T LoadFromCursor(Cursor cursor);
 

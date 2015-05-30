@@ -3,31 +3,25 @@ package org.projectes.androidshopping.DAObject;
 /**
  * Created by mrr on 30/05/15.
  */
-public class WS_Data {
-    private int id;
+public class WS_Data extends DAObjectBase{
     private long date;
     private String nomTaula;
 
     public WS_Data() {
+        super();
     }
 
     public WS_Data(long date, String nomTaula) {
+        super();
         this.date = date;
         this.nomTaula = nomTaula;
     }
 
     public WS_Data(int id, long date, String nomTaula) {
+        super();
         this.id = id;
         this.date = date;
         this.nomTaula = nomTaula;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public long getDate() {

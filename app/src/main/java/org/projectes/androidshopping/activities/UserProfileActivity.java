@@ -1,14 +1,14 @@
 package org.projectes.androidshopping.activities;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import org.projectes.androidshopping.R;
 
 public class UserProfileActivity extends BaseActivity {
-
+    private String sGender;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,5 +36,16 @@ public class UserProfileActivity extends BaseActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onRadioButtonClicked(View view){
+        switch(view.getId()){
+            case R.id.activity_register_rdioMale:
+                this.sGender = "Hombre";
+                break;
+            case R.id.activity_newUser_rdioFemale:
+                this.sGender = "Mujer";
+                break;
+        }
     }
 }

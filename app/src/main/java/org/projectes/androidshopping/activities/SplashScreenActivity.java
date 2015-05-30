@@ -23,14 +23,8 @@ import java.util.TimerTask;
 
 public class SplashScreenActivity extends BaseActivity {
 
-    private ImageView imgLogo = null;
-    private TextView lblSplash = null;
-    private Animation fadeIn = null;
     private int boolIntent1 = 0;
     private int boolIntent2 = 0;
-
-    private WSTask productsTask = null;
-    private Timer timer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,9 +50,9 @@ public class SplashScreenActivity extends BaseActivity {
     }
 
     private void associateControls(){
-        imgLogo = (ImageView) findViewById(R.id.splash_screen_activity_imgApp);
-        lblSplash = (TextView) findViewById(R.id.splash_screen_activity_lblAppName);
-        fadeIn = AnimationUtils.loadAnimation(this, R.anim.fadein);
+        ImageView imgLogo = (ImageView) findViewById(R.id.splash_screen_activity_imgApp);
+        TextView lblSplash = (TextView) findViewById(R.id.splash_screen_activity_lblAppName);
+        Animation fadeIn = AnimationUtils.loadAnimation(this, R.anim.fadein);
 
         if(lblSplash != null){
             lblSplash.setTypeface(boldFont);
@@ -70,14 +64,14 @@ public class SplashScreenActivity extends BaseActivity {
             imgLogo.startAnimation(fadeIn);
         }
 
-        this.productsTask = new WSTask();
-        this.productsTask.setResultListener(new IResult<Message>() {
+        WSTask productsTask = new WSTask();
+        productsTask.setResultListener(new IResult<Message>() {
             @Override
             public void onSuccess(Message IRresult) {
-                synchronized (MyApplication.mutexSplash){
+                synchronized (MyApplication.mutexSplash) {
                     boolIntent2 = 1;
-                    if (boolIntent1 == 1){
-                        Intent i = new Intent(getApplicationContext(),LoginActivity.class);
+                    if (boolIntent1 == 1) {
+                        Intent i = new Intent(getApplicationContext(), LoginActivity.class);
                         startActivity(i);
                         finish();
                     }
@@ -87,10 +81,10 @@ public class SplashScreenActivity extends BaseActivity {
             @Override
             public void onFail(String missatgeError) {
                 Toast.makeText(SplashScreenActivity.this, missatgeError, Toast.LENGTH_LONG).show();
-                synchronized (MyApplication.mutexSplash){
+                synchronized (MyApplication.mutexSplash) {
                     boolIntent2 = 1;
-                    if (boolIntent1 == 1){
-                        Intent i = new Intent(getApplicationContext(),LoginActivity.class);
+                    if (boolIntent1 == 1) {
+                        Intent i = new Intent(getApplicationContext(), LoginActivity.class);
                         startActivity(i);
                         finish();
                     }
@@ -98,14 +92,14 @@ public class SplashScreenActivity extends BaseActivity {
             }
         });
 
-        this.timer = new Timer();
-        this.timer.schedule(new TimerTask() {
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                synchronized (MyApplication.mutexSplash){
+                synchronized (MyApplication.mutexSplash) {
                     boolIntent1 = 1;
-                    if (boolIntent2 == 1){
-                        Intent i = new Intent(getApplicationContext(),LoginActivity.class);
+                    if (boolIntent2 == 1) {
+                        Intent i = new Intent(getApplicationContext(), LoginActivity.class);
                         startActivity(i);
                         finish();
                     }
@@ -113,7 +107,7 @@ public class SplashScreenActivity extends BaseActivity {
             }
         }, 2000);
 
-        this.productsTask.execute(this, Constants.URL_PRODUCTES);
+        productsTask.execute(this, Constants.URL_PRODUCTES);
 
     }
 

@@ -18,7 +18,37 @@ public class DAOProductes extends DAOBase<Producte> {
         super(context, TABLE_NAME_PRODUCTE);
     }
 
-    public long insertProduct (Producte producte){
+    public Producte selectByRemoteID(long id){
+        openReadOnly();
+        String sql="SELECT * FROM " + TABLE_NAME + " where id_remot = ? LIMIT 1" ;
+        Cursor cursor = myDB.rawQuery(sql, new String []{Long.toString(id)});
+        cursor.moveToFirst();
+        Producte element = LoadFromCursor(cursor);
+        cursor.close();
+        closeDatabase();
+        return element;
+    }
+
+    @Override
+    public void delete(Producte obj) {
+        int nError = 1;
+        try{
+            openWrite();
+            String sql = "UPDATE " + TABLE_NAME_PRODUCTE + " SET deleted = 1 WHERE id = ?";
+            SQLiteStatement statement = myDB.compileStatement(sql);
+            statement.bindAllArgsAsStrings(new String[]{Integer.toString(obj.getId())});
+            nError = statement.executeUpdateDelete();
+            Log.i("--DELETE--", "Ha entrat al delete");
+            statement.close();
+        }catch (Exception ex){
+            Log.d("ERROR", ex.toString());
+        }finally {
+            this.closeDatabase();
+        }
+    }
+
+    @Override
+    public long insert(Producte producte) {
         long inserted_id = -1;
         try{
             openWrite();
@@ -37,18 +67,8 @@ public class DAOProductes extends DAOBase<Producte> {
         return inserted_id;
     }
 
-    public Producte selectByRemoteID(long id){
-        openReadOnly();
-        String sql="SELECT * FROM " + TABLE_NAME + " where id_remot = ? LIMIT 1" ;
-        Cursor cursor = myDB.rawQuery(sql, new String []{Long.toString(id)});
-        cursor.moveToFirst();
-        Producte element = LoadFromCursor(cursor);
-        cursor.close();
-        closeDatabase();
-        return element;
-    }
-
-    public void updateFromID(Producte p){
+    @Override
+    public void update(Producte p) {
         int nError = 0;
         try{
             openWrite();
@@ -83,4 +103,6 @@ public class DAOProductes extends DAOBase<Producte> {
         }
         return result;
     }
+
+
 }

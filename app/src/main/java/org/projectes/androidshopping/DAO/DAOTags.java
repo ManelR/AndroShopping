@@ -5,7 +5,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteStatement;
 import android.util.Log;
 
-import org.projectes.androidshopping.DAObject.Producte;
 import org.projectes.androidshopping.DAObject.Tag;
 
 /**
@@ -85,6 +84,22 @@ public class DAOTags extends DAOBase<Tag> {
         }
     }
 
+
+    @Override
+    public void delete(Tag obj) {
+        //NO S'utilitza
+    }
+
+    @Override
+    public long insert(Tag obj) {
+        return 0;
+    }
+
+    @Override
+    public void update(Tag obj) {
+
+    }
+
     @Override
     protected Tag LoadFromCursor(Cursor cursor) {
         Tag result = null;
@@ -97,4 +112,6 @@ public class DAOTags extends DAOBase<Tag> {
         }
         return result;
     }
+
+
 }

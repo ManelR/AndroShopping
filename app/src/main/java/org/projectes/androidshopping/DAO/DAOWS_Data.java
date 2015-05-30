@@ -28,31 +28,19 @@ public class DAOWS_Data extends DAOBase<WS_Data> {
         return element;
     }
 
-    public void updateFromID(WS_Data date){
-        int nError = 0;
-        try{
-            Log.i("---VALORS UPDATE---", date.getNomTaula() + " " + date.getDate());
-            openWrite();
-            String sql = "UPDATE " + TABLE_NAME_WS_DATE + " SET data = ? WHERE id = ?";
-            SQLiteStatement statement = myDB.compileStatement(sql);
-            statement.bindAllArgsAsStrings(new String[]{Long.toString(date.getDate()), new Integer(date.getId()).toString()});
-            nError = statement.executeUpdateDelete();
-            Log.i("--UPDATE--", new Integer(nError).toString());
-            statement.close();
-        }catch (Exception ex){
-            Log.e("ERROR", ex.toString());
-        }finally {
-            this.closeDatabase();
-        }
+    @Override
+    public void delete(WS_Data obj) {
+        //No s'utilitza
     }
 
-    public void insertWS_Data(WS_Data newDate){
+    @Override
+    public long insert(WS_Data obj) {
         long inserted_id = -1;
         try{
             openWrite();
             String sql="INSERT INTO "+TABLE_NAME_WS_DATE+" (data, nomTaula) VALUES(?,?)";
             SQLiteStatement statement = this.myDB.compileStatement(sql);
-            statement.bindAllArgsAsStrings(new String[]{Long.toString(newDate.getDate()), newDate.getNomTaula()});
+            statement.bindAllArgsAsStrings(new String[]{Long.toString(obj.getDate()), obj.getNomTaula()});
             inserted_id=statement.executeInsert();
             Log.i("---ID---", new Long(inserted_id).toString());
             Log.i("---SQL---", sql);
@@ -61,6 +49,26 @@ public class DAOWS_Data extends DAOBase<WS_Data> {
             Log.e("ERROR", ex.toString());
         }finally{
             super.closeDatabase();
+        }
+        return inserted_id;
+    }
+
+    @Override
+    public void update(WS_Data obj) {
+        int nError = 0;
+        try{
+            Log.i("---VALORS UPDATE---", obj.getNomTaula() + " " + obj.getDate());
+            openWrite();
+            String sql = "UPDATE " + TABLE_NAME_WS_DATE + " SET data = ? WHERE id = ?";
+            SQLiteStatement statement = myDB.compileStatement(sql);
+            statement.bindAllArgsAsStrings(new String[]{Long.toString(obj.getDate()), new Integer(obj.getId()).toString()});
+            nError = statement.executeUpdateDelete();
+            Log.i("--UPDATE--", new Integer(nError).toString());
+            statement.close();
+        }catch (Exception ex){
+            Log.e("ERROR", ex.toString());
+        }finally {
+            this.closeDatabase();
         }
     }
 

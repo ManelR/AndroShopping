@@ -3,8 +3,7 @@ package org.projectes.androidshopping.DAObject;
 /**
  * Created by mrr on 30/05/15.
  */
-public class Usuari {
-    private int id;
+public class Usuari extends DAObjectBase {
     private String email;
     private String hash_pass;
     private String pass;
@@ -16,9 +15,22 @@ public class Usuari {
     private int deleted;
 
     public Usuari() {
+        super();
+    }
+
+    public Usuari(String email, String pass, int genere, String nom, int edat, int rol, int logged_in) {
+        super();
+        this.email = email;
+        this.pass = pass;
+        this.genere = genere;
+        this.nom = nom;
+        this.edat = edat;
+        this.rol = rol;
+        this.logged_in = logged_in;
     }
 
     public Usuari(int id, String email, String hash_pass, int genere, String nom, int edat, int rol, int logged_in) {
+        super();
         this.id = id;
         this.email = email;
         this.hash_pass = hash_pass;
@@ -27,14 +39,6 @@ public class Usuari {
         this.edat = edat;
         this.rol = rol;
         this.logged_in = logged_in;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getEmail() {

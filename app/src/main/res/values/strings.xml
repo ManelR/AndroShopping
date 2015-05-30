@@ -48,6 +48,11 @@
     <string name="item_sell_list_lblQuantity">Cantidad:</string>
     <string name="item_sell_list_lblProduct">Producto:</string>
 
+    <!-- ManageUsers Activity -->
+    <string name="activity_manageUsers_menu_addItem">Añadir</string>
+    <string name="activity_manageUsers_activityName">Gestionar Usuarios</string>
+    <string name="activity_manageUsers_lblTitle">Selecciona un usuario:</string>
+
     <!-- PurchaseHistory Activity -->
     <string name="activity_purchaseHistory_activityName">Histórico</string>
     <string name="item_purchase_history_lblPrice">Precio Total:</string>
@@ -64,7 +69,6 @@
     <string name="title_activity_buy">BuyActivity</string>
     <string name="activity_register_txtName">Nombre</string>
     <string name="activity_register_chckTerms">Acepto las condiciones de servicio</string>
-    <string name="title_activity_sell_list">SellListActivity</string>
     <string name="activity_userProfile_btnModifier"><![CDATA[Modificar >]]></string>
     <string name="activity_newuser_btnCreate"><![CDATA[Crear >]]></string>
 

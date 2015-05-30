@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="org.projectes.androidshopping" >
 
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
 
     <application
         android:name=".MyApplication"
@@ -13,25 +13,20 @@
         <activity
             android:name=".activities.SplashScreenActivity"
             android:label="@string/app_name" >
-
-        </activity>
-        <activity
-            android:name=".activities.LoginActivity"
-            android:label="@string/app_name"
-            android:windowSoftInputMode="stateAlwaysHidden" >
-        </activity>
-        <activity
-            android:name=".activities.MainMenuActivity"
-            android:label="@string/app_name" >
-        </activity>
-        <activity
-            android:name=".activities.RegisterActivity"
-            android:label="@string/title_activity_register" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".activities.LoginActivity"
+            android:label="@string/app_name"
+            ></activity>
+        <activity
+            android:name=".activities.MainMenuActivity"
+            android:label="@string/app_name">
+
         </activity>
     </application>
 

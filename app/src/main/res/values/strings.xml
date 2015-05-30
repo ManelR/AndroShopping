@@ -8,7 +8,14 @@
     <!-- Splash Screen Activity Strings -->
     <string name="title_activity_splash_scree">SplashScreen</string>
 
-
+    <!-- MainMenu Activity Strings -->
+    <string name="activity_mainMenu_lblPerfil">Perfil</string>
+    <string name="activity_mainMenu_lblComprar">Comprar</string>
+    <string name="activity_mainMenu_lblPurchaseHistory">Histórico de compras</string>
+    <string name="activity_mainMenu_lblExit">Salir</string>
+    <string name="activity_mainMenu_lblManageProducts">Gestionar Productos</string>
+    <string name="activity_mainMenu_lblManageUsers">Gestionar Usuarios</string>
+    <string name="activity_mainMenu_lblSellList">Estado de ventas</string>
     <!-- Login Activity Strings -->
     <string name="activity_login_lblLoginHeader">Autenticación</string>
     <string name="activity_login_lblEmail">Correo Electrónico:</string>
@@ -21,7 +28,8 @@
     <string name="errorHTTP">Error connexió WS</string>
     <string name="title_activity_register">RegisterActivity</string>
 
-    <string name="hello_world">Hello world!</string>
+
+    <!-- RegisterActivity Strings -->
     <string name="activity_register_lblTitle">Alta de usuarios nuevos</string>
     <string name="activity_register_lblPassword">Contraseña</string>
     <string name="activity_register_lblRepeatPassword">Repita la contraseña</string>

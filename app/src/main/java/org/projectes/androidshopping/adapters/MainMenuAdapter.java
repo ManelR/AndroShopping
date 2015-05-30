@@ -11,6 +11,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.projectes.androidshopping.R;
+import org.projectes.androidshopping.activities.BuyActivity;
+import org.projectes.androidshopping.activities.PurchaseHistoryActivity;
+import org.projectes.androidshopping.activities.UserProfileActivity;
 import org.projectes.androidshopping.objects.MainMenuObject;
 
 import java.util.LinkedList;
@@ -22,10 +25,10 @@ public class MainMenuAdapter extends BaseAdapter {
     private LinkedList<MainMenuObject> lObjectes = null;
     private Context context = null;
 
-    public MainMenuAdapter(Context context){
+    public MainMenuAdapter(Context context,boolean isAdmin){
         this.lObjectes = new LinkedList<MainMenuObject>();
         this.context = context;
-        this.inflateElements();
+        this.inflateElements(isAdmin);
     }
 
     @Override
@@ -92,9 +95,19 @@ public class MainMenuAdapter extends BaseAdapter {
         return item;
     }
 
-    private void inflateElements(){
-        objExit = new MainMenuObject("Salir",R.mipmap.ic_launcher,null);
-        objExit.setIsExit(true);
-        lObjectes.add(objExit);
+    private void inflateElements(boolean isAdmin){
+        if(isAdmin){
+
+        }else{
+            MainMenuObject objPerfil = new MainMenuObject(context.getString(R.string.activity_mainMenu_lblPerfil),R.mipmap.user, UserProfileActivity.class);
+            MainMenuObject objComprar = new MainMenuObject(context.getString(R.string.activity_mainMenu_lblComprar),R.mipmap.buy, BuyActivity.class);
+            MainMenuObject objPurchaseHistory = new MainMenuObject(context.getString(R.string.activity_mainMenu_lblPurchaseHistory),R.mipmap.list, PurchaseHistoryActivity.class);
+            MainMenuObject objExit = new MainMenuObject(context.getString(R.string.activity_mainMenu_lblExit),R.mipmap.exit,null);
+            objExit.setIsExit(true);
+            lObjectes.add(objPerfil);
+            lObjectes.add(objComprar);
+            lObjectes.add(objPurchaseHistory);
+            lObjectes.add(objExit);
+        }
     }
 }

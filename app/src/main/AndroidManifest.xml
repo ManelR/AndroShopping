@@ -21,7 +21,12 @@
         </activity>
         <activity
             android:name=".activities.MainMenuActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:theme="@style/Theme.AppCompat.Light">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".activities.RegisterActivity"
@@ -69,10 +74,6 @@
             android:name=".activities.PurchaseHistoryActivity"
             android:label="@string/activity_purchaseHistory_activityName"
             android:theme="@style/Theme.AppCompat.Light">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 

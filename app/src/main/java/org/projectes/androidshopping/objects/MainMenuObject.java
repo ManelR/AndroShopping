@@ -10,10 +10,10 @@ public class MainMenuObject{
 
     private String sText;
     private int nImage;
-    private Class<Activity> activityClass;
+    private Class<?> activityClass;
     private boolean isExit;
 
-    public MainMenuObject(String sText,int nImage,Class<Activity> activityClass){
+    public MainMenuObject(String sText,int nImage,Class<?> activityClass){
         this.sText = sText;
         this.nImage = nImage;
         this.activityClass = activityClass;
@@ -44,7 +44,7 @@ public class MainMenuObject{
         return this.sText;
     }
 
-    public Class<Activity> getActivityClass(){
+    public Class<?> getActivityClass(){
         return activityClass;
     }
 

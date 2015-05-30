@@ -67,7 +67,6 @@ public class BaseActivity extends AppCompatActivity {
             aBar.setIcon(R.mipmap.ic_launcher);
             aBar.setDisplayShowHomeEnabled(true);
             aBar.setDisplayHomeAsUpEnabled(true);
-
         }
 
         //Import Typefaces

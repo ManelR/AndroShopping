@@ -125,7 +125,7 @@
             <Spinner
                 android:id="@+id/activity_register_spinAge"
                 android:layout_width="match_parent"
-
+                android:prompt="@string/activity_register_spinnerDefault"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/activity_register_txtName">
 

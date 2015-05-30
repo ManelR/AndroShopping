@@ -71,6 +71,12 @@
     <string name="activity_register_chckTerms">Acepto las condiciones de servicio</string>
     <string name="activity_userProfile_btnModifier"><![CDATA[Modificar >]]></string>
     <string name="activity_newuser_btnCreate"><![CDATA[Crear >]]></string>
+    <string name="error_email_message">El correo introducido no es correcto</string>
+    <string name="error_rePass_empty">El campo \"Repita la Contraseña\" no puede estar vacío</string>
+    <string name="error_pass_empty">El campo \"Contraseña\" no puede estar vacío</string>
+    <string name="error_pass_nomatch">Los campos de contraseña no coinciden</string>
+    <string name="error_gender_empty">Tienes que seleccionar un género</string>
+    <string name="activity_register_spinnerDefault">Edad</string>
 
 
 </resources>

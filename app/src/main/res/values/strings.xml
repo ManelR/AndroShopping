@@ -52,6 +52,10 @@
     <string name="activity_manageUsers_menu_addItem">Añadir</string>
     <string name="activity_manageUsers_activityName">Gestionar Usuarios</string>
     <string name="activity_manageUsers_lblTitle">Selecciona un usuario:</string>
+    <string name="item_manage_users_lblEmail">Email:</string>
+    <string name="item_manage_users_lblAge">Edad:</string>
+    <string name="item_manage_users_lblGenere">Género:</string>
+    <string name="item_manage_users_btnDelete">Eliminar</string>
 
     <!-- PurchaseHistory Activity -->
     <string name="activity_purchaseHistory_activityName">Histórico</string>

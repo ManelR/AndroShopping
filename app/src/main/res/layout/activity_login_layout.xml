@@ -115,7 +115,6 @@
                        android:text="@string/activity_login_lblCheckbox"
                        android:padding="8dp"
                        android:textColor="@color/solid_black"/>
-
                </LinearLayout>
 
                <LinearLayout
@@ -136,6 +135,14 @@
                        />
 
                </LinearLayout>
+
+               <TextView
+                   android:id="@+id/actvity_login_lblRegister"
+                   android:gravity="center"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_gravity="center"
+                   android:text="@string/activity_login_linkNewAccount"/>
 
            </LinearLayout>
 

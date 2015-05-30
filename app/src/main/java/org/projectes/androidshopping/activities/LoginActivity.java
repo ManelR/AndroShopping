@@ -3,23 +3,35 @@ package org.projectes.androidshopping.activities;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.projectes.androidshopping.R;
 
 /**
  * Created by alloveras on 12/05/15.
  */
+
 public class LoginActivity extends BaseActivity {
+
+    private TextView link = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_layout);
+        link = (TextView) findViewById(R.id.actvity_login_lblRegister);
+        link.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(),"HOLA MANEL",Toast.LENGTH_LONG).show();
 
+            }
+        });
     }
 
     @Override

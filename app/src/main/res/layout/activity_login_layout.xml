@@ -68,6 +68,7 @@
                    android:layout_marginLeft="12dp"
                    android:layout_marginRight="12dp"
                    android:textSize="18sp"
+                   android:imeOptions="flagNoExtractUi"
                    android:hint="@string/activity_login_txtEmailHint"
                    android:textColorHint="@color/solid_black"/>
 
@@ -90,6 +91,7 @@
                    android:layout_marginLeft="12dp"
                    android:layout_marginRight="12dp"
                    android:textSize="18sp"
+                   android:imeOptions="flagNoExtractUi"
                    android:hint="@string/activity_login_txtContraseñaHint"
                    android:textColorHint="@color/solid_black"/>
 

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Message;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -17,6 +16,7 @@ import org.projectes.androidshopping.DAObject.Producte;
 import org.projectes.androidshopping.DAObject.Tag;
 import org.projectes.androidshopping.DAObject.WS_Data;
 import org.projectes.androidshopping.Listeners.IResult;
+import org.projectes.androidshopping.R;
 import org.projectes.androidshopping.WS.JacksonJSONHelper;
 import org.projectes.androidshopping.WS.WSConnector;
 
@@ -150,12 +150,9 @@ public class WSTask extends AsyncTask<Object, Integer, Message> {
         if (this.listener != null){
             if (message != null && message.what == 200){
                 listener.onSuccess(message);
-                //Toast.makeText(this.context, productes.get(2).getNombre(), Toast.LENGTH_LONG).show();
-                //Toast.makeText(this.context, this.jsonTree.get("last_update").textValue(), Toast.LENGTH_LONG).show();
                 Log.d("UNIX TIME:", Long.toString(this.unixTimeUpdate));
-                Toast.makeText(this.context, Integer.toString(this.flag), Toast.LENGTH_LONG).show();
             }else{
-                listener.onFail("Error HTTP");
+                listener.onFail(this.context.getString(R.string.errorHTTP));
             }
         }
     }

@@ -18,8 +18,19 @@
     <string name="activity_login_lblCheckbox">Recuerdame la próxima vez</string>
     <string name="activity_login_btnLogin">Entrar</string>
     <string name="activity_login_linkNewAccount">No tienes cuenta? Registrate</string>
+    <string name="errorHTTP">Error connexió WS</string>
+    <string name="title_activity_register">RegisterActivity</string>
 
-
+    <string name="hello_world">Hello world!</string>
+    <string name="activity_register_lblTitle">Alta de usuarios nuevos</string>
+    <string name="activity_register_lblPassword">Contraseña</string>
+    <string name="activity_register_lblRepeatPassword">Repita la contraseña</string>
+    <string name="activity_register_txtEmail">Email</string>
+    <string name="activity_register_masculino">Hombre</string>
+    <string name="activity_register_femenino">Mujer</string>
+    <string name="activity_regiser_btnRegister">Registrarse</string>
+    <string name="activity_register_txtPassword">qwerty1234</string>
+    <string name="activity_register_lblGender">Género</string>
 
 
 </resources>

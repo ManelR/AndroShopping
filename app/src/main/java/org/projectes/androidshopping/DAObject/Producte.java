@@ -10,8 +10,7 @@ import java.util.List;
  * Created by mrr on 12/05/15.
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Producte {
-    @JsonIgnore public int id;
+public class Producte extends DAObjectBase{
     @JsonProperty("id") public int id_remot;
     @JsonProperty("nombre") public String nombre;
     @JsonProperty("descripcion") public String descripcion;
@@ -24,15 +23,7 @@ public class Producte {
     @JsonIgnore public int deleted;
 
     public Producte(){
-
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+        super();
     }
 
     public String getNombre() {

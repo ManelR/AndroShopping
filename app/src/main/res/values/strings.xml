@@ -80,6 +80,8 @@
     <string name="error_name_empty">El campo \"Nombre\" no puede estar vacío</string>
     <string name="error_chckTerm_notChecked">Tienes que aceptar los terminos</string>
     <string name="error_ageSpinner_empty">Tienes que seleccionar una edad</string>
+    <string name="error_email_repeat">El correo introducido ya existe</string>
+    <string name="errorBaseDades">Error con la base de datos</string>
 
 
 </resources>

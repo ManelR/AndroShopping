@@ -12,14 +12,14 @@ import java.security.MessageDigest;
 /**
  * Created by mrr on 30/05/15.
  */
-public class DAOUsuaris extends DAOBase {
+public class DAOUsuaris extends DAOBase<Usuari> {
     private static final String TABLE_NAME_USER = "usuaris";
 
     public DAOUsuaris(Context context) {
         super(context, TABLE_NAME_USER);
     }
 
-    public int emailExist(String email){
+    public boolean emailExist(String email){
         openReadOnly();
         String sql="SELECT * FROM " + TABLE_NAME_USER + " where email = ? LIMIT 1" ;
         Cursor cursor = myDB.rawQuery(sql, new String []{email});
@@ -27,10 +27,29 @@ public class DAOUsuaris extends DAOBase {
         Usuari element = LoadFromCursor(cursor);
         cursor.close();
         closeDatabase();
-        return element == null ? 0:1;
+        return element != null;
     }
 
-    public long insertUser(Usuari user){
+    @Override
+    public void delete(Usuari obj) {
+        int nError = 1;
+        try{
+            openWrite();
+            String sql = "UPDATE " + TABLE_NAME_USER + " SET deleted = 1 WHERE id = ?";
+            SQLiteStatement statement = myDB.compileStatement(sql);
+            statement.bindAllArgsAsStrings(new String[]{Integer.toString(obj.getId())});
+            nError = statement.executeUpdateDelete();
+            Log.i("--DELETE--", "Ha entrat al delete usuari");
+            statement.close();
+        }catch (Exception ex){
+            Log.d("ERROR", ex.toString());
+        }finally {
+            this.closeDatabase();
+        }
+    }
+
+    @Override
+    public long insert(Usuari user) {
         long id = -1;
         try{
             MessageDigest md = MessageDigest.getInstance("SHA-256");
@@ -49,6 +68,27 @@ public class DAOUsuaris extends DAOBase {
             super.closeDatabase();
         }
         return id;
+
+    }
+
+    @Override
+    public void update(Usuari obj) {
+        int nError = 0;
+        try{
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            md.update(obj.getPass().getBytes("UTF-8"));
+            openWrite();
+            String sql = "UPDATE " + TABLE_NAME_USER + " SET email = ?, hash_password = ?, genere = ?, nom = ?, edat = ?, rol = ?, logged_in = ?, deleted = ? WHERE id = ?";
+            SQLiteStatement statement = myDB.compileStatement(sql);
+            statement.bindAllArgsAsStrings(new String[]{obj.getEmail(), md.digest().toString(), Integer.toString(obj.getGenere()), obj.getNom(), Integer.toString(obj.getEdat()), Integer.toString(obj.getRol()), Integer.toString(obj.getLogged_in()), Integer.toString(obj.getDeleted()), Integer.toString(obj.getId())});
+            nError = statement.executeUpdateDelete();
+            Log.i("--UPDATE--", Integer.toString(obj.getId()));
+            statement.close();
+        }catch (Exception ex){
+            Log.e("ERROR", ex.toString());
+        }finally {
+            this.closeDatabase();
+        }
     }
 
     @Override

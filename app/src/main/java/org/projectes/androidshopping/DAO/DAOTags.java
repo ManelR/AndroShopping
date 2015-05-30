@@ -85,6 +85,22 @@ public class DAOTags extends DAOBase<Tag> {
         }
     }
 
+
+    @Override
+    public void delete(Tag obj) {
+        //NO S'utilitza
+    }
+
+    @Override
+    public long insert(Tag obj) {
+        return 0;
+    }
+
+    @Override
+    public void update(Tag obj) {
+
+    }
+
     @Override
     protected Tag LoadFromCursor(Cursor cursor) {
         Tag result = null;
@@ -97,4 +113,6 @@ public class DAOTags extends DAOBase<Tag> {
         }
         return result;
     }
+
+
 }

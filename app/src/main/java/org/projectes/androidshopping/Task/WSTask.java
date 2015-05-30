@@ -68,13 +68,13 @@ public class WSTask extends AsyncTask<Object, Integer, Message> {
                     this.flag = 2;
                     getProductWS();
                     updateTime.setDate(this.unixTimeUpdate);
-                    DBTime.updateFromID(updateTime);
+                    DBTime.update(updateTime);
                     actualitzarProductes();
                 }
             }else{
                 this.flag = 2;
                 updateTime = new WS_Data(this.unixTimeUpdate, "producte");
-                DBTime.insertWS_Data(updateTime);
+                DBTime.insert(updateTime);
                 getProductWS();
                 insertAllProducts();
             }
@@ -98,12 +98,12 @@ public class WSTask extends AsyncTask<Object, Integer, Message> {
                 Producte update = this.productes.get(i);
                 update.setId(aux.getId());
                 update.setDeleted(0);
-                BBDDProductes.updateFromID(update);
+                BBDDProductes.update(update);
                 //Borrar els tags del producte
                 BBDDTag.deleteProducte_TagByIDProduct(aux.getId());
                 insertAllTags(BBDDTag, aux.getId(), i);
             }else{
-                id_product = BBDDProductes.insertProduct(this.productes.get(i));
+                id_product = BBDDProductes.insert(this.productes.get(i));
                 insertAllTags(BBDDTag, id_product, i);
             }
         }
@@ -126,7 +126,7 @@ public class WSTask extends AsyncTask<Object, Integer, Message> {
         DAOTags BBDDTAG = new DAOTags(this.context);
         long id_product = -1;
         for (int i = 0; i < this.productes.size(); i++){
-            id_product = BBDDProductes.insertProduct(this.productes.get(i));
+            id_product = BBDDProductes.insert(this.productes.get(i));
             insertAllTags(BBDDTAG, id_product, i);
         }
     }

@@ -33,7 +33,7 @@ public abstract class DAOBase<T> extends SQLiteOpenHelper {
             "\tnom TEXT,\n" +
             "\tedat INTEGER,\n" +
             "\trol INTEGER,\n" +
-            "\tlogged_in INTEGER\n" +
+            "\tlogged_in INTEGER,\n" +
             "\tdeleted INTEGER\n" +
             ");";
 
@@ -187,6 +187,12 @@ public abstract class DAOBase<T> extends SQLiteOpenHelper {
         }
         return nError;
     }
+
+    public abstract void delete(T obj);
+
+    public abstract long insert(T obj);
+
+    public abstract void update(T obj);
 
     protected abstract T LoadFromCursor(Cursor cursor);
 

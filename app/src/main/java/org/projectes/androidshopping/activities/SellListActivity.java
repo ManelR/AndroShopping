@@ -13,7 +13,7 @@ public class SellListActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sell_list);
-        setTitle(getString(R.string.title_activity_sell_list));
+        setTitle(getString(R.string.activity_sell_list_activityName));
 
     }
 

@@ -1,5 +1,6 @@
 package org.projectes.androidshopping.DAObject;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -9,8 +10,9 @@ import java.util.List;
  * Created by mrr on 12/05/15.
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Product {
-    @JsonProperty("id") public int id;
+public class Producte {
+    @JsonIgnore public int id;
+    @JsonProperty("id") public int id_remot;
     @JsonProperty("nombre") public String nombre;
     @JsonProperty("descripcion") public String descripcion;
     @JsonProperty("precio") public float precio;
@@ -18,8 +20,9 @@ public class Product {
     @JsonProperty("stock") public int stock;
     @JsonProperty("foto") public String image;
     @JsonProperty("tags") public List<String> tags;
+    public int deleted;
 
-    public Product(){
+    public Producte(){
 
     }
 
@@ -85,5 +88,21 @@ public class Product {
 
     public void setTags(List<String> tags) {
         this.tags = tags;
+    }
+
+    public int getId_remot() {
+        return id_remot;
+    }
+
+    public void setId_remot(int id_remot) {
+        this.id_remot = id_remot;
+    }
+
+    public int getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(int deleted) {
+        this.deleted = deleted;
     }
 }

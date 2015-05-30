@@ -8,20 +8,20 @@ import android.widget.Toast;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.module.SimpleAbstractTypeResolver;
 
 import org.projectes.androidshopping.Constants.Constants;
+import org.projectes.androidshopping.DAO.DAOProductes;
 import org.projectes.androidshopping.DAO.DAOWS_Data;
-import org.projectes.androidshopping.DAObject.Product;
+import org.projectes.androidshopping.DAObject.Producte;
 import org.projectes.androidshopping.DAObject.WS_Data;
 import org.projectes.androidshopping.Listeners.IResult;
 import org.projectes.androidshopping.WS.JacksonJSONHelper;
 import org.projectes.androidshopping.WS.WSConnector;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.Date;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
@@ -34,10 +34,8 @@ public class WSTask extends AsyncTask<Object, Integer, Message> {
     private Context context;
     private IResult<Message> listener;
     private ObjectMapper mapper;
-    private List<Product> productes;
     private JsonNode jsonTree;
-    private Date date;
-    private DateFormat formatter;
+    private List<Producte> productes;
     private long unixTimeUpdate;
     private int flag;
 
@@ -63,36 +61,63 @@ public class WSTask extends AsyncTask<Object, Integer, Message> {
 
             //Comprovem si cal fer actualització
             if (updateTime != null){
-                //TODO Comparar si s'ha d'actualitzar
                 this.flag = 1;
                 if(this.unixTimeUpdate > updateTime.getDate()){
-                    //TODO Actualitzar productes i data
+                    getProductWS();
+                    updateTime.setDate(this.unixTimeUpdate);
+                    DBTime.updateFromID(updateTime);
+                    actualitzarProductes();
                 }
             }else{
-                //TODO no hi ha data anterior, cal guardar.
                 this.flag = 2;
                 updateTime = new WS_Data(this.unixTimeUpdate, "producte");
                 DBTime.insertWS_Data(updateTime);
-
+                getProductWS();
+                insertAllProducts();
             }
 
         } catch (IOException e){
             e.printStackTrace();
 
         }
-
+        /*
         try {
             this.Mess = WS.get((String)params[Constants.POSICIO_URL_WSTask], null);
             this.mapper = JacksonJSONHelper.Initialize();
             this.productes = this.mapper.readValue(
                     (String)this.Mess.obj,
                     mapper.getTypeFactory().constructCollectionType(
-                            List.class, Product.class));
+                            List.class, Producte.class));
 
         } catch (IOException e) {
             e.printStackTrace();
         }
+        */
         return this.Mess;
+    }
+
+    private void actualitzarProductes() {
+        DAOProductes BBDDProductes = new DAOProductes(this.context);
+        List<Producte> productesDB = BBDDProductes.selectAll();
+        for (int i = 0; i<this.productes.size(); i++){
+            Producte aux = BBDDProductes.selectByRemoteID(this.productes.get(i).getId_remot());
+            if (aux != null){
+                Producte update = this.productes.get(i);
+                update.setId(aux.getId());
+                update.setDeleted(0);
+                BBDDProductes.updateFromID(update);
+            }else{
+                BBDDProductes.insertProduct(this.productes.get(i));
+            }
+        }
+    }
+
+    private void insertAllProducts() {
+        DAOProductes BBDDProductes = new DAOProductes(this.context);
+        for (int i = 0; i < this.productes.size(); i++){
+            BBDDProductes.insertProduct(this.productes.get(i));
+        }
+        Log.d("BBDD COMPROVACIÓ:", BBDDProductes.selectByID(3).getNombre());
     }
 
     public void onPostExecute(Message message){
@@ -120,6 +145,20 @@ public class WSTask extends AsyncTask<Object, Integer, Message> {
             return date.getTime()/1000;
         }catch(java.text.ParseException en){
             return 0;
+        }
+    }
+
+    private void getProductWS(){
+        WSConnector WS = new WSConnector();
+        try {
+            this.Mess = WS.get(Constants.URL_PRODUCTES, null);
+            this.mapper = JacksonJSONHelper.Initialize();
+            this.productes = this.mapper.readValue(
+                    (String)this.Mess.obj,
+                    mapper.getTypeFactory().constructCollectionType(
+                            List.class, Producte.class));
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

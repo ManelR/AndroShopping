@@ -51,6 +51,7 @@ public abstract class DAOBase<T> extends SQLiteOpenHelper {
             "\tpreu REAL,\n" +
             "\tactiu INTEGER,\n" +
             "\tstock INTEGER,\n" +
+            "\tdeleted INTEGER,\n" +
             "\timatge TEXT\n" +
             ");";
 

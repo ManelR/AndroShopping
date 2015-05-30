@@ -28,7 +28,7 @@ public class DAOWS_Data extends DAOBase<WS_Data> {
         return element;
     }
 
-    public void UpdateFromID(WS_Data date){
+    public void updateFromID(WS_Data date){
         int nError = 0;
         try{
             Log.i("---VALORS UPDATE---", date.getNomTaula() + " " + date.getDate());
@@ -68,7 +68,6 @@ public class DAOWS_Data extends DAOBase<WS_Data> {
     protected WS_Data LoadFromCursor(Cursor cursor) {
         WS_Data result = null;
         if (cursor != null){
-            cursor.moveToFirst();
             if (!cursor.isAfterLast()){
                 result = new WS_Data();
                 result.setId(cursor.getInt(cursor.getColumnIndex("id")));

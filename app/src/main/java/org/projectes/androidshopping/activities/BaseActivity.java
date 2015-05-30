@@ -5,20 +5,22 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import org.projectes.androidshopping.MyApplication;
+import org.projectes.androidshopping.R;
 
 /**
  * Created by alloveras on 29/04/15.
  */
 
-
 public class BaseActivity extends AppCompatActivity {
 
     protected MyApplication app = null;
+    protected ActionBar aBar = null;
     protected Typeface normalFont = null;
     protected Typeface boldFont = null;
     protected Typeface italicFont = null;
@@ -31,7 +33,6 @@ public class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         allocateMemory();
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -50,6 +51,15 @@ public class BaseActivity extends AppCompatActivity {
 
         //Get Fragment manager
         fragmentManager = getSupportFragmentManager();
+
+        //Get the action bar
+        aBar = (ActionBar) getSupportActionBar();
+        if(aBar != null){
+            aBar.setIcon(R.mipmap.ic_launcher);
+            aBar.setDisplayShowHomeEnabled(true);
+            aBar.setDisplayHomeAsUpEnabled(true);
+
+        }
 
         //Import Typefaces
 

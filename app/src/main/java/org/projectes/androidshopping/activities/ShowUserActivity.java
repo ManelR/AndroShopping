@@ -7,12 +7,13 @@ import android.view.MenuItem;
 
 import org.projectes.androidshopping.R;
 
-public class ShowUserActivity extends ActionBarActivity {
+public class ShowUserActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_user);
+
     }
 
     @Override

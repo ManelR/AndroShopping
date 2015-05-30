@@ -44,6 +44,7 @@
         />
 
     <RadioGroup
+        android:id="@+id/activity_showUser_genereContainer"
         android:layout_below="@id/activity_showUser_lblGenere"
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
@@ -65,5 +66,55 @@
             android:text="@string/activity_showUser_radioFemale"/>
 
     </RadioGroup>
+
+    <LinearLayout
+        android:layout_below="@id/activity_showUser_genereContainer"
+        android:id="@+id/activity_showUser_ageContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="100"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/activity_showUser_lblAge"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="20"
+            android:text="@string/activity_showUser_lblAge"/>
+
+        <TextView
+            android:id="@+id/activity_showUser_txtAge"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="80"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_below="@id/activity_showUser_ageContainer"
+        android:id="@+id/activity_showUser_totalAmountContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="100"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/activity_showUser_lblTotalAmount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="40"
+            android:text="@string/activity_showUser_lblTotalAmount"/>
+
+        <TextView
+            android:id="@+id/activity_showUser_txtTotalAmount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="60"
+            />
+
+    </LinearLayout>
 
 </RelativeLayout>

@@ -38,6 +38,10 @@
     <string name="activity_showUser_lblGenere">Género:</string>
     <string name="activity_showUser_radioMale">Hombre</string>
     <string name="activity_showUser_radioFemale">Mujer</string>
+    <string name="activity_showUser_lblAge">Edad:</string>
+    <string name="activity_showUser_lblTotalAmount">Dinero total invertido:</string>
+
+    <!-- ProductsManager Activity -->
     <string name="title_activity_products_manager">ProductsManagerActivity</string>
     <string name="title_activity_new_product">NewProductActivity</string>
     <string name="title_activity_show_product">ShowProductActivity</string>

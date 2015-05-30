@@ -20,7 +20,6 @@ import org.projectes.androidshopping.R;
 import org.projectes.androidshopping.WS.JacksonJSONHelper;
 import org.projectes.androidshopping.WS.WSConnector;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.Date;
 import java.text.DateFormat;
@@ -36,10 +35,8 @@ public class WSTask extends AsyncTask<Object, Integer, Message> {
     private Context context;
     private IResult<Message> listener;
     private ObjectMapper mapper;
-    private JsonNode jsonTree;
     private List<Producte> productes;
     private long unixTimeUpdate;
-    private int flag;
 
     @Override
     protected Message doInBackground(Object... params) {
@@ -54,25 +51,26 @@ public class WSTask extends AsyncTask<Object, Integer, Message> {
             //Obtenim la data de LastUpdate del WS
             this.Mess = WS.get(Constants.URL_UPDATE, null);
             this.mapper = JacksonJSONHelper.Initialize();
-            this.jsonTree = this.mapper.readTree((String)this.Mess.obj);
-            this.unixTimeUpdate = getUnixTimestamp(this.jsonTree.get("last_update").textValue());
+            JsonNode jsonTree = this.mapper.readTree((String) this.Mess.obj);
+            this.unixTimeUpdate = getUnixTimestamp(jsonTree.get("last_update").textValue());
 
             //Recuperar dades BBDD
             DAOWS_Data DBTime = new DAOWS_Data(this.context);
             WS_Data updateTime = DBTime.selectBynomTaula("producte");
 
             //Comprovem si cal fer actualització
+            int flag;
             if (updateTime != null){
-                this.flag = 1;
+                flag = 1;
                 if(this.unixTimeUpdate > updateTime.getDate()){
-                    this.flag = 2;
+                    flag = 2;
                     getProductWS();
                     updateTime.setDate(this.unixTimeUpdate);
                     DBTime.update(updateTime);
                     actualitzarProductes();
                 }
             }else{
-                this.flag = 2;
+                flag = 2;
                 updateTime = new WS_Data(this.unixTimeUpdate, "producte");
                 DBTime.insert(updateTime);
                 getProductWS();

@@ -15,20 +15,17 @@ import org.projectes.androidshopping.R;
  */
 public class DBTask_Base_Modify<T extends DAOBase<E>, E> extends AsyncTask<Object, Integer, Boolean> {
     private Context context;
-    private int tipus;
-    private T BBDD;
-    private E element;
     private IResult<Boolean> listener;
 
     @Override
     protected Boolean doInBackground(Object... params) {
         Boolean result = new Boolean(false);
         this.context = (Context)params[Constants.POSICIO_CONTEXT_BBDD_TASK];
-        this.tipus = (int)params[Constants.POSICIO_TIPUS_BBDD_TASK];
-        this.BBDD = (T)params[Constants.POSICIO_BBDD_TASK];
-        this.element = (E)params[Constants.POSICIO_ELEMENT_TASK];
+        int tipus = (int) params[Constants.POSICIO_TIPUS_BBDD_TASK];
+        T BBDD = (T) params[Constants.POSICIO_BBDD_TASK];
+        E element = (E) params[Constants.POSICIO_ELEMENT_TASK];
 
-        switch (this.tipus){
+        switch (tipus){
             case Constants.BBDD_INSERT:
                 if(BBDD.insert(element) > 0){
                     result = true;

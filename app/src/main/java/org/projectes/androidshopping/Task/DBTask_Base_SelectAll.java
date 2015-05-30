@@ -18,8 +18,6 @@ import java.util.List;
  */
 public class DBTask_Base_SelectAll<T extends DAOBase<E>, E extends DAObjectBase> extends AsyncTask<Object, Integer, Boolean> {
     private Context context;
-    private int tipus;
-    private T BBDD;
     private IResultList<E> listener;
     private ArrayList<E> elements;
 
@@ -27,10 +25,10 @@ public class DBTask_Base_SelectAll<T extends DAOBase<E>, E extends DAObjectBase>
     protected Boolean doInBackground(Object... params) {
         Boolean result = new Boolean(false);
         this.context = (Context)params[Constants.POSICIO_CONTEXT_BBDD_TASK];
-        this.tipus = (int)params[Constants.POSICIO_TIPUS_BBDD_TASK];
-        this.BBDD = (T)params[Constants.POSICIO_BBDD_TASK];
-        if (this.tipus == Constants.BBDD_SELECT_ID){
-            elements = this.BBDD.selectAll();
+        int tipus = (int) params[Constants.POSICIO_TIPUS_BBDD_TASK];
+        T BBDD = (T) params[Constants.POSICIO_BBDD_TASK];
+        if (tipus == Constants.BBDD_SELECT_ID){
+            elements = BBDD.selectAll();
             result = true;
         }
         return result;

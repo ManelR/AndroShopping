@@ -28,7 +28,6 @@ import java.util.regex.Pattern;
 public class RegisterActivity extends BaseActivity {
     private String sGender;
     private Spinner spinGender;
-    private Button btnRegister;
     private EditText txtEmail;
     private EditText txtPassword;
     private EditText txtRepeatPass;
@@ -66,15 +65,15 @@ public class RegisterActivity extends BaseActivity {
 
         this.chckTerm = (CheckBox)findViewById(R.id.activity_register_chckTerms);
 
-        this.btnRegister = (Button)findViewById(R.id.activity_register_btnRegister);
-        this.btnRegister.setOnClickListener(new View.OnClickListener() {
+        Button btnRegister = (Button) findViewById(R.id.activity_register_btnRegister);
+        btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 boolean valid = validarCampsRegistre();
-                if (valid){
+                if (valid) {
                     //Guardar l'usuari a la base de dades
                     DBTask_Base_Modify<DAOUsuaris, Usuari> DBTask = new DBTask_Base_Modify<DAOUsuaris, Usuari>();
-                    int genere = sGender.equals("Hombre") ? 1:2;
+                    int genere = sGender.equals("Hombre") ? 1 : 2;
                     Usuari user = new Usuari(txtEmail.getText().toString(), txtPassword.getText().toString(), genere, txtName.getText().toString(), Integer.valueOf(spinGender.getSelectedItem().toString()), 2, 0);
                     DBTask.setResultListener(new IResult<Boolean>() {
                         @Override
@@ -90,7 +89,7 @@ public class RegisterActivity extends BaseActivity {
                         }
                     });
                     DBTask.execute(RegisterActivity.this, Constants.BBDD_INSERT, BBDDUsers, user);
-                }else{
+                } else {
                     Toast.makeText(RegisterActivity.this, errorMessage, Toast.LENGTH_LONG).show();
                 }
             }

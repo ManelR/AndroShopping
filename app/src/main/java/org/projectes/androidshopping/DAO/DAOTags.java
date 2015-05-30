@@ -5,7 +5,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteStatement;
 import android.util.Log;
 
-import org.projectes.androidshopping.DAObject.Producte;
 import org.projectes.androidshopping.DAObject.Tag;
 
 /**

@@ -88,6 +88,8 @@ public class WSTask extends AsyncTask<Object, Integer, Message> {
 
     private void actualitzarProductes() {
         DAOProductes BBDDProductes = new DAOProductes(this.context);
+        DAOTags BBDDTag = new DAOTags(this.context);
+        long id_product = -1;
         List<Producte> productesDB = BBDDProductes.selectAll();
         boolean nTrobat = false;
         for (int i = 0; i<this.productes.size(); i++){
@@ -97,8 +99,12 @@ public class WSTask extends AsyncTask<Object, Integer, Message> {
                 update.setId(aux.getId());
                 update.setDeleted(0);
                 BBDDProductes.updateFromID(update);
+                //Borrar els tags del producte
+                BBDDTag.deleteProducte_TagByIDProduct(aux.getId());
+                insertAllTags(BBDDTag, aux.getId(), i);
             }else{
-                BBDDProductes.insertProduct(this.productes.get(i));
+                id_product = BBDDProductes.insertProduct(this.productes.get(i));
+                insertAllTags(BBDDTag, id_product, i);
             }
         }
         for (int i = 0; i < productesDB.size(); i++){
@@ -110,6 +116,7 @@ public class WSTask extends AsyncTask<Object, Integer, Message> {
             }
             if (!nTrobat){
                 BBDDProductes.deleteById(productesDB.get(i).getId());
+                BBDDTag.deleteProducte_TagByIDProduct(productesDB.get(i).getId());
             }
         }
     }
@@ -120,17 +127,22 @@ public class WSTask extends AsyncTask<Object, Integer, Message> {
         long id_product = -1;
         for (int i = 0; i < this.productes.size(); i++){
             id_product = BBDDProductes.insertProduct(this.productes.get(i));
-            for (int j = 0; j <this.productes.get(i).getWS_tags().size(); j++){
-                //Comprovar si existeix
-                Tag tagActual = BBDDTAG.selectByName(this.productes.get(i).getWS_tags().get(j));
-                if (tagActual == null){
-                    tagActual = new Tag();
-                    tagActual.setNom(this.productes.get(i).getWS_tags().get(j));
-                    tagActual.setId((int)BBDDTAG.insertTag(tagActual));
-                    Log.d("TAG INSERT:", tagActual.getNom());
-                }
-                BBDDTAG.insertProducte_Tag(tagActual.getId(), (int)id_product);
+            insertAllTags(BBDDTAG, id_product, i);
+        }
+    }
+
+    private void insertAllTags(DAOTags BBDDTAG, long id_producte, int indexProduct){
+        int i = indexProduct;
+        for (int j = 0; j <this.productes.get(i).getWS_tags().size(); j++){
+            //Comprovar si existeix
+            Tag tagActual = BBDDTAG.selectByName(this.productes.get(i).getWS_tags().get(j));
+            if (tagActual == null){
+                tagActual = new Tag();
+                tagActual.setNom(this.productes.get(i).getWS_tags().get(j));
+                tagActual.setId((int)BBDDTAG.insertTag(tagActual));
+                Log.d("TAG INSERT:", tagActual.getNom());
             }
+            BBDDTAG.insertProducte_Tag(tagActual.getId(), (int)id_producte);
         }
     }
 

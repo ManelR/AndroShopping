@@ -50,6 +50,23 @@ public class DAOTags extends DAOBase<Tag> {
         return id;
     }
 
+    public void deleteProducte_TagByIDProduct(int id_product){
+        long nError = -1;
+        try{
+            openWrite();
+            String sql = "DELETE FROM " + TAULA_PRODUCTE_TAG + " WHERE id_producte = ?";
+            SQLiteStatement statement = myDB.compileStatement(sql);
+            statement.bindAllArgsAsStrings(new String[]{Integer.toString(id_product)});
+            nError = statement.executeUpdateDelete();
+            Log.i("--DELETE--", Integer.toString(id_product));
+            statement.close();
+        }catch (Exception ex){
+            Log.e("ERROR", ex.toString());
+        }finally {
+            this.closeDatabase();
+        }
+    }
+
     public void insertProducte_Tag(int id_tag, int id_product){
         long id = -1;
         try{

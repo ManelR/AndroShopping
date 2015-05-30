@@ -46,8 +46,8 @@
     <string name="title_activity_user_profile">UserProfileActivity</string>
     <string name="title_activity_buy">BuyActivity</string>
     <string name="title_activity_purchase_history">PurchaseHistoryActivity</string>
-
-
+    <string name="activity_register_txtName">Nombre</string>
+    <string name="activity_register_chckTerms">Acepto las condiciones de servicio</string>
 
 
 </resources>

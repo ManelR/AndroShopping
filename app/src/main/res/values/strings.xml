@@ -53,6 +53,8 @@
     <string name="activity_register_txtName">Nombre</string>
     <string name="activity_register_chckTerms">Acepto las condiciones de servicio</string>
     <string name="title_activity_sell_list">SellListActivity</string>
+    <string name="activity_userProfile_btnModifier"><![CDATA[Modificar >]]></string>
+    <string name="activity_newuser_btnCreate"><![CDATA[Crear >]]></string>
 
 
 </resources>

@@ -44,8 +44,7 @@
                 android:textColorHint="#000"
                 android:layout_height="wrap_content"
                 android:hint="@string/activity_register_txtEmail"
-                android:inputType="textEmailAddress"
-                android:layout_below="@id/activity_register_lblTitle"/>
+                android:inputType="textEmailAddress"/>
 
             <TextView
                 android:id="@+id/activity_register_lblPassword"

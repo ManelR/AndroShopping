@@ -28,16 +28,19 @@ public class NewProductActivity extends BaseActivity {
         associateControls();
         switch (paso){
             case 1:
+                aBar.setSubtitle("Paso 1/3");
                 changeFragment(R.id.activity_newProduct_fragment, this.fragment1);
                 btnAnterior.setEnabled(false);
                 btnSeguent.setEnabled(true);
                 break;
             case 2:
+                aBar.setSubtitle("Paso 2/3");
                 changeFragment(R.id.activity_newProduct_fragment, this.fragment2);
                 btnSeguent.setEnabled(true);
                 btnAnterior.setEnabled(true);
                 break;
             case 3:
+                aBar.setSubtitle("Paso 3/3");
                 changeFragment(R.id.activity_newProduct_fragment, this.fragment3);
                 btnSeguent.setEnabled(true);
                 btnAnterior.setEnabled(true);
@@ -55,11 +58,13 @@ public class NewProductActivity extends BaseActivity {
                 paso--;
                 switch (paso){
                     case 1:
+                        aBar.setSubtitle("Paso 1/3");
                         changeFragment(R.id.activity_newProduct_fragment, fragment1);
                         btnAnterior.setEnabled(false);
                         btnSeguent.setEnabled(true);
                         break;
                     case 2:
+                        aBar.setSubtitle("Paso 2/3");
                         changeFragment(R.id.activity_newProduct_fragment, fragment2);
                         btnSeguent.setEnabled(true);
                         btnAnterior.setEnabled(true);
@@ -73,11 +78,13 @@ public class NewProductActivity extends BaseActivity {
                 paso++;
                 switch (paso){
                     case 2:
+                        aBar.setSubtitle("Paso 2/3");
                         changeFragment(R.id.activity_newProduct_fragment, fragment2);
                         btnSeguent.setEnabled(true);
                         btnAnterior.setEnabled(true);
                         break;
                     case 3:
+                        aBar.setSubtitle("Paso 3/3");
                         changeFragment(R.id.activity_newProduct_fragment, fragment3);
                         btnSeguent.setEnabled(true);
                         btnAnterior.setEnabled(true);

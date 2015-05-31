@@ -1,6 +1,7 @@
 package org.projectes.androidshopping.activities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -68,6 +69,8 @@ public class MainMenuActivity extends BaseActivity {
                 Task_User.setResultListener(new IResult<Boolean>() {
                     @Override
                     public void onSuccess(Boolean IRresult) {
+                        Intent i = new Intent(MainMenuActivity.this, LoginActivity.class);
+                        startActivity(i);
                         finish();
                     }
 

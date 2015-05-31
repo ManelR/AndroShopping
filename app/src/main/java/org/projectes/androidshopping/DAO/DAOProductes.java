@@ -33,6 +33,7 @@ public class DAOProductes extends DAOBase<Producte> {
 
     @Override
     public void delete(Producte obj) {
+        DAOTags daoTag = new DAOTags(context);
         int nError = 1;
         try{
             openWrite();
@@ -40,8 +41,10 @@ public class DAOProductes extends DAOBase<Producte> {
             SQLiteStatement statement = myDB.compileStatement(sql);
             statement.bindAllArgsAsStrings(new String[]{Integer.toString(obj.getId())});
             nError = statement.executeUpdateDelete();
-            Log.i("--DELETE--", "Ha entrat al delete");
+            Log.i("--DELETE--", "Ha entrat al delete: " + obj.getNombre());
             statement.close();
+            //Eliminar les relacions amb el producte
+            daoTag.deleteProducte_TagByIDProduct(obj.getId());
         }catch (Exception ex){
             Log.d("ERROR", ex.toString());
         }finally {

@@ -113,8 +113,7 @@ public class WSTask extends AsyncTask<Object, Integer, Message> {
                 }
             }
             if (!nTrobat){
-                BBDDProductes.deleteById(productesDB.get(i).getId());
-                BBDDTag.deleteProducte_TagByIDProduct(productesDB.get(i).getId());
+                BBDDProductes.delete(productesDB.get(i));
             }
         }
     }

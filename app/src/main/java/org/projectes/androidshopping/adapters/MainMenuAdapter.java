@@ -20,6 +20,7 @@ import org.projectes.androidshopping.R;
 import org.projectes.androidshopping.Task.DBTask_Base_Modify;
 import org.projectes.androidshopping.activities.BaseActivity;
 import org.projectes.androidshopping.activities.BuyActivity;
+import org.projectes.androidshopping.activities.LoginActivity;
 import org.projectes.androidshopping.activities.MainMenuActivity;
 import org.projectes.androidshopping.activities.ManageUsersActivity;
 import org.projectes.androidshopping.activities.ProductsManagerActivity;
@@ -90,6 +91,8 @@ public class MainMenuAdapter extends BaseAdapter {
                             Task_User.setResultListener(new IResult<Boolean>() {
                                 @Override
                                 public void onSuccess(Boolean IRresult) {
+                                    Intent i = new Intent(context, LoginActivity.class);
+                                    ((Activity) context).startActivity(i);
                                     ((Activity) context).finish();
                                 }
 

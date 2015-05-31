@@ -42,7 +42,8 @@
         </activity>
         <activity
             android:name=".activities.ProductsManagerActivity"
-            android:label="@string/title_activity_products_manager" >
+            android:label="@string/title_activity_products_manager"
+            android:theme="@style/Theme.AppCompat.Light">
         </activity>
         <activity
             android:name=".activities.NewProductActivity"

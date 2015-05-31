@@ -1,5 +1,6 @@
 package org.projectes.androidshopping.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -81,9 +82,11 @@ public class ManageUsersActivity extends BaseActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch(id){
+            case R.id.activity_manageUsers_menu_addItem:
+                Intent i = new Intent(getApplicationContext(),NewUserActivity.class);
+                startActivity(i);
+                break;
         }
 
         return super.onOptionsItemSelected(item);

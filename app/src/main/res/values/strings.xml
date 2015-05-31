@@ -94,8 +94,8 @@
     <string name="title_activity_products_manager">ProductsManagerActivity</string>
     <string name="title_activity_show_product">ShowProductActivity</string>
     <string name="title_activity_manage_users">ManageUsersActivity</string>
-    <string name="title_activity_user_profile">UserProfileActivity</string>
-    <string name="title_activity_buy">BuyActivity</string>
+    <string name="title_activity_user_profile">Perfil</string>
+    <string name="title_activity_buy">Comprar</string>
     <string name="activity_register_txtName">Nombre</string>
     <string name="activity_register_chckTerms">Acepto las condiciones de servicio</string>
     <string name="activity_userProfile_btnModifier"><![CDATA[Modificar >]]></string>

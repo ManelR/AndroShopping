@@ -2,7 +2,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/solid_orange"
     >
 
     <LinearLayout
@@ -129,9 +128,7 @@
                        android:layout_height="wrap_content"
                        android:layout_margin="12dp"
                        android:padding="8dp"
-                       android:textColor="@color/solid_black"
                        android:text="@string/activity_login_btnLogin"
-                       android:background="@color/solid_very_light_orange"
                        />
 
                </LinearLayout>

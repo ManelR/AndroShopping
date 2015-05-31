@@ -60,10 +60,16 @@ public class MainMenuActivity extends BaseActivity {
 
             //User Role Menu Items
             case R.id.menu_main_menu_itemPerfil:
+                i = new Intent(MainMenuActivity.this, UserProfileActivity.class);
+                startActivity(i);
                 break;
             case R.id.menu_main_menu_itemBuy:
+                i = new Intent(MainMenuActivity.this, BuyActivity.class);
+                startActivity(i);
                 break;
             case R.id.menu_main_menu_itemPurchaseHistory:
+                i = new Intent(MainMenuActivity.this, PurchaseHistoryActivity.class);
+                startActivity(i);
                 break;
             case R.id.menu_main_menu_itemExit:
                 user = this.app.getUserLog();
@@ -95,6 +101,8 @@ public class MainMenuActivity extends BaseActivity {
                 startActivity(i);
                 break;
             case R.id.menu_main_menu_itemSellList:
+                i = new Intent(MainMenuActivity.this, SellListActivity.class);
+                startActivity(i);
                 break;
 
         }

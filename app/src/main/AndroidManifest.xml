@@ -71,12 +71,14 @@
         <activity
             android:name=".activities.UserProfileActivity"
             android:label="@string/title_activity_user_profile"
+
             android:windowSoftInputMode="stateAlwaysHidden"
             android:theme="@style/Theme.AppCompat.Light">
         </activity>
         <activity
             android:name=".activities.BuyActivity"
-            android:label="@string/title_activity_buy" >
+            android:label="@string/title_activity_buy"
+            android:theme="@style/Theme.AppCompat.Light">
         </activity>
         <activity
             android:name=".activities.SellListActivity"

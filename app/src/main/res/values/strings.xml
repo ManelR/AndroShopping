@@ -30,6 +30,8 @@
 
 
     <!-- ManageProducts Activity Strings -->
+    <string name="item_manage_products_lblTitleConfirmation">Confirmación</string>
+    <string name="item_manage_products_lblBodyConfirmation">Estas seguro que deseas eliminar el producto</string>
     <string name="activity_manage_products_activityName">Gestionar Productos</string>
     <string name="activity_manage_products_lblTitle">Selecciona un producto:</string>
     <string name="item_manage_products_lblName">Nombre:</string>

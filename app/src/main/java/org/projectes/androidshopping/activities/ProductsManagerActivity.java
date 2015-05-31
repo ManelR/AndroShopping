@@ -96,7 +96,7 @@ public class ProductsManagerActivity extends BaseActivity {
     private void associateControls(){
         aProductes = new ArrayList<Producte>();
         daoProductes = new DAOProductes(this);
-        adapter = new ManageProductsAdapter(getApplicationContext(),aProductes);
+        adapter = new ManageProductsAdapter(this,aProductes);
         listViewProductes = (ListView) findViewById(R.id.activity_manage_products_listView);
 
         //Assign the adapter

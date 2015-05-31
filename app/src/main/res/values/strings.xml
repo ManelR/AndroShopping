@@ -29,6 +29,13 @@
     <string name="title_activity_register">RegisterActivity</string>
 
 
+    <!-- ManageProducts Activity Strings -->
+    <string name="activity_manage_products_activityName">Gestionar Productos</string>
+    <string name="activity_manage_products_lblTitle">Selecciona un producto:</string>
+    <string name="item_manage_products_lblName">Nombre:</string>
+    <string name="item_manage_products_lblTags">Tags:</string>
+    <string name="item_manage_products_lblPrecio">Precio:</string>
+
     <!-- RegisterActivity Strings -->
     <string name="activity_register_lblTitle">Alta de usuarios nuevos</string>
     <string name="activity_register_lblPassword">Contraseña</string>

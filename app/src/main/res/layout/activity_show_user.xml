@@ -1,120 +1,146 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="org.projectes.androidshopping.activities.ShowUserActivity"
-    android:background="@color/default_background_color">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <LinearLayout
-        android:id="@+id/activity_showUser_emailContainer"
-        android:orientation="horizontal"
-        android:weightSum="100"
-        android:layout_marginTop="30dp"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/activity_showUser_lblEmail"
-            android:layout_weight="20"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/activity_showUser_lblEmail"
-            android:textColor="#000000"/>
-
-        <TextView
-            android:layout_weight="80"
-            android:id="@+id/activity_showUser_txtEmail"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textColor="#000000"
-            />
-
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/activity_showUser_lblGenere"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/activity_showUser_lblGenere"
-        android:layout_marginTop="10dp"
-        android:layout_below="@id/activity_showUser_emailContainer"
-        android:textColor="#000000"
-        />
-
-    <RadioGroup
-        android:id="@+id/activity_showUser_genereContainer"
-        android:layout_below="@id/activity_showUser_lblGenere"
-        android:layout_marginTop="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
-
-        <RadioButton
-            android:id="@+id/activity_showUser_radioMale"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#000000"
-            android:text="@string/activity_showUser_radioMale"/>
+            >
+
+            <LinearLayout
+                android:id="@+id/activity_showUser_emailContainer"
+                android:orientation="horizontal"
+                android:weightSum="100"
+                android:layout_marginTop="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/activity_showUser_lblEmail"
+                    android:layout_weight="20"
+                    android:layout_width="0dp"
+                    android:layout_margin="8dp"
+                    android:padding="8dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/activity_showUser_lblEmail"
+                    android:textColor="#000000"/>
+
+                <TextView
+                    android:layout_weight="80"
+                    android:id="@+id/activity_showUser_txtEmail"
+                    android:layout_width="0dp"
+                    android:layout_margin="8dp"
+                    android:padding="8dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="#000000"
+                    />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/activity_showUser_lblGenere"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/activity_showUser_lblGenere"
+                android:layout_marginTop="10dp"
+                android:layout_margin="8dp"
+                android:padding="8dp"
+                android:layout_below="@id/activity_showUser_emailContainer"
+                android:textColor="#000000"
+                />
+
+            <RadioGroup
+                android:id="@+id/activity_showUser_genereContainer"
+                android:layout_below="@id/activity_showUser_lblGenere"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:padding="8dp"
+                >
+
+                <RadioButton
+                    android:id="@+id/activity_showUser_radioMale"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#000000"
+                    android:text="@string/activity_showUser_radioMale"/>
 
 
-        <RadioButton
-            android:id="@+id/activity_showUser_radioFemale"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/activity_showUser_radioFemale"/>
+                <RadioButton
+                    android:id="@+id/activity_showUser_radioFemale"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/activity_showUser_radioFemale"/>
 
-    </RadioGroup>
+            </RadioGroup>
 
-    <LinearLayout
-        android:layout_below="@id/activity_showUser_genereContainer"
-        android:id="@+id/activity_showUser_ageContainer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:weightSum="100"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal">
+            <LinearLayout
+                android:layout_below="@id/activity_showUser_genereContainer"
+                android:id="@+id/activity_showUser_ageContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="100"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/activity_showUser_lblAge"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="20"
-            android:text="@string/activity_showUser_lblAge"/>
+                <TextView
+                    android:id="@+id/activity_showUser_lblAge"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="20"
+                    android:layout_margin="8dp"
+                    android:padding="8dp"
+                    android:text="@string/activity_showUser_lblAge"/>
 
-        <TextView
-            android:id="@+id/activity_showUser_txtAge"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="80"
-            />
+                <TextView
+                    android:id="@+id/activity_showUser_txtAge"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="80"
+                    android:layout_margin="8dp"
+                    android:padding="8dp"
+                    />
 
-    </LinearLayout>
+            </LinearLayout>
 
-    <LinearLayout
-        android:layout_below="@id/activity_showUser_ageContainer"
-        android:id="@+id/activity_showUser_totalAmountContainer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:weightSum="100"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal">
+            <LinearLayout
+                android:layout_below="@id/activity_showUser_ageContainer"
+                android:id="@+id/activity_showUser_totalAmountContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="100"
+                android:gravity="center_vertical"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/activity_showUser_lblTotalAmount"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="40"
-            android:text="@string/activity_showUser_lblTotalAmount"/>
+                <TextView
+                    android:id="@+id/activity_showUser_lblTotalAmount"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="40"
+                    android:layout_margin="8dp"
+                    android:padding="8dp"
+                    android:text="@string/activity_showUser_lblTotalAmount"/>
 
-        <TextView
-            android:id="@+id/activity_showUser_txtTotalAmount"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="60"
-            />
+                <TextView
+                    android:id="@+id/activity_showUser_txtTotalAmount"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="60"
+                    android:layout_margin="8dp"
+                    android:padding="8dp"
+                    />
 
-    </LinearLayout>
+            </LinearLayout>
 
-</RelativeLayout>
+        </RelativeLayout>
+        s
+    </ScrollView>
+
+</LinearLayout>

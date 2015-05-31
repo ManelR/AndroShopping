@@ -2,6 +2,7 @@ package org.projectes.androidshopping.adapters;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -20,6 +22,7 @@ import org.projectes.androidshopping.DAObject.Producte;
 import org.projectes.androidshopping.DAObject.Usuari;
 import org.projectes.androidshopping.R;
 import org.projectes.androidshopping.Task.DBTask_Base_Modify;
+import org.projectes.androidshopping.activities.ShowUserActivity;
 
 import java.util.ArrayList;
 
@@ -62,7 +65,7 @@ public class ManageUsersAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, final View convertView, ViewGroup parent) {
         View item = convertView;
         if (item == null) {
 
@@ -127,6 +130,25 @@ public class ManageUsersAdapter extends BaseAdapter {
                 }
             });
         }
+
+        item.setTag(aUsuaris.get(position).getId());
+        item.setClickable(true);
+        item.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(view.getTag() instanceof Integer){
+                    int id = (int) view.getTag();
+                    Intent i = new Intent(context, ShowUserActivity.class);
+                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    i.putExtra(ShowUserActivity.ID_USER_KEY, id);
+                    context.startActivity(i);
+                }
+
+
+
+            }
+        });
 
 
         //Canviem el color en funció de si és parell o no

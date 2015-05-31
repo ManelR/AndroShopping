@@ -12,6 +12,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import org.projectes.androidshopping.Constants.Constants;
+import org.projectes.androidshopping.DAO.DAOUsuaris;
+import org.projectes.androidshopping.DAObject.Usuari;
 import org.projectes.androidshopping.Listeners.IResult;
 import org.projectes.androidshopping.MyApplication;
 import org.projectes.androidshopping.R;
@@ -71,9 +73,7 @@ public class SplashScreenActivity extends BaseActivity {
                 synchronized (MyApplication.mutexSplash) {
                     boolIntent2 = 1;
                     if (boolIntent1 == 1) {
-                        Intent i = new Intent(getApplicationContext(), LoginActivity.class);
-                        startActivity(i);
-                        finish();
+                        iniciaActivity();
                     }
                 }
             }
@@ -84,9 +84,7 @@ public class SplashScreenActivity extends BaseActivity {
                 synchronized (MyApplication.mutexSplash) {
                     boolIntent2 = 1;
                     if (boolIntent1 == 1) {
-                        Intent i = new Intent(getApplicationContext(), LoginActivity.class);
-                        startActivity(i);
-                        finish();
+                        iniciaActivity();
                     }
                 }
             }
@@ -99,9 +97,7 @@ public class SplashScreenActivity extends BaseActivity {
                 synchronized (MyApplication.mutexSplash) {
                     boolIntent1 = 1;
                     if (boolIntent2 == 1) {
-                        Intent i = new Intent(getApplicationContext(), LoginActivity.class);
-                        startActivity(i);
-                        finish();
+                        iniciaActivity();
                     }
                 }
             }
@@ -109,6 +105,20 @@ public class SplashScreenActivity extends BaseActivity {
 
         productsTask.execute(this, Constants.URL_PRODUCTES);
 
+    }
+
+    private void iniciaActivity(){
+        DAOUsuaris BBDD_User = new DAOUsuaris(this);
+        Usuari user = BBDD_User.selectByLogged_in();
+        Intent i = null;
+        if(user != null){
+            this.app.setUserLog(user);
+            i = new Intent(getApplicationContext(), MainMenuActivity.class);
+        }else{
+            i = new Intent(getApplicationContext(), LoginActivity.class);
+        }
+        startActivity(i);
+        finish();
     }
 
 }

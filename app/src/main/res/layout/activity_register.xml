@@ -127,7 +127,8 @@
                 android:layout_width="match_parent"
                 android:prompt="@string/activity_register_spinnerDefault"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/activity_register_txtName">
+                android:layout_below="@id/activity_register_txtName"
+                android:layout_marginBottom="20dp">
 
             </Spinner>
 

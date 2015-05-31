@@ -59,12 +59,14 @@
         <activity
             android:name=".activities.NewUserActivity"
             android:label="@string/title_activity_new_user"
-            android:windowSoftInputMode="stateAlwaysHidden">
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:theme="@style/Theme.AppCompat.Light">
         </activity>
         <activity
             android:name=".activities.UserProfileActivity"
             android:label="@string/title_activity_user_profile"
-            android:windowSoftInputMode="stateAlwaysHidden">
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:theme="@style/Theme.AppCompat.Light">
         </activity>
         <activity
             android:name=".activities.BuyActivity"

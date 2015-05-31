@@ -94,6 +94,7 @@
     <string name="error_ageSpinner_empty">Tienes que seleccionar una edad</string>
     <string name="error_email_repeat">El correo introducido ya existe</string>
     <string name="errorBaseDades">Error con la base de datos</string>
+    <string name="error_login_fields">Los datos introducidos no son correctos.</string>
 
 
 </resources>

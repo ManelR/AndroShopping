@@ -24,7 +24,8 @@ public class DBTask_Base_Modify<T extends DAOBase<E>, E> extends AsyncTask<Objec
         int tipus = (int) params[Constants.POSICIO_TIPUS_BBDD_TASK];
         T BBDD = (T) params[Constants.POSICIO_BBDD_TASK];
         E element = (E) params[Constants.POSICIO_ELEMENT_TASK];
-
+        if (BBDD == null)Log.d("NULL:", "Es null");
+        else Log.d("NULL:", "No es null");
         switch (tipus){
             case Constants.BBDD_INSERT:
                 if(BBDD.insert(element) > 0){
@@ -37,6 +38,7 @@ public class DBTask_Base_Modify<T extends DAOBase<E>, E> extends AsyncTask<Objec
                 break;
             case Constants.BBDD_EDIT:
                 BBDD.update(element);
+                result = true;
                 break;
             default:
                 result = false;

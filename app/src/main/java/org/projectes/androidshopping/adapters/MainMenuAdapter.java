@@ -9,9 +9,18 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import org.projectes.androidshopping.Constants.Constants;
+import org.projectes.androidshopping.DAO.DAOUsuaris;
+import org.projectes.androidshopping.DAObject.Usuari;
+import org.projectes.androidshopping.Listeners.IResult;
+import org.projectes.androidshopping.MyApplication;
 import org.projectes.androidshopping.R;
+import org.projectes.androidshopping.Task.DBTask_Base_Modify;
+import org.projectes.androidshopping.activities.BaseActivity;
 import org.projectes.androidshopping.activities.BuyActivity;
+import org.projectes.androidshopping.activities.MainMenuActivity;
 import org.projectes.androidshopping.activities.ManageUsersActivity;
 import org.projectes.androidshopping.activities.ProductsManagerActivity;
 import org.projectes.androidshopping.activities.PurchaseHistoryActivity;
@@ -56,7 +65,7 @@ public class MainMenuAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, final View convertView, ViewGroup parent) {
         View item = convertView;
         if (item == null) {
 
@@ -69,11 +78,27 @@ public class MainMenuAdapter extends BaseAdapter {
 
                 @Override
                 public void onClick(View v) {
+                    DAOUsuaris BBDD_User = new DAOUsuaris(context);
+                    DBTask_Base_Modify<DAOUsuaris, Usuari> Task_User = new DBTask_Base_Modify<DAOUsuaris, Usuari>();
+                    Usuari user;
                     //Si ens han fet click fem un intent de l'activitat en questió
                     if (v.getTag() != null && v.getTag() instanceof MainMenuObject) {
                         MainMenuObject obj = (MainMenuObject) v.getTag();
                         if (obj.getIsExit()) {
-                            ((Activity)context).finish();
+                            user = ((MyApplication)((BaseActivity)context).getApplication()).getUserLog();
+                            user.setLogged_in(0);
+                            Task_User.setResultListener(new IResult<Boolean>() {
+                                @Override
+                                public void onSuccess(Boolean IRresult) {
+                                    ((Activity) context).finish();
+                                }
+
+                                @Override
+                                public void onFail(String missatgeError) {
+                                    Toast.makeText(context, "Error al sortir", Toast.LENGTH_LONG).show();
+                                }
+                            });
+                            Task_User.execute(context, Constants.BBDD_EDIT, BBDD_User, user);
                         } else {
                             Intent intent = new Intent(context, obj.getActivityClass());
                             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

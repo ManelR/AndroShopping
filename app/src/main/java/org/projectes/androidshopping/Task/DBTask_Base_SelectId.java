@@ -33,8 +33,6 @@ public class DBTask_Base_SelectId<T extends DAOBase<E>, E extends DAObjectBase> 
         if (this.listener != null){
             if (result != null){
                 listener.onSuccess(result);
-            }else{
-                listener.onFail(this.context.getString(R.string.errorBaseDades));
             }
         }
     }

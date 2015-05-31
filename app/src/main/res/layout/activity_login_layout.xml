@@ -69,6 +69,7 @@
                    android:layout_marginRight="12dp"
                    android:textSize="18sp"
                    android:imeOptions="flagNoExtractUi"
+                   android:inputType="textEmailAddress"
                    android:hint="@string/activity_login_txtEmailHint"
                    android:textColorHint="@color/solid_black"/>
 
@@ -90,9 +91,8 @@
                    android:padding="8dp"
                    android:layout_marginLeft="12dp"
                    android:layout_marginRight="12dp"
-                   android:textSize="18sp"
+                   android:inputType="textPassword"
                    android:imeOptions="flagNoExtractUi"
-                   android:hint="@string/activity_login_txtContraseñaHint"
                    android:textColorHint="@color/solid_black"/>
 
                <LinearLayout
@@ -104,7 +104,7 @@
                    android:gravity="center">
 
                    <CheckBox
-                       android:id="@+id/acticity_login_chckRemember"
+                       android:id="@+id/activity_login_chckRemember"
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content" />
 

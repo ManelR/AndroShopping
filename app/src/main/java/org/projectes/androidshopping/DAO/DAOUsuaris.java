@@ -29,6 +29,17 @@ public class DAOUsuaris extends DAOBase<Usuari> {
         return element;
     }
 
+    public Usuari selectByLogged_in(){
+        openReadOnly();
+        String sql="SELECT * FROM " + TABLE_NAME_USER + " where logged_in = ? LIMIT 1" ;
+        Cursor cursor = myDB.rawQuery(sql, new String []{Integer.toString(1)});
+        cursor.moveToFirst();
+        Usuari element = LoadFromCursor(cursor);
+        cursor.close();
+        closeDatabase();
+        return element;
+    }
+
     @Override
     public void delete(Usuari obj) {
         int nError = 1;
@@ -73,7 +84,12 @@ public class DAOUsuaris extends DAOBase<Usuari> {
     public void update(Usuari obj) {
         int nError = 0;
         try{
-            String hash_pass = MD5.md5(obj.getPass());
+            String hash_pass;
+            if (obj.getPass() != null){
+                hash_pass = MD5.md5(obj.getPass());
+            }else{
+                hash_pass = obj.getHash_pass();
+            }
             openWrite();
             String sql = "UPDATE " + TABLE_NAME_USER + " SET email = ?, hash_password = ?, genere = ?, nom = ?, edat = ?, rol = ?, logged_in = ?, deleted = ? WHERE id = ?";
             SQLiteStatement statement = myDB.compileStatement(sql);
@@ -94,6 +110,7 @@ public class DAOUsuaris extends DAOBase<Usuari> {
         if (cursor != null){
             if (!cursor.isAfterLast()){
                 usuari = new Usuari();
+                usuari.setId(cursor.getInt(cursor.getColumnIndex("id")));
                 usuari.setEmail(cursor.getString(cursor.getColumnIndex("email")));
                 usuari.setHash_pass(cursor.getString(cursor.getColumnIndex("hash_password")));
                 usuari.setGenere(cursor.getInt(cursor.getColumnIndex("genere")));

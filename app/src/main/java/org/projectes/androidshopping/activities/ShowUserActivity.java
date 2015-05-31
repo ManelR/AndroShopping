@@ -1,5 +1,6 @@
 package org.projectes.androidshopping.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -30,7 +31,9 @@ public class ShowUserActivity extends BaseActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.activity_manageUsers_menu_addItem) {
+            Intent i = new Intent(ShowUserActivity.this, NewUserActivity.class);
+            startActivity(i);
             return true;
         }
 

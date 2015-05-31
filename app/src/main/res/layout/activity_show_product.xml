@@ -11,7 +11,7 @@
         android:layout_height="match_parent">
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
             <TextView
                 android:id="@+id/activity_showProduct_lblTitle"
                 android:layout_width="match_parent"
@@ -93,13 +93,14 @@
                 android:textStyle="bold"
                 android:layout_below="@id/activity_showProduct_lblStock"/>
 
-            <ListView
-                android:id="@+id/activity_showProduct_listTags"
+            <LinearLayout
+                android:id="@+id/activity_showProduct_listTag"
+                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/activity_showProduct_lblTag">
 
-            </ListView>
+            </LinearLayout>
         </RelativeLayout>
     </ScrollView>
 </RelativeLayout>

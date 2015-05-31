@@ -47,6 +47,9 @@
                 android:inputType="phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:imeOptions="flagNoExtractUi"
                 android:layout_below="@id/fragment_newProduct2_lblPrecio"/>
 
             <CheckBox
@@ -71,6 +74,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="phone"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:imeOptions="flagNoExtractUi"
                 android:layout_below="@id/fragment_newProduct2_lblStock"/>
         </RelativeLayout>
     </ScrollView>

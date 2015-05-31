@@ -59,3 +59,4 @@ CREATE TABLE ws_data(
 	data INTEGER,
 	nomTaula TEXT
 );
+

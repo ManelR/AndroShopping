@@ -1,5 +1,6 @@
 package org.projectes.androidshopping.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -28,8 +29,8 @@ public class LoginActivity extends BaseActivity {
         link.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(),"HOLA MANEL",Toast.LENGTH_LONG).show();
-
+                Intent i = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(i);
             }
         });
     }

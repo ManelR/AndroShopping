@@ -5,9 +5,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteStatement;
 import android.util.Log;
 
+import org.projectes.androidshopping.Constants.MD5;
 import org.projectes.androidshopping.DAObject.Usuari;
-
-import java.security.MessageDigest;
 
 /**
  * Created by mrr on 30/05/15.
@@ -52,12 +51,11 @@ public class DAOUsuaris extends DAOBase<Usuari> {
     public long insert(Usuari user) {
         long id = -1;
         try{
-            MessageDigest md = MessageDigest.getInstance("SHA-256");
-            md.update(user.getPass().getBytes("UTF-8"));
+            String hash_pass = MD5.md5(user.getPass());
             openWrite();
             String sql="INSERT INTO "+TABLE_NAME_USER+" (email, hash_password, genere, nom, edat, rol, logged_in, deleted) VALUES(?,?,?,?,?,?,?,0)";
             SQLiteStatement statement = this.myDB.compileStatement(sql);
-            statement.bindAllArgsAsStrings(new String[]{user.getEmail(), md.digest().toString(), Integer.toString(user.getGenere()), user.getNom(), Integer.toString(user.getEdat()), Integer.toString(user.getRol()), Integer.toString(user.getLogged_in())});
+            statement.bindAllArgsAsStrings(new String[]{user.getEmail(), hash_pass, Integer.toString(user.getGenere()), user.getNom(), Integer.toString(user.getEdat()), Integer.toString(user.getRol()), Integer.toString(user.getLogged_in())});
             id=statement.executeInsert();
             Log.i("---ID---", new Long(id).toString());
             Log.i("---SQL---", sql);
@@ -75,12 +73,11 @@ public class DAOUsuaris extends DAOBase<Usuari> {
     public void update(Usuari obj) {
         int nError = 0;
         try{
-            MessageDigest md = MessageDigest.getInstance("SHA-256");
-            md.update(obj.getPass().getBytes("UTF-8"));
+            String hash_pass = MD5.md5(obj.getPass());
             openWrite();
             String sql = "UPDATE " + TABLE_NAME_USER + " SET email = ?, hash_password = ?, genere = ?, nom = ?, edat = ?, rol = ?, logged_in = ?, deleted = ? WHERE id = ?";
             SQLiteStatement statement = myDB.compileStatement(sql);
-            statement.bindAllArgsAsStrings(new String[]{obj.getEmail(), md.digest().toString(), Integer.toString(obj.getGenere()), obj.getNom(), Integer.toString(obj.getEdat()), Integer.toString(obj.getRol()), Integer.toString(obj.getLogged_in()), Integer.toString(obj.getDeleted()), Integer.toString(obj.getId())});
+            statement.bindAllArgsAsStrings(new String[]{obj.getEmail(), hash_pass, Integer.toString(obj.getGenere()), obj.getNom(), Integer.toString(obj.getEdat()), Integer.toString(obj.getRol()), Integer.toString(obj.getLogged_in()), Integer.toString(obj.getDeleted()), Integer.toString(obj.getId())});
             nError = statement.executeUpdateDelete();
             Log.i("--UPDATE--", Integer.toString(obj.getId()));
             statement.close();

@@ -50,6 +50,8 @@ public class MainMenuActivity extends BaseActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+
+        Intent i = null;
         DAOUsuaris BBDD_User = new DAOUsuaris(this);
         DBTask_Base_Modify<DAOUsuaris, Usuari> Task_User = new DBTask_Base_Modify<DAOUsuaris, Usuari>();
         Usuari user;
@@ -85,11 +87,11 @@ public class MainMenuActivity extends BaseActivity {
 
             //Admin Role Menu Items
             case R.id.menu_main_menu_itemManageProducts:
-                Intent i = new Intent(getApplicationContext(),ProductsManagerActivity.class);
+                i = new Intent(getApplicationContext(),ProductsManagerActivity.class);
                 startActivity(i);
                 break;
             case R.id.menu_main_menu_itemManageUsers:
-                Intent i = new Intent(getApplicationContext(),ManageUsersActivity.class);
+                i = new Intent(getApplicationContext(),ManageUsersActivity.class);
                 startActivity(i);
                 break;
             case R.id.menu_main_menu_itemSellList:

@@ -106,11 +106,11 @@ public class LoginActivity extends BaseActivity {
                                 }
                             }else{
                                 errorMessage = LoginActivity.this.getString(R.string.error_login_fields);
-                                Toast.makeText(LoginActivity.this, errorMessage, Toast.LENGTH_LONG).show();
+                                Toast.makeText(LoginActivity.this, errorMessage + "1", Toast.LENGTH_LONG).show();
                             }
                         }else{
                             errorMessage = LoginActivity.this.getString(R.string.error_login_fields);
-                            Toast.makeText(LoginActivity.this, errorMessage, Toast.LENGTH_LONG).show();
+                            Toast.makeText(LoginActivity.this, errorMessage + "2", Toast.LENGTH_LONG).show();
                         }
                     }
 

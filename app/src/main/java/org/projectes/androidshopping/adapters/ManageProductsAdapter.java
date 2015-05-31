@@ -1,6 +1,7 @@
 package org.projectes.androidshopping.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import com.squareup.picasso.Picasso;
 
 import org.projectes.androidshopping.DAObject.Producte;
 import org.projectes.androidshopping.R;
+import org.projectes.androidshopping.activities.ShowProductActivity;
 
 import java.util.ArrayList;
 
@@ -71,6 +73,23 @@ public class ManageProductsAdapter extends BaseAdapter {
 
         imgProduct.setClickable(false);
         imgProduct.setFocusable(false);
+
+        item.setTag(new Integer(aProductes.get(position).getId()));
+
+        item.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(v.getTag() instanceof Integer){
+                    int id = (Integer) v.getTag();
+                    Intent i = new Intent(context, ShowProductActivity.class);
+                    i.putExtra("id_product", id);
+                    i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(i);
+                }
+
+            }
+        });
 
         if(txtNom != null){
             txtNom.setText(aProductes.get(position).getNombre());

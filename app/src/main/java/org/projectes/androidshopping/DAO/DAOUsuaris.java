@@ -20,7 +20,7 @@ public class DAOUsuaris extends DAOBase<Usuari> {
 
     public Usuari selectByEmail(String email){
         openReadOnly();
-        String sql="SELECT * FROM " + TABLE_NAME_USER + " where email = ? LIMIT 1" ;
+        String sql="SELECT * FROM " + TABLE_NAME_USER + " where email = ? AND deleted = 0 LIMIT 1" ;
         Cursor cursor = myDB.rawQuery(sql, new String []{email});
         cursor.moveToFirst();
         Usuari element = LoadFromCursor(cursor);

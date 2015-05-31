@@ -99,7 +99,7 @@ public abstract class DAOBase<T> extends SQLiteOpenHelper {
                 ");";
         db.execSQL(CREATE_WS_DATA);
         //Inserts
-        String INSERT_USERS = "INSERT INTO usuaris (email, hash_password, genere, nom, edat, rol, logged_in) VALUES ('admin@salleurl.edu', '3fc0a7acf087f549ac2b266baf94b8b1' , 1, 'Admin', 20, 1, 0), ('user@salleurl.edu', '3fc0a7acf087f549ac2b266baf94b8b1', 1, 'User', 20, 2, 0)";
+        String INSERT_USERS = "INSERT INTO usuaris (email, hash_password, genere, nom, edat, rol, logged_in, deleted) VALUES ('admin@salleurl.edu', '3fc0a7acf087f549ac2b266baf94b8b1' , 1, 'Admin', 20, 1, 0, 0), ('user@salleurl.edu', '3fc0a7acf087f549ac2b266baf94b8b1', 1, 'User', 20, 2, 0, 0)";
         db.execSQL(INSERT_USERS);
         Log.d("BBDD:", "Creada!!!");
 

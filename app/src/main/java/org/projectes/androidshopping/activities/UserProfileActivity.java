@@ -40,10 +40,10 @@ public class UserProfileActivity extends BaseActivity {
 
     public void onRadioButtonClicked(View view){
         switch(view.getId()){
-            case R.id.activity_register_rdioMale:
+            case R.id.activity_userProfile_rdioMale:
                 this.sGender = "Hombre";
                 break;
-            case R.id.activity_newUser_rdioFemale:
+            case R.id.activity_userProfile_rdioFemale:
                 this.sGender = "Mujer";
                 break;
         }

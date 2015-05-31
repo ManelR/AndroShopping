@@ -72,25 +72,44 @@ public class RegisterActivity extends BaseActivity {
             public void onClick(View v) {
                 boolean valid = validarCampsRegistre();
                 if (valid) {
-                    //TODO Validar que el mail no existeixi
-                    //Guardar l'usuari a la base de dades
-                    DBTask_Base_Modify<DAOUsuaris, Usuari> DBTask = new DBTask_Base_Modify<DAOUsuaris, Usuari>();
-                    int genere = sGender.equals("Hombre") ? 1 : 2;
-                    Usuari user = new Usuari(txtEmail.getText().toString(), txtPassword.getText().toString(), genere, txtName.getText().toString(), Integer.valueOf(spinGender.getSelectedItem().toString()), 2, 0);
-                    DBTask.setResultListener(new IResult<Boolean>() {
+                    //Validar que el correu no existeixi
+                    DBTask_Usuari_Select_Email DBTask_User = new DBTask_Usuari_Select_Email();
+                    DBTask_User.setResultListener(new IResult<Usuari>() {
                         @Override
-                        public void onSuccess(Boolean IRresult) {
-                            Intent i = new Intent(RegisterActivity.this, LoginActivity.class);
-                            startActivity(i);
-                            finish();
+                        public void onSuccess(Usuari IRresult) {
+                            if (IRresult != null){
+                                //Existeix el correu
+                                errorMessage = RegisterActivity.this.getString(R.string.error_email_repeat);
+                                Toast.makeText(RegisterActivity.this, errorMessage, Toast.LENGTH_LONG).show();
+                            }else{
+                                //No existeix
+                                //Guardar l'usuari a la base de dades
+                                DBTask_Base_Modify<DAOUsuaris, Usuari> DBTask = new DBTask_Base_Modify<DAOUsuaris, Usuari>();
+                                int genere = sGender.equals("Hombre") ? 1 : 2;
+                                Usuari user = new Usuari(txtEmail.getText().toString(), txtPassword.getText().toString(), genere, txtName.getText().toString(), Integer.valueOf(spinGender.getSelectedItem().toString()), 2, 0);
+                                DBTask.setResultListener(new IResult<Boolean>() {
+                                    @Override
+                                    public void onSuccess(Boolean IRresult) {
+                                        Intent i = new Intent(RegisterActivity.this, LoginActivity.class);
+                                        startActivity(i);
+                                        finish();
+                                    }
+
+                                    @Override
+                                    public void onFail(String missatgeError) {
+                                        Toast.makeText(RegisterActivity.this, missatgeError, Toast.LENGTH_LONG).show();
+                                    }
+                                });
+                                DBTask.execute(RegisterActivity.this, Constants.BBDD_INSERT, BBDDUsers, user);
+                            }
                         }
 
                         @Override
                         public void onFail(String missatgeError) {
-                            Toast.makeText(RegisterActivity.this, missatgeError, Toast.LENGTH_LONG).show();
+
                         }
                     });
-                    DBTask.execute(RegisterActivity.this, Constants.BBDD_INSERT, BBDDUsers, user);
+                    DBTask_User.execute(RegisterActivity.this, txtEmail.getText().toString());
                 } else {
                     Toast.makeText(RegisterActivity.this, errorMessage, Toast.LENGTH_LONG).show();
                 }
@@ -102,7 +121,6 @@ public class RegisterActivity extends BaseActivity {
         boolean result = true;
         Pattern emailPattern;
         Matcher emailMatcher;
-        DBTask_Usuari_Select_Email BBDD = new DBTask_Usuari_Select_Email();
 
         Editable emailText = this.txtEmail.getText();
         if (!emailText.toString().matches("") && result){
@@ -156,7 +174,7 @@ public class RegisterActivity extends BaseActivity {
             case R.id.activity_register_rdioMale:
                 this.sGender = "Hombre";
                 break;
-            case R.id.activity_newUser_rdioFemale:
+            case R.id.activity_register_rdioFemale:
                 this.sGender = "Mujer";
                 break;
         }

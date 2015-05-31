@@ -44,7 +44,7 @@
 
             <EditText
                 android:id="@+id/fragment_newProduct2_txtPrecio"
-                android:inputType="number"
+                android:inputType="phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/fragment_newProduct2_lblPrecio"/>
@@ -68,9 +68,9 @@
 
             <EditText
                 android:id="@+id/fragment_newProduct2_txtStock"
-                android:inputType="number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="phone"
                 android:layout_below="@id/fragment_newProduct2_lblStock"/>
         </RelativeLayout>
     </ScrollView>

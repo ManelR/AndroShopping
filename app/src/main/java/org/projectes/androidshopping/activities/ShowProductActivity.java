@@ -1,10 +1,13 @@
 package org.projectes.androidshopping.activities;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,6 +19,7 @@ import org.projectes.androidshopping.DAO.DAOProductes;
 import org.projectes.androidshopping.DAObject.Producte;
 import org.projectes.androidshopping.Listeners.IResult;
 import org.projectes.androidshopping.R;
+import org.projectes.androidshopping.Task.DBTask_Base_Modify;
 import org.projectes.androidshopping.Task.DBTask_Base_SelectId;
 
 public class ShowProductActivity extends BaseActivity {
@@ -25,7 +29,7 @@ public class ShowProductActivity extends BaseActivity {
     private TextView precioProducte;
     private TextView stockProducte;
     private ImageView imageProduct;
-    private ListView listTags;
+    private LinearLayout listTags;
     private String[] tags;
     private Producte producte;
 
@@ -69,7 +73,8 @@ public class ShowProductActivity extends BaseActivity {
         this.precioProducte = (TextView)findViewById(R.id.activity_showProduct_lblPrecioResult);
         this.stockProducte = (TextView)findViewById(R.id.activity_showProduct_lblStockResult);
         this.imageProduct = (ImageView)findViewById(R.id.activity_showProduct_imgImage);
-        this.listTags = (ImageView)findViewById(R.id.activity_showProduct_listTags);
+        this.listTags = (LinearLayout)findViewById(R.id.activity_showProduct_listTag);
+
 
         if(this.producte != null){
             this.nomProducte.setText(this.producte.getNombre());
@@ -77,10 +82,14 @@ public class ShowProductActivity extends BaseActivity {
             this.precioProducte.setText(this.producte.getPrecio() + "€");
             this.stockProducte.setText(this.producte.getStock() > 1 ? this.producte.getStock() + " unidades" : this.producte.getStock() + " unidad");
             Picasso.with(this).load(this.producte.getImage()).resize(128, 128).into(this.imageProduct);
+            this.tags = new String[this.producte.getDB_tags().size()];
             for (int i = 0; i < this.producte.getDB_tags().size(); i++){
-                this.tags[i] = new String(i + ". " + this.producte.getDB_tags().get(i));
+                this.tags[i] = new String((i+1) + ". " + this.producte.getDB_tags().get(i).getNom());
             }
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, this.tags);
+            for (int i = 0; i< adapter.getCount(); i++){
+                this.listTags.addView(adapter.getView(i, null, null));
+            }
         }
     }
 
@@ -100,7 +109,29 @@ public class ShowProductActivity extends BaseActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.activity_showProduct_menu_delete) {
+            AlertDialog.Builder confirmation = new AlertDialog.Builder(this,R.style.Theme_AppCompat_Light_Dialog_Alert);
+            confirmation.setTitle(this.getString(R.string.item_manage_products_lblTitleConfirmation));
+            confirmation.setIcon(R.mipmap.delete);
+            confirmation.setMessage(this.getString(R.string.item_manage_products_lblBodyConfirmation) + " " + this.producte.getNombre() + " ?");
+            confirmation.setPositiveButton(R.string.item_manage_users_lblYesConfirmation, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    DBTask_Base_Modify<DAOProductes, Producte> taskModify;
+                    DAOProductes daoProductes = new DAOProductes(ShowProductActivity.this);
+                    taskModify = new DBTask_Base_Modify<DAOProductes, Producte>();
+                    taskModify.execute(ShowProductActivity.this, Constants.BBDD_DELETE, daoProductes, producte);
+                    ShowProductActivity.this.finish();
+                }
+            });
+            confirmation.setNegativeButton(R.string.item_manage_products_lblNoConfirmation, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    //No fem res
+                }
+            });
+
+            confirmation.show();
             return true;
         }
 

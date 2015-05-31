@@ -92,7 +92,6 @@
 
     <!-- ProductsManager Activity -->
     <string name="title_activity_products_manager">ProductsManagerActivity</string>
-    <string name="title_activity_new_product">NewProductActivity</string>
     <string name="title_activity_show_product">ShowProductActivity</string>
     <string name="title_activity_manage_users">ManageUsersActivity</string>
     <string name="title_activity_user_profile">UserProfileActivity</string>
@@ -101,6 +100,14 @@
     <string name="activity_register_chckTerms">Acepto las condiciones de servicio</string>
     <string name="activity_userProfile_btnModifier"><![CDATA[Modificar >]]></string>
     <string name="activity_newuser_btnCreate"><![CDATA[Crear >]]></string>
+
+    <!-- NewProduct Fragment3 Strings -->
+    <string name="activity_newProduct_activityName">Nuevo Producto</string>
+    <string name="fragment_newProduct3_repeatedTagError">Ya existe este tag!</string>
+    <string name="fragment_newProduct3_emptyTagError">El nombre del tag no puede estar en blanco!</string>
+    <string name="fragment_newProduct3_lblTitle">Selecciona los tags del producto:</string>
+    <string name="fragment_newProduct3_txtNewTagHint">Nuevo tag...</string>
+    <string name="fragment_newProduct3_btnAddTag">Insertar</string>
 
     <string name="error_email_message">El correo introducido no es correcto</string>
     <string name="error_rePass_empty">El campo \"Repita la Contraseña\" no puede estar vacío</string>

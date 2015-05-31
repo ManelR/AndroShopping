@@ -17,16 +17,21 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import org.projectes.androidshopping.R;
+import org.projectes.androidshopping.adapters.InsertTagsAdapter;
 import org.projectes.androidshopping.fragments.NewProductFragment1;
 import org.projectes.androidshopping.fragments.NewProductFragment2;
 import org.projectes.androidshopping.fragments.NewProductFragment3;
 
+import java.util.LinkedList;
+
 public class NewProductActivity extends BaseActivity {
     private Button btnAnterior;
     private Button btnSeguent;
+    private static LinkedList<String> lTags = new LinkedList<String>();
     private static NewProductFragment1 fragment1 = new NewProductFragment1();
     private static NewProductFragment2 fragment2 = new NewProductFragment2();
     private static NewProductFragment3 fragment3 = new NewProductFragment3();
+
     private static int paso = 1;
 
     static final int RESULT_LOAD_IMAGE = 0;
@@ -54,6 +59,7 @@ public class NewProductActivity extends BaseActivity {
                 changeFragment(R.id.activity_newProduct_fragment, this.fragment3);
                 btnSeguent.setEnabled(true);
                 btnAnterior.setEnabled(true);
+                fragment3.setTagList(lTags);
                 break;
         }
     }
@@ -95,6 +101,7 @@ public class NewProductActivity extends BaseActivity {
                         break;
                     case 3:
                         aBar.setSubtitle("Paso 3/3");
+                        fragment3.setTagList(lTags);
                         changeFragment(R.id.activity_newProduct_fragment, fragment3);
                         btnSeguent.setEnabled(true);
                         btnAnterior.setEnabled(true);

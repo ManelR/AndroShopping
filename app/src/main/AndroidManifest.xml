@@ -45,7 +45,7 @@
         </activity>
         <activity
             android:name=".activities.NewProductActivity"
-            android:label="@string/title_activity_new_product"
+            android:label="@string/activity_newProduct_activityName"
             android:theme="@style/Theme.AppCompat.Light">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

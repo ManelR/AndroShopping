@@ -24,12 +24,10 @@
         android:layout_alignParentLeft="true"
         android:text="@string/activity_newUser_anterior"/>
 
-    <fragment
+    <FrameLayout
         android:id="@+id/activity_newProduct_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:name="org.projectes.androidshopping.fragments.NewProductFragment1"
-        tools:layout="@layout/fragment_new_product_fragment1"
         android:layout_above="@id/activity_newProduct_btnAnterior">
-    </fragment>
+    </FrameLayout>
 </RelativeLayout>

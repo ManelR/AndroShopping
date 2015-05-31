@@ -130,6 +130,11 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="fragment_newProduct_nom">Nombre</string>
     <string name="fragment_newProduct_desc">Descripción</string>
+    <string name="fragment_newProduct_foto">Foto</string>
+    <string name="fragment_newProduct_selectFoto">Seleccionar foto</string>
+    <string name="fragment_newProduct_precio">Precio</string>
+    <string name="fragment_newProduct_stock">Stock</string>
+    <string name="fragment_newProduct_chckActivo">Producto Activo</string>
 
 
 </resources>

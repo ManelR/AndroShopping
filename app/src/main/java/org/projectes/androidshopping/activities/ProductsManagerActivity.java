@@ -1,5 +1,6 @@
 package org.projectes.androidshopping.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -87,7 +88,8 @@ public class ProductsManagerActivity extends BaseActivity {
 
         switch (id){
             case R.id.activity_manage_products_addMenuItem:
-                //TODO Add Create Products
+                Intent i = new Intent(ProductsManagerActivity.this, NewProductActivity.class);
+                startActivity(i);
                 break;
         }
 

@@ -56,7 +56,8 @@
         </activity>
         <activity
             android:name=".activities.ManageUsersActivity"
-            android:label="@string/title_activity_manage_users" >
+            android:label="@string/title_activity_manage_users"
+            android:theme="@style/Theme.AppCompat.Light">
         </activity>
         <activity
             android:name=".activities.NewUserActivity"

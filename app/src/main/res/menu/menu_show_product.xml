@@ -3,5 +3,5 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="org.projectes.androidshopping.activities.ShowProductActivity">
     <item android:id="@+id/activity_showProduct_menu_delete" android:title="@string/activity_showProduct_menu_delete"
-        android:orderInCategory="1" app:showAsAction="always" android:icon="@drawable/delete" />
+        android:orderInCategory="1" app:showAsAction="always" android:icon="@mipmap/delete" />
 </menu>

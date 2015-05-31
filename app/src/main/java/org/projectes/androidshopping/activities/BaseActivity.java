@@ -78,6 +78,8 @@ public class BaseActivity extends AppCompatActivity {
 
     protected void changeFragment(int containerId,Fragment newFragment){
         fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(containerId, newFragment);
+        fragmentTransaction.commit();
 
     }
 

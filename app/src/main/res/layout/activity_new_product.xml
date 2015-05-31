@@ -6,4 +6,30 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="org.projectes.androidshopping.activities.NewProductActivity">
 
+
+
+    <Button
+        android:id="@+id/activity_newProduct_btnSeguent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:text="@string/activity_newUser_continuar"/>
+
+    <Button
+        android:id="@+id/activity_newProduct_btnAnterior"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:text="@string/activity_newUser_anterior"/>
+
+    <fragment
+        android:id="@+id/activity_newProduct_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:name="org.projectes.androidshopping.fragments.NewProductFragment1"
+        tools:layout="@layout/fragment_new_product_fragment1"
+        android:layout_above="@id/activity_newProduct_btnAnterior">
+    </fragment>
 </RelativeLayout>

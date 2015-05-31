@@ -1,0 +1,37 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/fragment_newProduct1_lblName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:textStyle="bold"
+        android:text="@string/fragment_newProduct_nom"/>
+
+    <EditText
+        android:id="@+id/fragment_newProduct1_txtName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/fragment_newProduct1_lblName"
+        />
+
+    <TextView
+        android:id="@+id/fragment_newProduct1_lblDesc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/fragment_newProduct_desc"
+        android:layout_margin="20dp"
+        android:textStyle="bold"
+        android:layout_below="@id/fragment_newProduct1_txtName"/>
+
+    <EditText
+        android:id="@+id/fragment_newProduct1_txtDesc"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/fragment_newProduct1_lblDesc"/>
+
+
+</RelativeLayout>

@@ -16,21 +16,36 @@ import org.projectes.androidshopping.fragments.NewProductFragment3;
 public class NewProductActivity extends BaseActivity {
     private Button btnAnterior;
     private Button btnSeguent;
-    private NewProductFragment1 fragment1;
-    private NewProductFragment2 fragment2;
-    private NewProductFragment3 fragment3;
-    private int paso;
+    private static NewProductFragment1 fragment1 = new NewProductFragment1();
+    private static NewProductFragment2 fragment2 = new NewProductFragment2();
+    private static NewProductFragment3 fragment3 = new NewProductFragment3();
+    private static int paso = 1;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_product);
-        this.fragment1 = new NewProductFragment1();
-        this.fragment2 = new NewProductFragment2();
-        this.fragment3 = new NewProductFragment3();
-        changeFragment(R.id.activity_newProduct_fragment, fragment1);
-        paso = 1;
         associateControls();
+        switch (paso){
+            case 1:
+                aBar.setSubtitle("Paso 1/3");
+                changeFragment(R.id.activity_newProduct_fragment, this.fragment1);
+                btnAnterior.setEnabled(false);
+                btnSeguent.setEnabled(true);
+                break;
+            case 2:
+                aBar.setSubtitle("Paso 2/3");
+                changeFragment(R.id.activity_newProduct_fragment, this.fragment2);
+                btnSeguent.setEnabled(true);
+                btnAnterior.setEnabled(true);
+                break;
+            case 3:
+                aBar.setSubtitle("Paso 3/3");
+                changeFragment(R.id.activity_newProduct_fragment, this.fragment3);
+                btnSeguent.setEnabled(true);
+                btnAnterior.setEnabled(true);
+                break;
+        }
     }
 
     private void associateControls() {
@@ -43,11 +58,13 @@ public class NewProductActivity extends BaseActivity {
                 paso--;
                 switch (paso){
                     case 1:
+                        aBar.setSubtitle("Paso 1/3");
                         changeFragment(R.id.activity_newProduct_fragment, fragment1);
                         btnAnterior.setEnabled(false);
                         btnSeguent.setEnabled(true);
                         break;
                     case 2:
+                        aBar.setSubtitle("Paso 2/3");
                         changeFragment(R.id.activity_newProduct_fragment, fragment2);
                         btnSeguent.setEnabled(true);
                         btnAnterior.setEnabled(true);
@@ -61,19 +78,23 @@ public class NewProductActivity extends BaseActivity {
                 paso++;
                 switch (paso){
                     case 2:
+                        aBar.setSubtitle("Paso 2/3");
                         changeFragment(R.id.activity_newProduct_fragment, fragment2);
                         btnSeguent.setEnabled(true);
                         btnAnterior.setEnabled(true);
                         break;
                     case 3:
+                        aBar.setSubtitle("Paso 3/3");
                         changeFragment(R.id.activity_newProduct_fragment, fragment3);
-                        btnSeguent.setEnabled(false);
+                        btnSeguent.setEnabled(true);
                         btnAnterior.setEnabled(true);
+                        break;
+                    case 4:
+                        //TODO validar els camps de tot el registre
                         break;
                 }
             }
         });
-        this.btnAnterior.setEnabled(false);
     }
 
 

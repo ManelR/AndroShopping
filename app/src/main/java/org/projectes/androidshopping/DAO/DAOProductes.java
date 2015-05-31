@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteStatement;
 import android.util.Log;
 
 import org.projectes.androidshopping.DAObject.Producte;
+import org.projectes.androidshopping.DAObject.Tag;
 
 /**
  * Created by mrr on 30/05/15.
@@ -55,6 +56,7 @@ public class DAOProductes extends DAOBase<Producte> {
     @Override
     public long insert(Producte producte) {
         long inserted_id = -1;
+        DAOTags BBDD_Tag = new DAOTags(this.context);
         try{
             openWrite();
             String sql="INSERT INTO "+TABLE_NAME_PRODUCTE+" (id_remot, nom, descripcio, preu, actiu, stock, imatge, deleted) VALUES(?,?,?,?,?,?,?,0)";
@@ -64,6 +66,16 @@ public class DAOProductes extends DAOBase<Producte> {
             Log.i("---ID---", new Long(inserted_id).toString());
             Log.i("---SQL---", sql);
             statement.close();
+            for (int i = 0; i < producte.getWS_tags().size(); i++){
+                Tag tagActual = BBDD_Tag.selectByName(producte.getWS_tags().get(i));
+                if (tagActual == null){
+                    tagActual = new Tag();
+                    tagActual.setNom(producte.getWS_tags().get(i));
+                    tagActual.setId((int)BBDD_Tag.insert(tagActual));
+                    Log.d("TAG INSERT:", tagActual.getNom());
+                }
+                BBDD_Tag.insertProducte_Tag(tagActual.getId(), (int)inserted_id);
+            }
         }catch(Exception ex){
             Log.e("ERROR", ex.toString());
         }finally{
@@ -74,6 +86,7 @@ public class DAOProductes extends DAOBase<Producte> {
 
     @Override
     public void update(Producte p) {
+        DAOTags BBDD_Tag = new DAOTags(this.context);
         int nError = 0;
         try{
             openWrite();
@@ -83,6 +96,17 @@ public class DAOProductes extends DAOBase<Producte> {
             nError = statement.executeUpdateDelete();
             Log.i("--UPDATE--", Integer.toString(p.getId_remot()));
             statement.close();
+            BBDD_Tag.deleteProducte_TagByIDProduct(p.getId());
+            for (int i = 0; i < p.getWS_tags().size(); i++){
+                Tag tagActual = BBDD_Tag.selectByName(p.getWS_tags().get(i));
+                if (tagActual == null){
+                    tagActual = new Tag();
+                    tagActual.setNom(p.getWS_tags().get(i));
+                    tagActual.setId((int)BBDD_Tag.insert(tagActual));
+                    Log.d("TAG INSERT:", tagActual.getNom());
+                }
+                BBDD_Tag.insertProducte_Tag(tagActual.getId(), p.getId());
+            }
         }catch (Exception ex){
             Log.e("ERROR", ex.toString());
         }finally {

@@ -8,6 +8,8 @@ import android.util.Log;
 import org.projectes.androidshopping.Constants.MD5;
 import org.projectes.androidshopping.DAObject.Usuari;
 
+import java.util.ArrayList;
+
 /**
  * Created by mrr on 30/05/15.
  */
@@ -20,7 +22,7 @@ public class DAOUsuaris extends DAOBase<Usuari> {
 
     public Usuari selectByEmail(String email){
         openReadOnly();
-        String sql="SELECT * FROM " + TABLE_NAME_USER + " where email = ? LIMIT 1" ;
+        String sql="SELECT * FROM " + TABLE_NAME_USER + " where email = ? AND deleted = 0 LIMIT 1" ;
         Cursor cursor = myDB.rawQuery(sql, new String []{email});
         cursor.moveToFirst();
         Usuari element = LoadFromCursor(cursor);
@@ -102,6 +104,24 @@ public class DAOUsuaris extends DAOBase<Usuari> {
         }finally {
             this.closeDatabase();
         }
+    }
+
+    @Override
+    public ArrayList<Usuari> selectAllNotDeleted(){
+        ArrayList<Usuari> listT = new ArrayList<Usuari>();
+        openReadOnly();
+        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE deleted = 0 AND rol <> 1";
+        Cursor cursor = myDB.rawQuery(sql, null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()){
+            Log.d("HA ENTRAT", "ha entrat en el bucle del select de la BBDD");
+            Usuari element = LoadFromCursor(cursor);
+            listT.add(element);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        this.closeDatabase();
+        return listT;
     }
 
     @Override

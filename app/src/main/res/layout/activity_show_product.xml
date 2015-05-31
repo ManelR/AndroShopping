@@ -6,7 +6,100 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="org.projectes.androidshopping.activities.ShowProductActivity">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/activity_showProduct_lblTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/activity_showProduct_title"
+                android:textStyle="bold"
+                android:layout_marginBottom="20dp"/>
 
+            <TextView
+                android:id="@+id/activity_showProduct_lblNameProduct"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/activity_showProduct_nameProduct"
+                android:layout_below="@id/activity_showProduct_lblTitle"
+                android:layout_marginBottom="20dp"/>
 
+            <TextView
+                android:id="@+id/activity_showProduct_lblDescProduct"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/activity_showProduct_descProduct"
+                android:layout_below="@id/activity_showProduct_lblNameProduct"
+                android:layout_marginBottom="10dp"/>
 
+            <TextView
+                android:id="@+id/activity_showProduct_lblFoto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/activity_showProduct_foto"
+                android:layout_below="@id/activity_showProduct_lblDescProduct"
+                android:layout_marginBottom="10dp"/>
+
+            <ImageView
+                android:id="@+id/activity_showProduct_imgImage"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_below="@id/activity_showProduct_lblFoto"
+                android:layout_marginBottom="10dp"/>
+
+            <TextView
+                android:id="@+id/activity_showProduct_lblPrecio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/activity_showProduct_precio"
+                android:layout_below="@id/activity_showProduct_imgImage"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="10dp"/>
+
+            <TextView
+                android:id="@+id/activity_showProduct_lblPrecioResult"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="prova"
+                android:layout_below="@id/activity_showProduct_imgImage"
+                android:layout_toRightOf="@id/activity_showProduct_lblPrecio"/>
+
+            <TextView
+                android:id="@+id/activity_showProduct_lblStock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/activity_showProduct_stock"
+                android:layout_below="@id/activity_showProduct_lblPrecio"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="10dp"/>
+
+            <TextView
+                android:id="@+id/activity_showProduct_lblStockResult"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="prova"
+                android:layout_below="@id/activity_showProduct_lblPrecio"
+                android:layout_toRightOf="@id/activity_showProduct_lblStock"/>
+
+            <TextView
+                android:id="@+id/activity_showProduct_lblTag"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/activity_showProduct_tag"
+                android:textStyle="bold"
+                android:layout_below="@id/activity_showProduct_lblStock"/>
+
+            <ListView
+                android:id="@+id/activity_showProduct_listTags"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/activity_showProduct_lblTag">
+
+            </ListView>
+        </RelativeLayout>
+    </ScrollView>
 </RelativeLayout>

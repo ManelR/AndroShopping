@@ -104,6 +104,15 @@
     <string name="error_email_repeat">El correo introducido ya existe</string>
     <string name="errorBaseDades">Error con la base de datos</string>
     <string name="error_login_fields">Los datos introducidos no son correctos.</string>
+    <string name="activity_showProduct_title">INFORMACIÓN BÁSICA</string>
+    <string name="activity_showProduct_nameProduct">Nombre producto</string>
+    <string name="activity_showProduct_descProduct">Lorem ipsum ad his scripta blandit partiendo, eum fastidii accumsan euripidis in, eum liber hendrerit an. Qui ut wisi vocibus suscipiantur, quo dicit ridens inciderint id. Quo mundi lobortis reformidans eu, legimus senserit definiebas an eos. Eu sit tincidunt incorrupte definitionem, vis mutat affert percipit cu, eirmod consectetuer signiferumque eu per. In usu latine equidem dolores.</string>
+    <string name="activity_showProduct_foto">Foto</string>
+    <string name="activity_showProduct_precio">Precio:</string>
+    <string name="activity_showProduct_stock">Stock:</string>
+    <string name="activity_showProduct_tag">TAGS</string>
+    <string name="title_activity_show_product_2">Ver producto</string>
+    <string name="activity_showProduct_menu_delete">Eliminar Producto</string>
 
 
 </resources>

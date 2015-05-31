@@ -2,6 +2,7 @@ package org.projectes.androidshopping.adapters;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +18,7 @@ import org.projectes.androidshopping.DAO.DAOProductes;
 import org.projectes.androidshopping.DAObject.Producte;
 import org.projectes.androidshopping.R;
 import org.projectes.androidshopping.Task.DBTask_Base_Modify;
-import org.projectes.androidshopping.activities.ProductsManagerActivity;
+import org.projectes.androidshopping.activities.ShowProductActivity;
 
 import java.util.ArrayList;
 
@@ -108,6 +109,23 @@ public class ManageProductsAdapter extends BaseAdapter {
 
                     confirmation.show();
                 }
+            }
+        });
+
+        item.setTag(new Integer(aProductes.get(position).getId()));
+
+        item.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(v.getTag() instanceof Integer){
+                    int id = (Integer) v.getTag();
+                    Intent i = new Intent(context, ShowProductActivity.class);
+                    i.putExtra("id_product", id);
+                    i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(i);
+                }
+
             }
         });
 

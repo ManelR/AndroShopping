@@ -3,7 +3,9 @@ package org.projectes.androidshopping.activities;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,7 +25,8 @@ public class ShowProductActivity extends BaseActivity {
     private TextView precioProducte;
     private TextView stockProducte;
     private ImageView imageProduct;
-
+    private ListView listTags;
+    private String[] tags;
     private Producte producte;
 
 
@@ -66,6 +69,7 @@ public class ShowProductActivity extends BaseActivity {
         this.precioProducte = (TextView)findViewById(R.id.activity_showProduct_lblPrecioResult);
         this.stockProducte = (TextView)findViewById(R.id.activity_showProduct_lblStockResult);
         this.imageProduct = (ImageView)findViewById(R.id.activity_showProduct_imgImage);
+        this.listTags = (ImageView)findViewById(R.id.activity_showProduct_listTags);
 
         if(this.producte != null){
             this.nomProducte.setText(this.producte.getNombre());
@@ -73,6 +77,10 @@ public class ShowProductActivity extends BaseActivity {
             this.precioProducte.setText(this.producte.getPrecio() + "€");
             this.stockProducte.setText(this.producte.getStock() > 1 ? this.producte.getStock() + " unidades" : this.producte.getStock() + " unidad");
             Picasso.with(this).load(this.producte.getImage()).resize(128, 128).into(this.imageProduct);
+            for (int i = 0; i < this.producte.getDB_tags().size(); i++){
+                this.tags[i] = new String(i + ". " + this.producte.getDB_tags().get(i));
+            }
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, this.tags);
         }
     }
 

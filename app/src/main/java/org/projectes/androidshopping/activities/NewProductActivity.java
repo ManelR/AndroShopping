@@ -1,12 +1,20 @@
 package org.projectes.androidshopping.activities;
 
+import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import org.projectes.androidshopping.R;
 import org.projectes.androidshopping.fragments.NewProductFragment1;
@@ -20,7 +28,9 @@ public class NewProductActivity extends BaseActivity {
     private static NewProductFragment2 fragment2 = new NewProductFragment2();
     private static NewProductFragment3 fragment3 = new NewProductFragment3();
     private static int paso = 1;
-    
+
+    static final int RESULT_LOAD_IMAGE = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,7 +86,7 @@ public class NewProductActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 paso++;
-                switch (paso){
+                switch (paso) {
                     case 2:
                         aBar.setSubtitle("Paso 2/3");
                         changeFragment(R.id.activity_newProduct_fragment, fragment2);
@@ -118,5 +128,28 @@ public class NewProductActivity extends BaseActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.d("IMAGE:", "Ha entrat a la resposta");
+        if (data != null){
+            Uri selectedImage = data.getData();
+            String[] filePathColumn = { MediaStore.Images.Media.DATA };
+
+            Cursor cursor = getContentResolver().query(selectedImage,
+                    filePathColumn, null, null, null);
+            cursor.moveToFirst();
+
+            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+            String picturePath = cursor.getString(columnIndex);
+            cursor.close();
+
+            fragment2.setImage(picturePath);
+
+        }
+
+
     }
 }

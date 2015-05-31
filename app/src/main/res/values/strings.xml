@@ -142,6 +142,13 @@
     <string name="fragment_newProduct_precio">Precio</string>
     <string name="fragment_newProduct_stock">Stock</string>
     <string name="fragment_newProduct_chckActivo">Producto Activo</string>
+    <string name="error_product_name_empty">El nombre del producto esta vacío</string>
+    <string name="error_product_desc_empty">La descripción del producto esta vacía</string>
+    <string name="error_product_img_empty">Tienes que seleccionar una imagen</string>
+    <string name="error_product_preu_empty">Tienes que introducir un precio</string>
+    <string name="error_product_preu_incorrect">El precio no es correcto</string>
+    <string name="error_product_stock_empty">El Stock no puede estar vacío</string>
+    <string name="error_product_stock_incorrect">El Stock no es correcto</string>
 
 
 </resources>

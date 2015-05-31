@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import org.projectes.androidshopping.DAObject.Producte;
 import org.projectes.androidshopping.R;
 import org.projectes.androidshopping.adapters.InsertTagsAdapter;
 import org.projectes.androidshopping.fragments.NewProductFragment1;
@@ -23,6 +24,8 @@ import org.projectes.androidshopping.fragments.NewProductFragment2;
 import org.projectes.androidshopping.fragments.NewProductFragment3;
 
 import java.util.LinkedList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class NewProductActivity extends BaseActivity {
     private Button btnAnterior;
@@ -33,8 +36,10 @@ public class NewProductActivity extends BaseActivity {
     private static NewProductFragment3 fragment3 = new NewProductFragment3();
 
     private static int paso = 1;
+    private String PREU_PATTERN = "^[0-9]*$";
+    private String STOCK_PATTERN = "^[0-9]*$";
 
-    static final int RESULT_LOAD_IMAGE = 0;
+    private String missatgeError;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,12 +113,78 @@ public class NewProductActivity extends BaseActivity {
                         break;
                     case 4:
                         //TODO validar els camps de tot el registre
+                        if(validarCampsProducte()){
+                            Producte newProduct = new Producte();
+                            newProduct.setDeleted(0);
+                            newProduct.setId_remot(-1);
+                            newProduct.setNombre(fragment1.getTxtName());
+                            newProduct.setDescripcion(fragment1.getTxtDesc());
+                            newProduct.setImage(fragment2.getPicturePath());
+                            newProduct.setPrecio(Integer.valueOf(fragment2.getPreu()));
+                            newProduct.setStock(Integer.valueOf(fragment2.getStock()));
+                        }else{
+                            Toast.makeText(NewProductActivity.this, missatgeError, Toast.LENGTH_LONG).show();
+                            paso--;
+                        }
                         break;
                 }
             }
         });
     }
 
+    private boolean validarCampsProducte(){
+        boolean result = true;
+        Pattern preuPattern;
+        Matcher preuMatcher;
+        Pattern stockPattern;
+        Matcher stockMatcher;
+
+        if (result && fragment1.getTxtName().equals("")){
+            result = false;
+            this.missatgeError = getString(R.string.error_product_name_empty);
+        }
+        if (result && fragment1.getTxtDesc().equals("")){
+            result = false;
+            this.missatgeError = getString(R.string.error_product_desc_empty);
+        }
+        if (result && fragment2.getPicturePath() == null){
+            result = false;
+            this.missatgeError = getString(R.string.error_product_img_empty);
+        }
+        if (result && fragment2.getPicturePath() != null){
+            if (fragment2.getPicturePath().equals("")){
+                result = false;
+                this.missatgeError = getString(R.string.error_product_img_empty);
+            }
+        }
+        if (result && fragment2.getPreu().equals("")){
+            result = false;
+            this.missatgeError = getString(R.string.error_product_preu_empty);
+        }
+        if (result && !fragment2.getPreu().equals("")){
+            //Comprovar rex preu
+            preuPattern = Pattern.compile(PREU_PATTERN);
+            preuMatcher = preuPattern.matcher(fragment2.getPreu());
+            if (!preuMatcher.matches()){
+                result = false;
+                this.missatgeError = getString(R.string.error_product_preu_incorrect);
+            }
+        }
+        if (result && fragment2.getStock().equals("")){
+            result = false;
+            this.missatgeError = getString(R.string.error_product_stock_empty);
+        }
+        if (result && !fragment2.getPreu().equals("")){
+            //Comprovar rex preu
+            stockPattern = Pattern.compile(STOCK_PATTERN);
+            stockMatcher = stockPattern.matcher(fragment2.getStock());
+            if (!stockMatcher.matches()){
+                result = false;
+                this.missatgeError = getString(R.string.error_product_stock_incorrect);
+            }
+        }
+        return result;
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

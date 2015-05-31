@@ -83,6 +83,15 @@ public class ManageProductsAdapter extends BaseAdapter {
         //Recuperem la imatge
         Picasso.with(context).load(aProductes.get(position).getImage()).resize(128, 128).into(imgProduct);
 
+        //Assignem els tags
+        for(int i = 0 ; i < aProductes.get(position).getDB_tags().size() ; i++){
+            if(i == 0){
+                txtTags.setText(aProductes.get(position).getDB_tags().get(i).getNom());
+            }else{
+                txtTags.setText(txtTags.getText() + ", " +aProductes.get(position).getDB_tags().get(i).getNom());
+            }
+        }
+
         //Assignem els clickable objects
         item.setClickable(true);
         item.setFocusable(true);

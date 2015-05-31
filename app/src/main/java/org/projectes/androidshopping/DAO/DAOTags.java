@@ -4,8 +4,13 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteStatement;
 import android.util.Log;
+import android.widget.ListView;
 
+import org.projectes.androidshopping.DAObject.Producte;
 import org.projectes.androidshopping.DAObject.Tag;
+
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by mrr on 30/05/15.
@@ -13,7 +18,6 @@ import org.projectes.androidshopping.DAObject.Tag;
 public class DAOTags extends DAOBase<Tag> {
     private static final String TAULA_TAG = "tag";
     private static final String TAULA_PRODUCTE_TAG = "producte_tag";
-
 
     public DAOTags(Context context) {
         super(context, TAULA_TAG);
@@ -106,6 +110,24 @@ public class DAOTags extends DAOBase<Tag> {
                 result.setNom(cursor.getString(cursor.getColumnIndex("nom")));
             }
         }
+        return result;
+    }
+
+    public List<Tag> selectAllTagsFromProduct(Producte p){
+        LinkedList<Tag> result = new LinkedList<Tag>();
+        openReadOnly();
+        String sql="SELECT t.id,t.nom FROM "+TAULA_TAG+" AS t, "+TAULA_PRODUCTE_TAG+" AS pt WHERE t.id = pt.id_tag AND pt.id_producte = ?" ;
+        Cursor cursor = myDB.rawQuery(sql, new String []{Integer.toString(p.getId())});
+        cursor.moveToFirst();
+        while(!cursor.isAfterLast()){
+            Tag element = LoadFromCursor(cursor);
+            if(element != null){
+                result.add(element);
+            }
+            cursor.moveToNext();
+        }
+        cursor.close();
+        closeDatabase();
         return result;
     }
 

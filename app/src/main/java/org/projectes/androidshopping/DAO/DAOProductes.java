@@ -11,11 +11,13 @@ import org.projectes.androidshopping.DAObject.Producte;
  * Created by mrr on 30/05/15.
  */
 public class DAOProductes extends DAOBase<Producte> {
-    private static final String TABLE_NAME_PRODUCTE = "producte";
 
+    private static final String TABLE_NAME_PRODUCTE = "producte";
+    private Context context = null;
 
     public DAOProductes(Context context) {
         super(context, TABLE_NAME_PRODUCTE);
+        this.context = context;
     }
 
     public Producte selectByRemoteID(long id){
@@ -88,6 +90,7 @@ public class DAOProductes extends DAOBase<Producte> {
     @Override
     protected Producte LoadFromCursor(Cursor cursor) {
         Producte result = null;
+        DAOTags daoTag = new DAOTags(context);
         if (cursor != null){
             if (!cursor.isAfterLast()){
                 result = new Producte();
@@ -99,6 +102,7 @@ public class DAOProductes extends DAOBase<Producte> {
                 result.setActivo(cursor.getInt(cursor.getColumnIndex("actiu")) == 1);
                 result.setStock(cursor.getInt(cursor.getColumnIndex("stock")));
                 result.setImage(cursor.getString(cursor.getColumnIndex("imatge")));
+                result.setDB_tags(daoTag.selectAllTagsFromProduct(result));
             }
         }
         return result;

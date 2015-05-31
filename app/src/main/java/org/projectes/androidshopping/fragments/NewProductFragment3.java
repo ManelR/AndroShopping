@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -22,7 +23,7 @@ import java.util.List;
 public class NewProductFragment3 extends Fragment {
     private View fragmentView = null;
 
-    private ListView listViewTags = null;
+    private LinearLayout listViewTags = null;
     private InsertTagsAdapter adapter = null;
     private List<String> lTags = null;
     private Button btnAddTag = null;
@@ -61,13 +62,21 @@ public class NewProductFragment3 extends Fragment {
             });
         }
 
-        listViewTags = (ListView) fragmentView.findViewById(R.id.fragment_newProduct3_listView);
+        listViewTags = (LinearLayout) fragmentView.findViewById(R.id.fragment_newProduct3_listView);
         if(listViewTags != null && lTags != null){
-            adapter = new InsertTagsAdapter(lTags,getActivity());
-            listViewTags.setAdapter(adapter);
+            listViewTags.setScrollContainer(false);
+            adapter = new InsertTagsAdapter(lTags,listViewTags,getActivity());
+            listViewTags.removeAllViews();
+            for(int i = 0 ; i < adapter.getCount() ; i++){
+                listViewTags.addView(adapter.getView(i,null,null));
+            }
         }
 
         return this.fragmentView;
+    }
+
+    public List<String> getTags(){
+        return this.lTags;
     }
 
 }

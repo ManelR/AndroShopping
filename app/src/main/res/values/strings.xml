@@ -81,6 +81,9 @@
     <string name="item_manage_users_lblYesConfirmation">Sí</string>
     <string name="item_manage_users_lblNoConfirmation">No</string>
 
+    <!-- NewUser Activity Strings -->
+    <string name="activity_new_user_activityName">Nuevo Usuario</string>
+
     <!-- PurchaseHistory Activity -->
     <string name="activity_purchaseHistory_activityName">Histórico</string>
     <string name="item_purchase_history_lblPrice">Precio Total:</string>
@@ -92,13 +95,13 @@
     <string name="title_activity_new_product">NewProductActivity</string>
     <string name="title_activity_show_product">ShowProductActivity</string>
     <string name="title_activity_manage_users">ManageUsersActivity</string>
-    <string name="title_activity_new_user">NewUserActivity</string>
     <string name="title_activity_user_profile">UserProfileActivity</string>
     <string name="title_activity_buy">BuyActivity</string>
     <string name="activity_register_txtName">Nombre</string>
     <string name="activity_register_chckTerms">Acepto las condiciones de servicio</string>
     <string name="activity_userProfile_btnModifier"><![CDATA[Modificar >]]></string>
     <string name="activity_newuser_btnCreate"><![CDATA[Crear >]]></string>
+
     <string name="error_email_message">El correo introducido no es correcto</string>
     <string name="error_rePass_empty">El campo \"Repita la Contraseña\" no puede estar vacío</string>
     <string name="error_pass_empty">El campo \"Contraseña\" no puede estar vacío</string>

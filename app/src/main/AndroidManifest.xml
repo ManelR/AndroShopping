@@ -61,7 +61,7 @@
         </activity>
         <activity
             android:name=".activities.NewUserActivity"
-            android:label="@string/title_activity_new_user"
+            android:label="@string/activity_new_user_activityName"
             android:windowSoftInputMode="stateAlwaysHidden"
             android:theme="@style/Theme.AppCompat.Light">
         </activity>

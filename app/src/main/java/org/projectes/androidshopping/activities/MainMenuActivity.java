@@ -85,8 +85,12 @@ public class MainMenuActivity extends BaseActivity {
 
             //Admin Role Menu Items
             case R.id.menu_main_menu_itemManageProducts:
+                Intent i = new Intent(getApplicationContext(),ProductsManagerActivity.class);
+                startActivity(i);
                 break;
             case R.id.menu_main_menu_itemManageUsers:
+                Intent i = new Intent(getApplicationContext(),ManageUsersActivity.class);
+                startActivity(i);
                 break;
             case R.id.menu_main_menu_itemSellList:
                 break;

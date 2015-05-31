@@ -48,15 +48,15 @@
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:imeOptions="flagNoExtractUi"
                 android:hint="@string/fragment_newProduct3_txtNewTagHint"/>
 
             <Button
                 android:id="@+id/fragment_newProduct3_btnAddTag"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:singleLine="true"
-                android:ellipsize="end"
-                android:imeOptions="flagNoExtractUi"
                 android:layout_gravity="right"
                 android:text="@string/fragment_newProduct3_btnAddTag"/>
 

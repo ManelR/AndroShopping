@@ -54,8 +54,10 @@ public class UserProfileActivity extends BaseActivity {
         this.spinAge.setSelection(this.myUser.getEdat() - 17);
         if (this.myUser.getGenere() == 1){
             this.rdioGender.check(R.id.activity_userProfile_rdioMale);
+            this.sGender = "Hombre";
         }else{
             this.rdioGender.check(R.id.activity_userProfile_rdioFemale);
+            this.sGender = "Mujer";
         }
         this.chckTerm.setChecked(true);
     }
@@ -93,15 +95,36 @@ public class UserProfileActivity extends BaseActivity {
                         @Override
                         public void onSuccess(Usuari IRresult) {
                             if (IRresult != null){
-                                //Existeix el correu
-                                errorMessage = UserProfileActivity.this.getString(R.string.error_email_repeat);
-                                Toast.makeText(UserProfileActivity.this, errorMessage, Toast.LENGTH_LONG).show();
+                                if (!IRresult.getEmail().equals(myUser.getEmail())){
+                                    //Existeix el correu
+                                    errorMessage = UserProfileActivity.this.getString(R.string.error_email_repeat);
+                                    Toast.makeText(UserProfileActivity.this, errorMessage, Toast.LENGTH_LONG).show();
+                                }else{
+                                    //Guardar l'usuari a la base de dades
+                                    DBTask_Base_Modify<DAOUsuaris, Usuari> DBTask = new DBTask_Base_Modify<DAOUsuaris, Usuari>();
+                                    int genere = sGender.equals("Hombre") ? 1 : 2;
+                                    Usuari user = new Usuari(myUser.getId(), txtEmail.getText().toString(), txtPassword.getText().toString(), genere, txtName.getText().toString(), Integer.valueOf(spinAge.getSelectedItem().toString()), 2, 0, 0);
+                                    UserProfileActivity.this.app.setUserLog(user);
+                                    DBTask.setResultListener(new IResult<Boolean>() {
+                                        @Override
+                                        public void onSuccess(Boolean IRresult) {
+                                            finish();
+                                        }
+
+                                        @Override
+                                        public void onFail(String missatgeError) {
+                                            Toast.makeText(UserProfileActivity.this, missatgeError, Toast.LENGTH_LONG).show();
+                                        }
+                                    });
+                                    DBTask.execute(UserProfileActivity.this, Constants.BBDD_EDIT, BBDDUsers, user);
+                                }
                             }else{
                                 //No existeix
                                 //Guardar l'usuari a la base de dades
                                 DBTask_Base_Modify<DAOUsuaris, Usuari> DBTask = new DBTask_Base_Modify<DAOUsuaris, Usuari>();
                                 int genere = sGender.equals("Hombre") ? 1 : 2;
-                                Usuari user = new Usuari(txtEmail.getText().toString(), txtPassword.getText().toString(), genere, txtName.getText().toString(), Integer.valueOf(spinAge.getSelectedItem().toString()), 2, 0);
+                                Usuari user = new Usuari(myUser.getId(), txtEmail.getText().toString(), txtPassword.getText().toString(), genere, txtName.getText().toString(), Integer.valueOf(spinAge.getSelectedItem().toString()), 2, 0, 0);
+                                UserProfileActivity.this.app.setUserLog(user);
                                 DBTask.setResultListener(new IResult<Boolean>() {
                                     @Override
                                     public void onSuccess(Boolean IRresult) {
@@ -113,7 +136,7 @@ public class UserProfileActivity extends BaseActivity {
                                         Toast.makeText(UserProfileActivity.this, missatgeError, Toast.LENGTH_LONG).show();
                                     }
                                 });
-                                DBTask.execute(UserProfileActivity.this, Constants.BBDD_INSERT, BBDDUsers, user);
+                                DBTask.execute(UserProfileActivity.this, Constants.BBDD_EDIT, BBDDUsers, user);
                             }
                         }
 

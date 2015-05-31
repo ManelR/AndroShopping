@@ -41,6 +41,20 @@ public class Usuari extends DAObjectBase {
         this.logged_in = logged_in;
     }
 
+    public Usuari(int id, String email, String pass, int genere, String nom, int edat, int rol, int logged_in, int deleted) {
+        super();
+        this.id = id;
+        this.email = email;
+        this.pass = pass;
+        this.genere = genere;
+        this.nom = nom;
+        this.edat = edat;
+        this.rol = rol;
+        this.deleted = deleted;
+        this.logged_in = logged_in;
+    }
+
+
     public String getEmail() {
         return email;
     }

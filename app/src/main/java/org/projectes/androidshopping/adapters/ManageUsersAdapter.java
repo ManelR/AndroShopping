@@ -100,11 +100,11 @@ public class ManageUsersAdapter extends BaseAdapter {
                     if(view.getTag() instanceof  Usuari){
                         auxUsuari = (Usuari) view.getTag();
                         AlertDialog.Builder confirmation = new AlertDialog.Builder(context,R.style.Theme_AppCompat_Light_Dialog_Alert);
-                        confirmation.setTitle(context.getString(R.string.item_manage_products_lblTitleConfirmation));
+                        confirmation.setTitle(context.getString(R.string.item_manage_users_lblTitleConfirmation));
                         confirmation.setIcon(R.mipmap.delete);
-                        confirmation.setMessage(context.getString(R.string.item_manage_products_lblBodyConfirmation) + " " + auxUsuari.getEmail() + " ?");
+                        confirmation.setMessage(context.getString(R.string.item_manage_users_lblBodyConfirmation) + " " + auxUsuari.getEmail() + " ?");
                         final Usuari finalAuxUsuari = auxUsuari;
-                        confirmation.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        confirmation.setPositiveButton(R.string.item_manage_users_lblYesConfirmation, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 taskModify = new DBTask_Base_Modify<DAOUsuaris, Usuari>();
@@ -113,7 +113,7 @@ public class ManageUsersAdapter extends BaseAdapter {
                                 updateInformation();
                             }
                         });
-                        confirmation.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                        confirmation.setNegativeButton(R.string.item_manage_users_lblNoConfirmation, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 //No fem res

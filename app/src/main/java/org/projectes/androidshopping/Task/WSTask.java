@@ -97,12 +97,8 @@ public class WSTask extends AsyncTask<Object, Integer, Message> {
                 update.setId(aux.getId());
                 update.setDeleted(0);
                 BBDDProductes.update(update);
-                //Borrar els tags del producte
-                BBDDTag.deleteProducte_TagByIDProduct(aux.getId());
-                insertAllTags(BBDDTag, aux.getId(), i);
             }else{
-                id_product = BBDDProductes.insert(this.productes.get(i));
-                insertAllTags(BBDDTag, id_product, i);
+                BBDDProductes.insert(this.productes.get(i));
             }
         }
         for (int i = 0; i < productesDB.size(); i++){
@@ -120,26 +116,8 @@ public class WSTask extends AsyncTask<Object, Integer, Message> {
 
     private void insertAllProducts() {
         DAOProductes BBDDProductes = new DAOProductes(this.context);
-        DAOTags BBDDTAG = new DAOTags(this.context);
-        long id_product = -1;
         for (int i = 0; i < this.productes.size(); i++){
-            id_product = BBDDProductes.insert(this.productes.get(i));
-            insertAllTags(BBDDTAG, id_product, i);
-        }
-    }
-
-    private void insertAllTags(DAOTags BBDDTAG, long id_producte, int indexProduct){
-        int i = indexProduct;
-        for (int j = 0; j <this.productes.get(i).getWS_tags().size(); j++){
-            //Comprovar si existeix
-            Tag tagActual = BBDDTAG.selectByName(this.productes.get(i).getWS_tags().get(j));
-            if (tagActual == null){
-                tagActual = new Tag();
-                tagActual.setNom(this.productes.get(i).getWS_tags().get(j));
-                tagActual.setId((int)BBDDTAG.insert(tagActual));
-                Log.d("TAG INSERT:", tagActual.getNom());
-            }
-            BBDDTAG.insertProducte_Tag(tagActual.getId(), (int)id_producte);
+            BBDDProductes.insert(this.productes.get(i));
         }
     }
 

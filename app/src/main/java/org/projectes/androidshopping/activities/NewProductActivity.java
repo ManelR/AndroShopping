@@ -16,14 +16,20 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import org.projectes.androidshopping.Constants.Constants;
+import org.projectes.androidshopping.DAO.DAOProductes;
 import org.projectes.androidshopping.DAObject.Producte;
+import org.projectes.androidshopping.Listeners.IResult;
 import org.projectes.androidshopping.R;
+import org.projectes.androidshopping.Task.DBTask_Base_Modify;
 import org.projectes.androidshopping.adapters.InsertTagsAdapter;
 import org.projectes.androidshopping.fragments.NewProductFragment1;
 import org.projectes.androidshopping.fragments.NewProductFragment2;
 import org.projectes.androidshopping.fragments.NewProductFragment3;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -114,6 +120,8 @@ public class NewProductActivity extends BaseActivity {
                     case 4:
                         //TODO validar els camps de tot el registre
                         if(validarCampsProducte()){
+                            DAOProductes BBDD = new DAOProductes(NewProductActivity.this);
+                            DBTask_Base_Modify<DAOProductes, Producte> task = new DBTask_Base_Modify<DAOProductes, Producte>();
                             Producte newProduct = new Producte();
                             newProduct.setDeleted(0);
                             newProduct.setId_remot(-1);
@@ -122,6 +130,20 @@ public class NewProductActivity extends BaseActivity {
                             newProduct.setImage(fragment2.getPicturePath());
                             newProduct.setPrecio(Integer.valueOf(fragment2.getPreu()));
                             newProduct.setStock(Integer.valueOf(fragment2.getStock()));
+                            newProduct.setActivo(fragment2.isActive());
+                            newProduct.setWS_tags(fragment3.getTags());
+                            task.setResultListener(new IResult<Boolean>() {
+                                @Override
+                                public void onSuccess(Boolean IRresult) {
+                                    finish();
+                                }
+
+                                @Override
+                                public void onFail(String missatgeError) {
+                                    Toast.makeText(NewProductActivity.this, missatgeError, Toast.LENGTH_LONG).show();
+                                }
+                            });
+                            task.execute(NewProductActivity.this, Constants.BBDD_INSERT, BBDD, newProduct);
                         }else{
                             Toast.makeText(NewProductActivity.this, missatgeError, Toast.LENGTH_LONG).show();
                             paso--;

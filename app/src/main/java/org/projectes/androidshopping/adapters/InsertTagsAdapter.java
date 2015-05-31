@@ -41,6 +41,10 @@ public class InsertTagsAdapter extends BaseAdapter {
         return position;
     }
 
+    public void updateInformation(){
+        notifyDataSetChanged();
+    }
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View item = convertView;
@@ -48,7 +52,7 @@ public class InsertTagsAdapter extends BaseAdapter {
 
             //Inflem la vista de l'objecte amb el layout definit per cadascún dels items a pintar
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            item = inflater.inflate(R.layout.item_newTag_layout, parent, false);
+            item = inflater.inflate(R.layout.item_newtag_layout, parent, false);
 
 
             //Recuperem els botons de la vista

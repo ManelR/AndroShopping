@@ -91,7 +91,7 @@ public class ManageProductsAdapter extends BaseAdapter {
                     confirmation.setIcon(R.mipmap.delete);
                     confirmation.setMessage(context.getString(R.string.item_manage_products_lblBodyConfirmation) + " " + auxProducte.getNombre() + " ?");
                     final Producte finalAuxProducte = auxProducte;
-                    confirmation.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    confirmation.setPositiveButton(R.string.item_manage_users_lblYesConfirmation, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             taskModify = new DBTask_Base_Modify<DAOProductes, Producte>();
@@ -100,7 +100,7 @@ public class ManageProductsAdapter extends BaseAdapter {
                             updateInformation();
                         }
                     });
-                    confirmation.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    confirmation.setNegativeButton(R.string.item_manage_products_lblNoConfirmation, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             //No fem res

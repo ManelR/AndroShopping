@@ -7,6 +7,8 @@
         android:id="@+id/activity_newUser_btnRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:padding="8dp"
         android:text="@string/activity_newuser_btnCreate"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"

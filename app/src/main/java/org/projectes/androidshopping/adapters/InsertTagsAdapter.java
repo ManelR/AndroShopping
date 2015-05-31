@@ -1,11 +1,14 @@
 package org.projectes.androidshopping.adapters;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.projectes.androidshopping.R;
@@ -19,11 +22,13 @@ import java.util.List;
 public class InsertTagsAdapter extends BaseAdapter {
 
     private List<String> lTags;
+    private LinearLayout listView = null;
     private Context context;
 
-    public InsertTagsAdapter(List<String> lTags, Context context) {
+    public InsertTagsAdapter(List<String> lTags,LinearLayout listView, Context context) {
         this.lTags = lTags;
         this.context = context;
+        this.listView = listView;
     }
 
     @Override
@@ -43,6 +48,11 @@ public class InsertTagsAdapter extends BaseAdapter {
 
     public void updateInformation(){
         notifyDataSetChanged();
+        listView.removeAllViews();
+        for(int i = 0 ; i < getCount() ; i++){
+            listView.addView(getView(i,null,null));
+        }
+
     }
 
     @Override
@@ -80,7 +90,7 @@ public class InsertTagsAdapter extends BaseAdapter {
                         lTags.set(position - 1, lTags.get(position));
                         lTags.set(position, sHigh);
                         //Notifiquem els canvis al adapter
-                        notifyDataSetChanged();
+                        updateInformation();
                     }
                 }
             });
@@ -100,24 +110,41 @@ public class InsertTagsAdapter extends BaseAdapter {
                         lTags.set(position + 1, lTags.get(position));
                         lTags.set(position, sTemarioLow);
                         //Notifiquem el canvi al adapter
-                        notifyDataSetChanged();
+                        updateInformation();
                     }
                 }
             });
 
+            imgDelete.setTag(lTags.get(position));
             imgDelete.setOnClickListener(new View.OnClickListener() {
 
                 @Override
                 public void onClick(View v) {
 
-                    //Recuperem la posició
-                    int position = (Integer) v.getTag();
+                    if(v.getTag() instanceof String){
 
-                    //Eliminem el temari
-                    lTags.remove(position);
+                        final String tagName = v.getTag().toString();
+                        AlertDialog.Builder confirmation = new AlertDialog.Builder(context,R.style.Theme_AppCompat_Light_Dialog_Alert);
+                        confirmation.setTitle(context.getString(R.string.item_fragment_newProduct3_lblTitleConfirmation));
+                        confirmation.setIcon(R.mipmap.delete);
+                        confirmation.setMessage(context.getString(R.string.item_fragment_newProduct3_lblBodyConfirmation) + tagName + " ?");
+                        confirmation.setPositiveButton(R.string.item_manage_users_lblYesConfirmation, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                lTags.remove(tagName);
+                                updateInformation();
+                            }
+                        });
+                        confirmation.setNegativeButton(R.string.item_manage_users_lblNoConfirmation, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                //No fem res
+                            }
+                        });
 
-                    //Notifiquem que ha canviat la informació al adapter
-                    notifyDataSetChanged();
+                        confirmation.show();
+
+                    }
 
                 }
             });
@@ -137,7 +164,6 @@ public class InsertTagsAdapter extends BaseAdapter {
         //Afegim com a tag del objecte la posició a la linked list
         imgUp.setTag(position);
         imgDown.setTag(position);
-        imgDelete.setTag(position);
 
         return item;
     }

@@ -108,6 +108,8 @@
     <string name="fragment_newProduct3_lblTitle">Selecciona los tags del producto:</string>
     <string name="fragment_newProduct3_txtNewTagHint">Nuevo tag...</string>
     <string name="fragment_newProduct3_btnAddTag">Insertar</string>
+    <string name="item_fragment_newProduct3_lblTitleConfirmation">Confirmación</string>
+    <string name="item_fragment_newProduct3_lblBodyConfirmation">Estas seguro que quieres eliminar el tag </string>
 
     <string name="error_email_message">El correo introducido no es correcto</string>
     <string name="error_rePass_empty">El campo \"Repita la Contraseña\" no puede estar vacío</string>

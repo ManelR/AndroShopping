@@ -137,7 +137,7 @@ public class WSTask extends AsyncTask<Object, Integer, Message> {
             if (tagActual == null){
                 tagActual = new Tag();
                 tagActual.setNom(this.productes.get(i).getWS_tags().get(j));
-                tagActual.setId((int)BBDDTAG.insertTag(tagActual));
+                tagActual.setId((int)BBDDTAG.insert(tagActual));
                 Log.d("TAG INSERT:", tagActual.getNom());
             }
             BBDDTAG.insertProducte_Tag(tagActual.getId(), (int)id_producte);

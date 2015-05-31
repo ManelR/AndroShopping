@@ -30,25 +30,6 @@ public class DAOTags extends DAOBase<Tag> {
         return element;
     }
 
-    public long insertTag(Tag tag){
-        long id = -1;
-        try{
-            openWrite();
-            String sql="INSERT INTO "+TAULA_TAG+" (nom) VALUES(?)";
-            SQLiteStatement statement = this.myDB.compileStatement(sql);
-            statement.bindAllArgsAsStrings(new String[]{tag.getNom()});
-            id=statement.executeInsert();
-            Log.i("---ID---", new Long(id).toString());
-            Log.i("---SQL---", sql);
-            statement.close();
-        }catch(Exception ex){
-            Log.e("ERROR", ex.toString());
-        }finally{
-            super.closeDatabase();
-        }
-        return id;
-    }
-
     public void deleteProducte_TagByIDProduct(int id_product){
         long nError = -1;
         try{
@@ -92,7 +73,22 @@ public class DAOTags extends DAOBase<Tag> {
 
     @Override
     public long insert(Tag obj) {
-        return 0;
+        long id = -1;
+        try{
+            openWrite();
+            String sql="INSERT INTO "+TAULA_TAG+" (nom) VALUES(?)";
+            SQLiteStatement statement = this.myDB.compileStatement(sql);
+            statement.bindAllArgsAsStrings(new String[]{obj.getNom()});
+            id=statement.executeInsert();
+            Log.i("---ID---", new Long(id).toString());
+            Log.i("---SQL---", sql);
+            statement.close();
+        }catch(Exception ex){
+            Log.e("ERROR", ex.toString());
+        }finally{
+            super.closeDatabase();
+        }
+        return id;
     }
 
     @Override

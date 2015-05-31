@@ -67,8 +67,11 @@ public class NewProductActivity extends BaseActivity {
                         break;
                     case 3:
                         changeFragment(R.id.activity_newProduct_fragment, fragment3);
-                        btnSeguent.setEnabled(false);
+                        btnSeguent.setEnabled(true);
                         btnAnterior.setEnabled(true);
+                        break;
+                    case 4:
+                        //TODO validar els camps de tot el registre
                         break;
                 }
             }

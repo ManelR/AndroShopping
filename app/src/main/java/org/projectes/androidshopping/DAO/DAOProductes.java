@@ -59,7 +59,7 @@ public class DAOProductes extends DAOBase<Producte> {
         DAOTags BBDD_Tag = new DAOTags(this.context);
         try{
             openWrite();
-            String sql="INSERT INTO "+TABLE_NAME_PRODUCTE+" (id_remot, nom, descripcio, preu, actiu, stock, imatge, deleted) VALUES(?,?,?,?,?,?,?,0)";
+            String sql="INSERT INTO "+TABLE_NAME_PRODUCTE+" (id_remot, nom, descripcio, preu, actiu, stock, imatge, deleted, data) VALUES(?,?,?,?,?,?,?,0, strftime('%s', 'now'))";
             SQLiteStatement statement = this.myDB.compileStatement(sql);
             statement.bindAllArgsAsStrings(new String[]{Integer.toString(producte.getId_remot()), producte.getNombre(), producte.getDescripcion(), Float.toString(producte.getPrecio()), Integer.toString(producte.isActivo() ? 1 : 0), Integer.toString(producte.getStock()), producte.getImage()});
             inserted_id=statement.executeInsert();
@@ -90,11 +90,11 @@ public class DAOProductes extends DAOBase<Producte> {
         int nError = 0;
         try{
             openWrite();
-            String sql = "UPDATE " + TABLE_NAME_PRODUCTE + " SET id_remot = ?, nom = ?, descripcio = ?, preu = ?, actiu = ?, stock = ?, imatge = ?, deleted = ? WHERE id = ?";
+            String sql = "UPDATE " + TABLE_NAME_PRODUCTE + " SET id_remot = ?, nom = ?, descripcio = ?, preu = ?, actiu = ?, stock = ?, imatge = ?, deleted = ?, data = strftime('%s', 'now') WHERE id = ?";
             SQLiteStatement statement = myDB.compileStatement(sql);
             statement.bindAllArgsAsStrings(new String[]{Integer.toString(p.getId_remot()), p.getNombre(), p.getDescripcion(), Float.toString(p.getPrecio()), Integer.toString(p.isActivo() ? 1 : 0), Integer.toString(p.getStock()), p.getImage(), Integer.toString(p.getDeleted()), Integer.toString(p.getId())});
             nError = statement.executeUpdateDelete();
-            Log.i("--UPDATE--", Integer.toString(p.getId_remot()));
+            Log.i("--UPDATE--", statement.toString());
             statement.close();
             BBDD_Tag.deleteProducte_TagByIDProduct(p.getId());
             for (int i = 0; i < p.getWS_tags().size(); i++){
@@ -129,6 +129,7 @@ public class DAOProductes extends DAOBase<Producte> {
                 result.setActivo(cursor.getInt(cursor.getColumnIndex("actiu")) == 1);
                 result.setStock(cursor.getInt(cursor.getColumnIndex("stock")));
                 result.setImage(cursor.getString(cursor.getColumnIndex("imatge")));
+                result.setDate(cursor.getInt(cursor.getColumnIndex("data")));
                 result.setDB_tags(daoTag.selectAllTagsFromProduct(result));
             }
         }

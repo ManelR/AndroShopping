@@ -36,7 +36,7 @@ public class ManageUsersActivity extends BaseActivity {
     @Override
     public void onResume(){
         super.onResume();
-        taskUsuaris = new DBTask_Base_SelectAllNotDeleted<>();
+        taskUsuaris = new DBTask_Base_SelectAllNotDeleted<DAOUsuaris, Usuari>();
         if(taskUsuaris != null){
             taskUsuaris.setResultListener(new IResultList<Usuari>() {
                 @Override

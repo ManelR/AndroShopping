@@ -21,6 +21,7 @@ public class Producte extends DAObjectBase{
     @JsonIgnore public List<Tag> DB_tags;
     @JsonProperty("tags") public List<String> WS_tags;
     @JsonIgnore public int deleted;
+    @JsonIgnore private int date;
 
     public Producte(){
         super();
@@ -104,5 +105,13 @@ public class Producte extends DAObjectBase{
 
     public void setDeleted(int deleted) {
         this.deleted = deleted;
+    }
+
+    public int getDate() {
+        return date;
+    }
+
+    public void setDate(int date) {
+        this.date = date;
     }
 }

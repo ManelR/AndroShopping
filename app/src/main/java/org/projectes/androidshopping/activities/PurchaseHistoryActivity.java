@@ -64,7 +64,10 @@ public class PurchaseHistoryActivity extends BaseActivity {
             taskPurchaseHistory.setResultListener(new IResultList<Compra>() {
                 @Override
                 public void onSuccess(ArrayList<Compra> obj) {
-                    adapter = new PurchaseHistoryAdapter(PurchaseHistoryActivity.this,obj);
+                    if(obj != null){
+                        adapter = new PurchaseHistoryAdapter(PurchaseHistoryActivity.this,obj);
+                        listViewCompras.setAdapter(adapter);
+                    }
                 }
 
                 @Override
@@ -72,7 +75,7 @@ public class PurchaseHistoryActivity extends BaseActivity {
                     Toast.makeText(PurchaseHistoryActivity.this,missatgeError,Toast.LENGTH_LONG).show();
                 }
             });
-            taskPurchaseHistory.execute(this,Constants.BBDD_SELECT_ID,daoCompres);
+            taskPurchaseHistory.execute(this, Constants.BBDD_SELECT_ID, daoCompres);
         }
 
 

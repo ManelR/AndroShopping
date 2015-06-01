@@ -8,7 +8,7 @@
     <TextView
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:id="@+id/item_purchase_history_lblDate"
+        android:id="@+id/item_purchase_history_txtDate"
         android:layout_width="wrap_content"
         android:layout_margin="8dp"
         android:layout_height="wrap_content"
@@ -40,7 +40,7 @@
 
     <LinearLayout
         android:layout_alignParentLeft="true"
-        android:layout_below="@id/item_purchase_history_lblDate"
+        android:layout_below="@id/item_purchase_history_txtDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
@@ -54,7 +54,7 @@
             android:textColor="@color/solid_black"/>
 
         <TextView
-            android:id="@+id/item_pruchase_history_txtQuantity"
+            android:id="@+id/item_purchase_history_txtQuantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/solid_black"/>

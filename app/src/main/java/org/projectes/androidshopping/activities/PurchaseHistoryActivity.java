@@ -1,14 +1,22 @@
 package org.projectes.androidshopping.activities;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.BaseAdapter;
+import android.widget.ListView;
 
+import org.projectes.androidshopping.DAObject.Compra;
 import org.projectes.androidshopping.R;
+import org.projectes.androidshopping.adapters.PurchaseHistoryAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class PurchaseHistoryActivity extends BaseActivity {
+
+    private ListView listViewCompras = null;
+    private PurchaseHistoryAdapter adapter = null;
+    private ArrayList<Compra> aCompres = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,4 +47,9 @@ public class PurchaseHistoryActivity extends BaseActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    private void associateControls(){
+        listViewCompras = (ListView) findViewById(R.id.activity_purchaseHistory_listView);
+    }
+
 }

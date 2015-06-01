@@ -1,67 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="100dp"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <TextView
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:id="@+id/item_buy_lblDate"
+    <RelativeLayout
+        android:id="@+id/item_buy_relative_chck"
         android:layout_width="wrap_content"
-        android:layout_margin="8dp"
-        android:text="N/A"
-        android:layout_height="wrap_content"
-        android:textColor="@color/solid_black"/>
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true">
 
-
-    <LinearLayout
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/item_buy_lblPrice"
+        <CheckBox
+            android:id="@+id/item_buy_checkBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:text="@string/item_"
-            android:textColor="@color/solid_black"/>
+            android:layout_centerInParent="true"/>
+    </RelativeLayout>
 
+    <RelativeLayout
+        android:layout_toRightOf="@id/item_buy_relative_chck"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
         <TextView
-            android:id="@+id/item_buy_txtPrice"
+            android:id="@+id/item_buy_lblDate"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:text="N/A"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_height="wrap_content"
             android:textColor="@color/solid_black"/>
 
-    </LinearLayout>
 
-    <Spinner
-        android:id="@+id/item_buy_spinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/item_buy_">
+        <LinearLayout
+            android:id="@+id/item_buy_linear_price"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
-    </Spinner>
+            <TextView
+                android:id="@+id/item_buy_lblPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="@string/item_sell_list_lblPrice"
+                android:textColor="@color/solid_black"/>
 
+            <TextView
+                android:id="@+id/item_buy_txtPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="N/A"
+                android:textColor="@color/solid_black"/>
 
-    <LinearLayout
-        android:layout_alignParentRight="true"
-        android:layout_below="@id/item_buy_lblCustomer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        </LinearLayout>
 
-        <TextView
-            android:id="@+id/item_buy_lblProduct"
+        <Spinner
+            android:id="@+id/item_buy_spinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:text="@string/item_buy_lblProduct"
-            android:textColor="@color/solid_black"/>
-    </LinearLayout>
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/item_buy_lblDate">
+
+        </Spinner>
+
+
+        <LinearLayout
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/item_buy_lblProduct"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="@string/item_sell_list_lblProduct"
+                android:textColor="@color/solid_black"/>
+        </LinearLayout>
+
+    </RelativeLayout>
 
 </RelativeLayout>

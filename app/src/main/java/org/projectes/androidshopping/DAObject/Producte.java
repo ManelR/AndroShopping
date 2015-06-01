@@ -22,6 +22,7 @@ public class Producte extends DAObjectBase{
     @JsonProperty("tags") public List<String> WS_tags;
     @JsonIgnore public int deleted;
     @JsonIgnore private int quantitat;
+    @JsonIgnore private int date;
 
     public Producte(){
         super();
@@ -113,5 +114,13 @@ public class Producte extends DAObjectBase{
 
     public void setQuantitat(int quantitat) {
         this.quantitat = quantitat;
+    }
+
+    public int getDate() {
+        return date;
+    }
+
+    public void setDate(int date) {
+        this.date = date;
     }
 }

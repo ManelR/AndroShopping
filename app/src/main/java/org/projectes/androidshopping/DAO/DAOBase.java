@@ -62,7 +62,8 @@ public abstract class DAOBase<T> extends SQLiteOpenHelper {
                 "\tactiu INTEGER,\n" +
                 "\tstock INTEGER,\n" +
                 "\tdeleted INTEGER,\n" +
-                "\timatge TEXT\n" +
+                "\timatge TEXT,\n" +
+                "\tdata INTEGER\n" +
                 ");";
         db.execSQL(CREATE_PRODUCTE);
         String CREATE_TAG = "CREATE TABLE tag(\n" +

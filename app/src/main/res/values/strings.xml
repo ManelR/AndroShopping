@@ -101,6 +101,11 @@
     <string name="activity_userProfile_btnModifier"><![CDATA[Modificar >]]></string>
     <string name="activity_newuser_btnCreate"><![CDATA[Crear >]]></string>
 
+    <!-- BuyActivity Strings -->
+    <string name="activity_buy_searchMenuItem">Buscar</string>
+    <string name="activity_buy_buyMenuItem">Comprar</string>
+
+
     <!-- NewProduct Fragment3 Strings -->
     <string name="activity_newProduct_activityName">Nuevo Producto</string>
     <string name="fragment_newProduct3_repeatedTagError">Ya existe este tag!</string>
@@ -110,6 +115,13 @@
     <string name="fragment_newProduct3_btnAddTag">Insertar</string>
     <string name="item_fragment_newProduct3_lblTitleConfirmation">Confirmación</string>
     <string name="item_fragment_newProduct3_lblBodyConfirmation">Estas seguro que quieres eliminar el tag </string>
+
+    <!-- Buy NormalFragment Strings -->
+    <string name="fragment_buy_normal_lblText">Selecciona los productos a comprar:</string>
+
+    <!-- Buy SearchFragment Strings -->
+    <string name="fragment_buy_search_lblSearch">Buscar:</string>
+    <string name="fragment_buy_search_txtSearchHint">Tag o nombre del producto...</string>
 
     <string name="error_email_message">El correo introducido no es correcto</string>
     <string name="error_rePass_empty">El campo \"Repita la Contraseña\" no puede estar vacío</string>

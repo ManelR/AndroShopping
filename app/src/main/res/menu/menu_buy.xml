@@ -2,4 +2,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="org.projectes.androidshopping.activities.BuyActivity">
+
+    <item android:id="@+id/activity_buy_searchMenuItem" android:icon="@mipmap/search" android:title="@string/activity_buy_searchMenuItem"
+        android:orderInCategory="1" app:showAsAction="ifRoom" />
+    <item android:id="@+id/activity_buy_buyMenuItem" android:icon="@mipmap/checkout" android:title="@string/activity_buy_buyMenuItem"
+        android:orderInCategory="2" app:showAsAction="ifRoom" />
 </menu>

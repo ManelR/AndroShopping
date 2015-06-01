@@ -33,7 +33,7 @@ public class DAOCompras extends DAOBase<Compra>{
         Activity act = (Activity) context;
         MyApplication app = (MyApplication) act.getApplication();
         openReadOnly();
-        String sql = "SELECT c.id AS id, c.data AS data, chp.preu AS preu, chp.quantitat AS quantitat, hp.nom as nom FROM " + TABLE_COMPRAS + " AS c, " + TABLE_COMPRA_HISTORIAL_PRODUCTE + " AS chp, " + TABLE_HISTORIAL_PRODUCTE + " AS hp WHERE c.id = chp.id_compra AND chp.id_producte = hp.id AND c.id_usuari = " + app.getUserLog().getId();
+        String sql = "SELECT c.id AS id, c.data AS data, chp.preu AS preu, chp.quantitat AS quantitat, hp.nom as nom FROM " + TABLE_COMPRAS + " AS c, " + TABLE_COMPRA_HISTORIAL_PRODUCTE + " AS chp, " + TABLE_HISTORIAL_PRODUCTE + " AS hp WHERE c.id = chp.id_compra AND chp.id_historialProducte = hp.id AND c.id_usuari = " + app.getUserLog().getId();
         Cursor cursor = myDB.rawQuery(sql, null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {

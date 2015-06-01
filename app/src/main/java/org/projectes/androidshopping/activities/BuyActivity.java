@@ -1,17 +1,49 @@
 package org.projectes.androidshopping.activities;
 
+import android.app.Fragment;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
 
+import org.projectes.androidshopping.DAObject.Compra;
 import org.projectes.androidshopping.R;
+import org.projectes.androidshopping.fragments.BuyActivityNormalFragment;
+import org.projectes.androidshopping.fragments.BuyActivitySearchFragment;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class BuyActivity extends BaseActivity {
+
+    private ArrayList<Compra> compraUsuari = null;
+    private ArrayList<Compra> resultatCerca = null;
+    private ArrayList<Compra> resultatSelect = null;
+    private static BuyActivityNormalFragment fragmentNormal = new BuyActivityNormalFragment();
+    private static BuyActivitySearchFragment fragmentSearch = new BuyActivitySearchFragment();
+    private ListView compraListView = null;
+    private int fragmentId = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_buy);
+        changeFragment(R.id.activity_buy_fragmentContainer,fragmentNormal);
+        fragmentId = 0;
+        associateControls();
+    }
+
+    public void onResume(){
+        super.onResume();
+        switch (fragmentId){
+            case 0:
+                changeFragment(R.id.activity_buy_fragmentContainer,fragmentNormal);
+                break;
+            case 1:
+                changeFragment(R.id.activity_buy_fragmentContainer,fragmentSearch);
+                break;
+        }
     }
 
 
@@ -29,11 +61,28 @@ public class BuyActivity extends BaseActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch(id){
+            case R.id.activity_buy_buyMenuItem:
+                break;
+            case R.id.activity_buy_searchMenuItem:
+                if(fragmentId == 0){
+                    changeFragment(R.id.activity_buy_fragmentContainer,fragmentSearch);
+                    fragmentId = 1;
+                }else{
+                    changeFragment(R.id.activity_buy_fragmentContainer,fragmentNormal);
+                    fragmentId = 0;
+                }
+                break;
         }
 
         return super.onOptionsItemSelected(item);
     }
+
+    private void associateControls(){
+        compraUsuari = new ArrayList<Compra>();
+        resultatCerca = new ArrayList<Compra>();
+        resultatSelect = new ArrayList<Compra>();
+        compraListView = (ListView) findViewById(R.id.activity_buy_listView);
+    }
+
 }

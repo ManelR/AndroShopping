@@ -23,6 +23,7 @@ public class Producte extends DAObjectBase{
     @JsonIgnore public int deleted;
     @JsonIgnore private int quantitat;
     @JsonIgnore private int date;
+    @JsonIgnore private boolean checked;
 
     public Producte(){
         super();
@@ -122,5 +123,13 @@ public class Producte extends DAObjectBase{
 
     public void setDate(int date) {
         this.date = date;
+    }
+
+    public boolean isChecked() {
+        return checked;
+    }
+
+    public void setChecked(boolean checked) {
+        this.checked = checked;
     }
 }

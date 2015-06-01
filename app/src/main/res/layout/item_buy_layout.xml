@@ -64,7 +64,6 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:layout_below="@id/item_buy_lblDate">
-
         </Spinner>
 
 

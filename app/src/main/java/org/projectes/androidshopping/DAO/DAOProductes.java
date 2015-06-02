@@ -150,6 +150,7 @@ public class DAOProductes extends DAOBase<Producte> {
                 result.setStock(cursor.getInt(cursor.getColumnIndex("stock")));
                 result.setImage(cursor.getString(cursor.getColumnIndex("imatge")));
                 result.setDate(cursor.getInt(cursor.getColumnIndex("data")));
+                Log.d("DATA: ", Integer.toString(result.getDate()));
                 result.setDB_tags(daoTag.selectAllTagsFromProduct(result));
             }
         }

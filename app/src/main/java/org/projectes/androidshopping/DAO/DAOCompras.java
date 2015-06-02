@@ -11,6 +11,8 @@ import org.projectes.androidshopping.DAObject.Producte;
 import org.projectes.androidshopping.DAObject.Tag;
 import org.projectes.androidshopping.MyApplication;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 /**
@@ -33,7 +35,7 @@ public class DAOCompras extends DAOBase<Compra>{
         Activity act = (Activity) context;
         MyApplication app = (MyApplication) act.getApplication();
         openReadOnly();
-        String sql = "SELECT c.id AS id, c.data AS data, chp.preu AS preu, chp.quantitat AS quantitat, hp.nom as nom FROM " + TABLE_COMPRAS + " AS c, " + TABLE_COMPRA_HISTORIAL_PRODUCTE + " AS chp, " + TABLE_HISTORIAL_PRODUCTE + " AS hp WHERE c.id = chp.id_compra AND chp.id_historialProducte = hp.id AND c.id_usuari = " + app.getUserLog().getId();
+        String sql = "SELECT c.id AS id, c.data AS data, chp.preu AS preu, chp.quantitat AS quantitat, hp.nom as nom FROM " + TABLE_COMPRAS + " AS c, " + TABLE_COMPRA_HISTORIAL_PRODUCTE + " AS chp, " + TABLE_HISTORIAL_PRODUCTE + " AS hp WHERE c.id = chp.id_compra AND chp.id_historialProducte = hp.id AND c.id_usuari = " + app.getUserLog().getId() + " order by c.data desc";
         Cursor cursor = myDB.rawQuery(sql, null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
@@ -71,7 +73,9 @@ public class DAOCompras extends DAOBase<Compra>{
                 historialProducte_id = statement.executeInsert();
                 sql = "INSERT INTO " + TABLE_COMPRA_HISTORIAL_PRODUCTE + " (id_compra,id_historialProducte,quantitat,preu) VALUES (?,?,?,?)";
                 statement = this.myDB.compileStatement(sql);
-                statement.bindAllArgsAsStrings(new String[]{Long.toString(compra_id),Long.toString(historialProducte_id),Integer.toString(p.getQuantitat()),Float.toString(p.getQuantitat() * p.getPrecio())});
+                DecimalFormat df = new DecimalFormat("#.##");
+                df.setRoundingMode(RoundingMode.CEILING);
+                statement.bindAllArgsAsStrings(new String[]{Long.toString(compra_id),Long.toString(historialProducte_id),Integer.toString(p.getQuantitat()),df.format(p.getQuantitat() * p.getPrecio())});
                 statement.executeInsert();
             }
         }catch(Exception ex){
@@ -96,9 +100,10 @@ public class DAOCompras extends DAOBase<Compra>{
             result.setDate(cursor.getInt(cursor.getColumnIndex("data")));
             Producte auxProducte = new Producte();
             auxProducte.setNombre(cursor.getString(cursor.getColumnIndex("nom")));
-            auxProducte.setPrecio(cursor.getFloat(cursor.getColumnIndex("preu")));
+            result.setPrice(cursor.getFloat(cursor.getColumnIndex("preu")));
             auxProducte.setQuantitat(cursor.getInt(cursor.getColumnIndex("quantitat")));
             result.setProducteShow(auxProducte);
+            Log.d("INFO",auxProducte.getNombre() + " - " + auxProducte.getPrecio() + auxProducte.getQuantitat());
         }
         return result;
     }

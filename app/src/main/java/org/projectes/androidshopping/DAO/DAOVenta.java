@@ -25,7 +25,7 @@ public class DAOVenta extends DAOBase<Venta> {
     public ArrayList<Venta> selectAll(){
         ArrayList<Venta> listT = new ArrayList<Venta>();
         openReadOnly();
-        String sql = "SELECT c.id as id, u.email as usuari, c.data as data, h.nom as nomProducte, ch.preu as preu, ch.quantitat as quantitat FROM " + TAULA_USUARIS + " as u, " + TAULA_COMPRA + " as c, " + TAULA_COMPRA_HISTORIC + " as ch, " + TAULA_HISTORIC+ " as h WHERE c.id_usuari = u.id AND ch.id_compra = c.id AND ch.id_historialProducte = h.id ORDER BY c.data";
+        String sql = "SELECT c.id as id, u.email as usuari, c.data as data, h.nom as nomProducte, ch.preu as preu, ch.quantitat as quantitat FROM " + TAULA_USUARIS + " as u, " + TAULA_COMPRA + " as c, " + TAULA_COMPRA_HISTORIC + " as ch, " + TAULA_HISTORIC+ " as h WHERE c.id_usuari = u.id AND ch.id_compra = c.id AND ch.id_historialProducte = h.id ORDER BY c.data desc";
         Cursor cursor = myDB.rawQuery(sql, null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()){

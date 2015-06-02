@@ -27,6 +27,7 @@ public class Producte extends DAObjectBase{
 
     public Producte(){
         super();
+        this.quantitat = 1;
     }
 
     public String getNombre() {

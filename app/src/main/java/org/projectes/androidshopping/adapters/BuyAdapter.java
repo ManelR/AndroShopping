@@ -1,9 +1,12 @@
 package org.projectes.androidshopping.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.Spinner;
@@ -12,6 +15,7 @@ import android.widget.TextView;
 import org.projectes.androidshopping.DAObject.Producte;
 import org.projectes.androidshopping.R;
 
+import java.security.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -22,7 +26,7 @@ import java.util.Date;
 public class BuyAdapter extends BaseAdapter {
 
 
-    private ArrayList<Producte> aCompres = null;
+    private static ArrayList<Producte> aCompres;
     private Context context = null;
 
     public BuyAdapter(Context context, ArrayList<Producte> aCompres){
@@ -58,12 +62,22 @@ public class BuyAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View item = convertView;
+        Spinner spinQuantitat = null;
         if (item == null) {
-
             //Inflem la vista de l'objecte amb el layout definit per cadascún dels items a pintar
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             item = inflater.inflate(R.layout.item_buy_layout, parent, false);
+            spinQuantitat = (Spinner)item.findViewById(R.id.item_buy_spinner);
+            // Create an ArrayAdapter using the string array and a default spinner layout
+            ArrayAdapter<CharSequence> adapterSpin = ArrayAdapter.createFromResource(context,
+                    R.array.spinner_quantity, android.R.layout.simple_spinner_item);
+            // Specify the layout to use when the list of choices appears
+            adapterSpin.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            // Apply the adapter to the spinner
+            spinQuantitat.setAdapter(adapterSpin);
 
+        }else{
+            spinQuantitat = (Spinner)item.findViewById(R.id.item_buy_spinner);
         }
 
         //Recuperem els controls de la vista particular de cada element de l'adapter
@@ -71,7 +85,9 @@ public class BuyAdapter extends BaseAdapter {
         TextView txtProducte = (TextView)item.findViewById(R.id.item_buy_lblProduct);
         TextView txtPrice = (TextView)item.findViewById(R.id.item_buy_txtPrice);
         CheckBox chckItem = (CheckBox)item.findViewById(R.id.item_buy_checkBox);
-        Spinner spinQuantitat = (Spinner)item.findViewById(R.id.item_buy_spinner);
+
+
+
 
         //Assignar textos
         txtProducte.setText(aCompres.get(position).getNombre());
@@ -79,9 +95,29 @@ public class BuyAdapter extends BaseAdapter {
         chckItem.setChecked(aCompres.get(position).isChecked());
         spinQuantitat.setSelection(aCompres.get(position).getQuantitat() - 1);
 
-        long dv = aCompres.get(position).getDate() * 1000;
-        Date df = new Date(dv);
-        txtData.setText(new SimpleDateFormat("dd/MM/yyyy hh:mm").format(df));
+        long dv = (long)aCompres.get(position).getDate();
+        Date date = new Date(dv * 1000);
+        txtData.setText(new SimpleDateFormat("dd/MM/yyyy hh:mm").format(date));
+
+        spinQuantitat.setTag(position);
+
+        spinQuantitat.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (parent != null){
+                    if(parent.getTag() != null) {
+                        Log.d("HOla: ", "Ha entrat al spinner de compra");
+                        int p = (int) parent.getTag();
+                        aCompres.get(p).setQuantitat(position + 1);
+                    }
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         item.setTag(position);
 
@@ -94,8 +130,7 @@ public class BuyAdapter extends BaseAdapter {
                 }else{
                     aCompres.get(position).setChecked(true);
                 }
-                Spinner spin = (Spinner)v.findViewById(R.id.item_buy_spinner);
-                aCompres.get(position).setQuantitat(Integer.valueOf((String)spin.getSelectedItem()));
+                updateInformation();
             }
         });
 

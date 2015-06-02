@@ -1,6 +1,6 @@
 package org.projectes.androidshopping.DAObject;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 /**
  * Created by alloveras on 1/06/15.
@@ -11,10 +11,10 @@ public class Compra extends DAObjectBase{
     private int date;
     private float price;
     private Producte producteShow;
-    private LinkedList<Producte> lProductes = null;
+    private ArrayList<Producte> lProductes = null;
 
     public Compra(){
-        lProductes = new LinkedList<Producte>();
+        lProductes = new ArrayList<Producte>();
     }
 
     public int getDate() {
@@ -33,11 +33,11 @@ public class Compra extends DAObjectBase{
         this.price = price;
     }
 
-    public LinkedList<Producte> getlProductes() {
+    public ArrayList<Producte> getlProductes() {
         return lProductes;
     }
 
-    public void setlProductes(LinkedList<Producte> lProductes) {
+    public void setlProductes(ArrayList<Producte> lProductes) {
         this.lProductes = lProductes;
     }
 
@@ -46,7 +46,11 @@ public class Compra extends DAObjectBase{
     }
 
     public void setProducteShow(Producte auxProducte) {
-        this.producteShow = producteShow;
+        producteShow = new Producte();
+        producteShow.setQuantitat(auxProducte.getQuantitat());
+        producteShow.setPrecio(auxProducte.getPrecio());
+        producteShow.setNombre(auxProducte.getNombre());
     }
+
 
 }

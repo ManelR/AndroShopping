@@ -80,9 +80,9 @@ public class PurchaseHistoryAdapter extends BaseAdapter {
         TextView txtProducte = (TextView) item.findViewById(R.id.item_purchase_history_txtProduct);
 
         if(txtData != null){
-            long dv = aCompres.get(position).getDate() * 1000;
-            Date df = new Date(dv);
-            txtData.setText(new SimpleDateFormat("dd/MM/yyyy hh:mm").format(df));
+            long dv = (long)aCompres.get(position).getDate();
+            Date date = new Date(dv * 1000);
+            txtData.setText(new SimpleDateFormat("dd/MM/yyyy hh:mm").format(date));
         }
 
         if(txtPreu != null){
@@ -94,7 +94,7 @@ public class PurchaseHistoryAdapter extends BaseAdapter {
         }
 
         if(txtQuantiat != null){
-            txtQuantiat.setText(aCompres.get(position).getProducteShow().getQuantitat());
+            txtQuantiat.setText(Integer.toString(aCompres.get(position).getProducteShow().getQuantitat()));
         }
 
         //Canviem el color en funció de si és parell o no

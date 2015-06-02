@@ -78,9 +78,10 @@ public class SellAdapter extends BaseAdapter {
         TextView txtQuantitat = (TextView) item.findViewById(R.id.item_sell_list_txtQuantity);
         TextView txtProducte = (TextView) item.findViewById(R.id.item_sell_list_lblProduct);
 
-        long dv = aVenta.get(position).getData() * 1000;
-        Date df = new Date(dv);
-        txtData.setText(new SimpleDateFormat("dd/MM/yyyy hh:mm").format(df));
+        long dv = (long)aVenta.get(position).getData();
+        Date date = new Date(dv * 1000);
+        txtData.setText(new SimpleDateFormat("dd/MM/yyyy hh:mm").format(date));
+
         txtPreu.setText(Float.toString(aVenta.get(position).getPreu()) + " €");
         txtProducte.setText(aVenta.get(position).getNomProducte());
         txtQuantitat.setText(Integer.toString(aVenta.get(position).getQuantitat()));

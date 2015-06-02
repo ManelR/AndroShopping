@@ -8,6 +8,8 @@ import android.util.Log;
 import org.projectes.androidshopping.DAObject.Producte;
 import org.projectes.androidshopping.DAObject.Tag;
 
+import java.util.ArrayList;
+
 /**
  * Created by mrr on 30/05/15.
  */
@@ -19,6 +21,24 @@ public class DAOProductes extends DAOBase<Producte> {
     public DAOProductes(Context context) {
         super(context, TABLE_NAME_PRODUCTE);
         this.context = context;
+    }
+
+    @Override
+    public ArrayList<Producte> selectAll(){
+        ArrayList<Producte> listT = new ArrayList<Producte>();
+        openReadOnly();
+        String sql = "SELECT * FROM " + TABLE_NAME_PRODUCTE +" WHERE deleted = 0 AND actiu = 1";
+        Cursor cursor = myDB.rawQuery(sql, null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()){
+            Log.d("HA ENTRAT", "ha entrat en el bucle del select de la BBDD");
+            Producte element = LoadFromCursor(cursor);
+            listT.add(element);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        this.closeDatabase();
+        return listT;
     }
 
     public Producte selectByRemoteID(long id){

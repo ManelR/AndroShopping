@@ -4,10 +4,19 @@ import android.app.Fragment;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.Toast;
 
+import org.projectes.androidshopping.Constants.Constants;
+import org.projectes.androidshopping.DAO.DAOProductes;
 import org.projectes.androidshopping.DAObject.Compra;
+import org.projectes.androidshopping.DAObject.Producte;
+import org.projectes.androidshopping.Listeners.IResultList;
 import org.projectes.androidshopping.R;
+import org.projectes.androidshopping.Task.DBTask_Base_SelectAll;
+import org.projectes.androidshopping.adapters.BuyAdapter;
 import org.projectes.androidshopping.fragments.BuyActivityNormalFragment;
 import org.projectes.androidshopping.fragments.BuyActivitySearchFragment;
 
@@ -16,12 +25,14 @@ import java.util.List;
 
 public class BuyActivity extends BaseActivity {
 
-    private ArrayList<Compra> compraUsuari = null;
-    private ArrayList<Compra> resultatCerca = null;
-    private ArrayList<Compra> resultatSelect = null;
+    private ArrayList<Producte> compraUsuari = null;
     private static BuyActivityNormalFragment fragmentNormal = new BuyActivityNormalFragment();
     private static BuyActivitySearchFragment fragmentSearch = new BuyActivitySearchFragment();
     private ListView compraListView = null;
+    private BuyAdapter adapter = null;
+    private Spinner spinQuantitat;
+    private DAOProductes daoProductes = null;
+    private DBTask_Base_SelectAll<DAOProductes, Producte> taskProduct;
     private int fragmentId = 0;
 
 
@@ -79,10 +90,37 @@ public class BuyActivity extends BaseActivity {
     }
 
     private void associateControls(){
-        compraUsuari = new ArrayList<Compra>();
-        resultatCerca = new ArrayList<Compra>();
-        resultatSelect = new ArrayList<Compra>();
+        compraUsuari = new ArrayList<Producte>();
         compraListView = (ListView) findViewById(R.id.activity_buy_listView);
+        daoProductes = new DAOProductes(this);
+        this.spinQuantitat = (Spinner) findViewById(R.id.item_buy_spinner);
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapterSpin = ArrayAdapter.createFromResource(this,
+                R.array.spinner_quantity, android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        adapterSpin.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        this.spinQuantitat.setAdapter(adapterSpin);
+
+        taskProduct = new DBTask_Base_SelectAll<DAOProductes, Producte>();
+        taskProduct.setResultListener(new IResultList<Producte>() {
+            @Override
+            public void onSuccess(ArrayList<Producte> obj) {
+                if (obj != null){
+                    compraUsuari = obj;
+                    adapter = new BuyAdapter(BuyActivity.this, compraUsuari);
+                    compraListView.setAdapter(adapter);
+                }else {
+                    Toast.makeText(BuyActivity.this, "Error recuperando productos", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFail(String missatgeError) {
+                Toast.makeText(BuyActivity.this, missatgeError, Toast.LENGTH_LONG).show();
+            }
+        });
+        taskProduct.execute(this, Constants.BBDD_SELECT_ID, daoProductes);
     }
 
 }

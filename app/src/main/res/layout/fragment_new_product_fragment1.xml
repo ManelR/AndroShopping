@@ -1,40 +1,48 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="8dp">
 
-    <TextView
-        android:id="@+id/fragment_newProduct1_lblName"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:textStyle="bold"
-        android:text="@string/fragment_newProduct_nom"/>
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:padding="8dp"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/fragment_newProduct1_lblName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:textStyle="bold"
+                android:text="@string/fragment_newProduct_nom"/>
 
-    <EditText
-        android:id="@+id/fragment_newProduct1_txtName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:singleLine="true"
-        android:imeOptions="flagNoExtractUi"
-        android:layout_below="@id/fragment_newProduct1_lblName"
-        />
+            <EditText
+                android:id="@+id/fragment_newProduct1_txtName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:imeOptions="flagNoExtractUi"
+                android:layout_below="@id/fragment_newProduct1_lblName"
+                />
 
-    <TextView
-        android:id="@+id/fragment_newProduct1_lblDesc"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/fragment_newProduct_desc"
-        android:layout_margin="20dp"
-        android:textStyle="bold"
-        android:layout_below="@id/fragment_newProduct1_txtName"/>
+            <TextView
+                android:id="@+id/fragment_newProduct1_lblDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/fragment_newProduct_desc"
+                android:layout_margin="20dp"
+                android:textStyle="bold"
+                android:layout_below="@id/fragment_newProduct1_txtName"/>
 
-    <EditText
-        android:id="@+id/fragment_newProduct1_txtDesc"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:imeOptions="flagNoExtractUi"
-        android:layout_below="@id/fragment_newProduct1_lblDesc"/>
-
-
+            <EditText
+                android:id="@+id/fragment_newProduct1_txtDesc"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:imeOptions="flagNoExtractUi"
+                android:layout_below="@id/fragment_newProduct1_lblDesc"/>
+        </RelativeLayout>
+    </ScrollView>
 </RelativeLayout>

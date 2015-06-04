@@ -8,7 +8,6 @@ import android.util.Log;
 
 import org.projectes.androidshopping.DAObject.Compra;
 import org.projectes.androidshopping.DAObject.Producte;
-import org.projectes.androidshopping.DAObject.Tag;
 import org.projectes.androidshopping.MyApplication;
 
 import java.math.RoundingMode;

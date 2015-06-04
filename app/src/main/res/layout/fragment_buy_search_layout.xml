@@ -29,7 +29,10 @@
             android:layout_height="wrap_content"
             android:singleLine="true"
             android:ellipsize="end"
-            android:hint="@string/fragment_buy_search_txtSearchHint"/>
+            android:hint="@string/fragment_buy_search_txtSearchHint"
+            android:imeOptions="flagNoExtractUi">
+            <requestFocus></requestFocus>
+        </EditText>
 
 
     </LinearLayout>

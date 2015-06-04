@@ -117,14 +117,32 @@
 
             </Spinner>
 
-            <CheckBox
-                android:id="@+id/activity_userProfile_chckTerms"
+
+            <LinearLayout
                 android:layout_width="match_parent"
+                android:orientation="horizontal"
                 android:layout_height="wrap_content"
-                android:text="@string/activity_register_chckTerms"
-                android:layout_marginBottom="50dp"
-                android:textColor="#000"
-                android:layout_below="@id/activity_userProfile_spinAge"/>
+                android:gravity="center"
+                android:layout_below="@id/activity_userProfile_spinAge">
+
+                <CheckBox
+                    android:id="@+id/activity_userProfile_chckTerms"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#000"
+                    />
+
+                <TextView
+                    android:id="@+id/activity_userProfile_lblTermsAndConditions"
+                    android:layout_width="wrap_content"
+                    android:padding="10dp"
+                    android:text="@string/activity_register_chckTerms"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+
+
 
         </RelativeLayout>
     </ScrollView>

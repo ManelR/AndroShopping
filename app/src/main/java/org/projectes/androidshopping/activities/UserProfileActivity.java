@@ -1,6 +1,7 @@
 package org.projectes.androidshopping.activities;
 
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,6 +12,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.projectes.androidshopping.Constants.Constants;
@@ -20,6 +22,7 @@ import org.projectes.androidshopping.Listeners.IResult;
 import org.projectes.androidshopping.R;
 import org.projectes.androidshopping.Task.DBTask_Base_Modify;
 import org.projectes.androidshopping.Task.DBTask_Usuari_Select_Email;
+import org.w3c.dom.Text;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -36,6 +39,7 @@ public class UserProfileActivity extends BaseActivity {
     private String errorMessage = null;
     private DAOUsuaris BBDDUsers = null;
     private Usuari myUser = null;
+    private TextView termsAndConditions = null;
 
     private static final String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
@@ -82,6 +86,21 @@ public class UserProfileActivity extends BaseActivity {
         this.txtName = (EditText)findViewById(R.id.activity_userProfile_txtName);
 
         this.chckTerm = (CheckBox)findViewById(R.id.activity_userProfile_chckTerms);
+
+        this.termsAndConditions = (TextView) findViewById(R.id.activity_userProfile_lblTermsAndConditions);
+
+        if(this.termsAndConditions != null){
+            this.termsAndConditions.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                AlertDialog.Builder confirmation = new AlertDialog.Builder(UserProfileActivity.this, R.style.Theme_AppCompat_Light_Dialog_Alert);
+                confirmation.setTitle(getString(R.string.termsAndConditions_lblTitle));
+                confirmation.setMessage(R.string.termsAndConditions_lblBody);
+                confirmation.setNeutralButton(getString(R.string.termsAndConditions_lblOK), null);
+                confirmation.show();
+                }
+            });
+        }
 
         Button btnRegister = (Button) findViewById(R.id.activity_userProfile_btnRegister);
         btnRegister.setOnClickListener(new View.OnClickListener() {

@@ -83,7 +83,7 @@ public class NewProductActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 paso--;
-                switch (paso){
+                switch (paso) {
                     case 1:
                         aBar.setSubtitle("Paso 1/3");
                         changeFragment(R.id.activity_newProduct_fragment, fragment1);
@@ -119,7 +119,7 @@ public class NewProductActivity extends BaseActivity {
                         break;
                     case 4:
                         //TODO validar els camps de tot el registre
-                        if(validarCampsProducte()){
+                        if (validarCampsProducte()) {
                             DAOProductes BBDD = new DAOProductes(NewProductActivity.this);
                             DBTask_Base_Modify<DAOProductes, Producte> task = new DBTask_Base_Modify<DAOProductes, Producte>();
                             Producte newProduct = new Producte();
@@ -135,6 +135,11 @@ public class NewProductActivity extends BaseActivity {
                             task.setResultListener(new IResult<Boolean>() {
                                 @Override
                                 public void onSuccess(Boolean IRresult) {
+                                    paso = 1;
+                                    fragment1 = new NewProductFragment1();
+                                    fragment2 = new NewProductFragment2();
+                                    fragment3 = new NewProductFragment3();
+                                    lTags = new LinkedList<String>();
                                     finish();
                                 }
 
@@ -144,7 +149,7 @@ public class NewProductActivity extends BaseActivity {
                                 }
                             });
                             task.execute(NewProductActivity.this, Constants.BBDD_INSERT, BBDD, newProduct);
-                        }else{
+                        } else {
                             Toast.makeText(NewProductActivity.this, missatgeError, Toast.LENGTH_LONG).show();
                             paso--;
                         }
@@ -228,6 +233,16 @@ public class NewProductActivity extends BaseActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed(){
+        paso = 1;
+        fragment1 = new NewProductFragment1();
+        fragment2 = new NewProductFragment2();
+        fragment3 = new NewProductFragment3();
+        lTags = new LinkedList<String>();
+        finish();
     }
 
     @Override

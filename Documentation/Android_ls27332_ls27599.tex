@@ -83,15 +83,34 @@ Finalment, cal destacar que els requeriments tècnics a nivell de Android són q
 
 \begin{center}
 	\includegraphics[scale=0.5]{img/1.png}
+	 \end{center}
+
+	\begin{center}
 	\includegraphics[scale=0.5]{img/2.png}
+	 \end{center}
+	 	 Tal i com es pot apreciar a la imatge anterior, per a la realització de la nostre pràctica, ens hem ajudat dels adapters per tal d'inflar de forma dinàmica i eficient diversos Layouts o ListViews.\\
+	
+	Per fer-ho, hem hagut d'heretar d'una de les classes base d'Adapters que proporciona Android que, en el nostre cas, ha estat la classe BaseAdapter.
+	 \begin{center}
 	\includegraphics[scale=0.5]{img/3.png}
-	\includegraphics[scale=0.5]{img/4.png}
+	\end{center}
+	L'objectiu de l'herència anterior i de la classe MyApplication és tenir un \textit{singleton} que permeti la persistència d'informació en memòria al llarg de la vida de la nostre aplicació. Un exemple del contingut desat en aquest \textit{singleton} són els identificadors únics dels \textit{mutex}.
+	\begin{center}
+	\includegraphics[scale=0.5]{img/4.png}\\
+\end{center}
+	Per tal d'encarar moltes de les vistes de la nostre aplicació hem decidit fer ús de Fragments.És per això que, en la il·lustració anterior es mostren totes les classes JAVA corresponents a la lògica d'aquests fragments.\\
+	
+	Com es pot apreciar, totes les classes dels nostres fragments, hereten de la classe Fragment que proporciona Android. D'aquesta manera, podem fer que dins d'una mateixa activitat, se'ns canviï el contingut mostrat a l'usuari, sense necessitat de carregar una altra activitat o quadre de diàleg.\\
+\begin{center}
 	\includegraphics[scale=0.5]{img/5.png}
 	\includegraphics[scale=0.5]{img/6.png}
 	\includegraphics[scale=0.5]{img/7.png}
 \end{center}
+	Finalment, a l'hora d'organitzar les classes que fan referència a les activitats de la nostre aplicació, vàrem creure oportú definir una classe base \textit{BaseActivity} la qual definís les característiques principals i comunes a cada activitat (per poder-les heretar) així com també implementar mètodes per realitzar tasques comunes a les activitats, com per exemple, mètodes que permetessin l'intercanvi de fragments, l'actualització d'informació a la \textit{ActionBar...}
+	
+\begin{center}
+\end{center}
 
-\newpage
 \section{Diagrama BBDD}
 \begin{center}
 	\includegraphics[scale=0.5]{img/Android_DB_Schema.png}

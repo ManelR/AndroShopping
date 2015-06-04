@@ -2,18 +2,14 @@ package org.projectes.androidshopping.activities;
 
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.provider.MediaStore;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import org.projectes.androidshopping.Constants.Constants;
@@ -22,14 +18,11 @@ import org.projectes.androidshopping.DAObject.Producte;
 import org.projectes.androidshopping.Listeners.IResult;
 import org.projectes.androidshopping.R;
 import org.projectes.androidshopping.Task.DBTask_Base_Modify;
-import org.projectes.androidshopping.adapters.InsertTagsAdapter;
 import org.projectes.androidshopping.fragments.NewProductFragment1;
 import org.projectes.androidshopping.fragments.NewProductFragment2;
 import org.projectes.androidshopping.fragments.NewProductFragment3;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -118,7 +111,6 @@ public class NewProductActivity extends BaseActivity {
                         btnAnterior.setEnabled(true);
                         break;
                     case 4:
-                        //TODO validar els camps de tot el registre
                         if (validarCampsProducte()) {
                             DAOProductes BBDD = new DAOProductes(NewProductActivity.this);
                             DBTask_Base_Modify<DAOProductes, Producte> task = new DBTask_Base_Modify<DAOProductes, Producte>();

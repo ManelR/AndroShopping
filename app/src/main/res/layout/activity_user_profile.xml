@@ -81,7 +81,6 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-
                 android:layout_below="@id/activity_userProfile_lblGender">
                 <RadioButton
                     android:id="@+id/activity_userProfile_rdioMale"

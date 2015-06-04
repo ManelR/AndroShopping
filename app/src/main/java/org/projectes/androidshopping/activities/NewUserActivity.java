@@ -158,6 +158,10 @@ public class NewUserActivity extends BaseActivity {
             errorMessage = this.getString(R.string.error_pass_empty);
             result = false;
         }
+        if (passText.toString().length() < 6 && result){
+            errorMessage = this.getString(R.string.error_pass_length);
+            result = false;
+        }
         Editable repeatPassText = this.txtRepeatPass.getText();
         if (repeatPassText.toString().matches("") && result){
             errorMessage = this.getString(R.string.error_rePass_empty);

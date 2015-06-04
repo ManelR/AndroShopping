@@ -6,7 +6,7 @@ package org.projectes.androidshopping.Constants;
  */
 public class Constants {
     public static final String URL_PRODUCTES = "http://www.v2msoft.com/curso-android/ws/lista_productos.php";
-    public static final String URL_UPDATE = "http://www.v2msoft.com/curso-android/ws/last_update.php?force_update=1";
+    public static final String URL_UPDATE = "http://www.v2msoft.com/curso-android/ws/last_update.php";
     public static final int POSICIO_CONTEXT_WSTask = 0;
 
     public static final int POSICIO_TIPUS_BBDD_TASK = 1;

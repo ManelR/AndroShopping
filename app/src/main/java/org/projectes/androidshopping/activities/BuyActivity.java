@@ -2,7 +2,9 @@ package org.projectes.androidshopping.activities;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.inputmethod.InputMethodManager;
@@ -14,8 +16,10 @@ import android.widget.Toast;
 import org.projectes.androidshopping.Constants.Constants;
 import org.projectes.androidshopping.DAO.DAOCompras;
 import org.projectes.androidshopping.DAO.DAOProductes;
+import org.projectes.androidshopping.DAO.DAOUsuaris;
 import org.projectes.androidshopping.DAObject.Compra;
 import org.projectes.androidshopping.DAObject.Producte;
+import org.projectes.androidshopping.DAObject.Usuari;
 import org.projectes.androidshopping.Listeners.IResult;
 import org.projectes.androidshopping.Listeners.IResultList;
 import org.projectes.androidshopping.R;
@@ -102,7 +106,7 @@ public class BuyActivity extends BaseActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        Compra compra = new Compra();
+        final Compra compra = new Compra();
         ArrayList<Producte> productesComprats = new ArrayList<Producte>();
         switch(id){
             case R.id.activity_buy_buyMenuItem:
@@ -123,7 +127,36 @@ public class BuyActivity extends BaseActivity {
                         Toast.makeText(BuyActivity.this, missatgeError, Toast.LENGTH_LONG).show();
                     }
                 });
-                taskCompra.execute(this, Constants.BBDD_INSERT, daoCompras, compra);
+                String missatgeConfirmacio = new String();
+                float preuTotal = 0;
+                for (Producte p : compraUsuari){
+                    if (p.isChecked()){
+                        missatgeConfirmacio += "- ";
+                        missatgeConfirmacio += p.getNombre() + " x " + Integer.toString(p.getQuantitat()) + " = " + String.format("%.2f", p.getPrecio()*p.getQuantitat()) + " €";
+                        missatgeConfirmacio += "\n";
+                        preuTotal += p.getPrecio()*p.getQuantitat();
+                    }
+                }
+                missatgeConfirmacio += "\nPrecio total: " + String.format("%.2f", preuTotal) + " €";
+
+                AlertDialog.Builder confirmation = new AlertDialog.Builder(this,R.style.Theme_AppCompat_Light_Dialog_Alert);
+                confirmation.setTitle(this.getString(R.string.activity_resumeBuy_lblTitle));
+                confirmation.setIcon(R.mipmap.checkout);
+                confirmation.setMessage(missatgeConfirmacio);
+                confirmation.setPositiveButton(R.string.item_manage_users_lblYesConfirmation, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        taskCompra.execute(BuyActivity.this, Constants.BBDD_INSERT, daoCompras, compra);
+                    }
+                });
+                confirmation.setNegativeButton(R.string.item_manage_users_lblNoConfirmation, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        //No fem res
+                    }
+                });
+                confirmation.show();
+
                 break;
             case R.id.activity_buy_searchMenuItem:
                 if(fragmentId == 0){

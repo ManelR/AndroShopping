@@ -169,6 +169,12 @@
     <string name="error_product_stock_empty">El Stock no puede estar vacío</string>
     <string name="error_product_stock_incorrect">El Stock no es correcto</string>
     <string name="error_pass_length">La contraseña tiene que tener mínimo 6 caracteres.</string>
+    <string name="title_activity_resume_buy">ResumeBuyActivity</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="activity_resumeBuy_btnAcceptar">Aceptar compra</string>
+    <string name="activity_resumeBuy_lblTitle">Resumen de la compra</string>
+    <string name="activity_resumeBuy_title">Resumen de la compra</string>
 
 
 </resources>

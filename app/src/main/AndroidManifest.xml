@@ -16,79 +16,80 @@
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".activities.LoginActivity"
             android:label="@string/app_name"
-            android:windowSoftInputMode="stateAlwaysHidden">
+            android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
         <activity
             android:name=".activities.MainMenuActivity"
             android:label="@string/app_name"
-            android:theme="@style/Theme.AppCompat.Light">
-
+            android:theme="@style/Theme.AppCompat.Light" >
         </activity>
         <activity
             android:name=".activities.RegisterActivity"
             android:label="@string/app_name"
-            android:windowSoftInputMode="stateAlwaysHidden">
-
+            android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
         <activity
             android:name=".activities.ShowUserActivity"
             android:label="@string/activity_showUser_title"
-            android:theme="@style/Theme.AppCompat.Light">
+            android:theme="@style/Theme.AppCompat.Light" >
         </activity>
         <activity
             android:name=".activities.ProductsManagerActivity"
             android:label="@string/title_activity_products_manager"
-            android:theme="@style/Theme.AppCompat.Light">
+            android:theme="@style/Theme.AppCompat.Light" >
         </activity>
         <activity
             android:name=".activities.NewProductActivity"
             android:label="@string/activity_newProduct_activityName"
-            android:theme="@style/Theme.AppCompat.Light">
-
+            android:theme="@style/Theme.AppCompat.Light" >
         </activity>
         <activity
             android:name=".activities.ShowProductActivity"
             android:label="@string/title_activity_show_product_2"
-            android:theme="@style/Theme.AppCompat.Light">
+            android:theme="@style/Theme.AppCompat.Light" >
         </activity>
         <activity
             android:name=".activities.ManageUsersActivity"
             android:label="@string/title_activity_manage_users"
-            android:theme="@style/Theme.AppCompat.Light">
+            android:theme="@style/Theme.AppCompat.Light" >
         </activity>
         <activity
             android:name=".activities.NewUserActivity"
             android:label="@string/activity_new_user_activityName"
-            android:windowSoftInputMode="stateAlwaysHidden"
-            android:theme="@style/Theme.AppCompat.Light">
+            android:theme="@style/Theme.AppCompat.Light"
+            android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
         <activity
             android:name=".activities.UserProfileActivity"
             android:label="@string/title_activity_user_profile"
-
-            android:windowSoftInputMode="stateAlwaysHidden"
-            android:theme="@style/Theme.AppCompat.Light">
+            android:theme="@style/Theme.AppCompat.Light"
+            android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
         <activity
             android:name=".activities.BuyActivity"
             android:label="@string/title_activity_buy"
-            android:theme="@style/Theme.AppCompat.Light">
+            android:theme="@style/Theme.AppCompat.Light" >
         </activity>
         <activity
             android:name=".activities.SellListActivity"
-            android:theme="@style/Theme.AppCompat.Light"
-            android:label="@string/activity_sell_list_activityName" >
+            android:label="@string/activity_sell_list_activityName"
+            android:theme="@style/Theme.AppCompat.Light" >
         </activity>
         <activity
             android:name=".activities.PurchaseHistoryActivity"
             android:label="@string/activity_purchaseHistory_activityName"
-            android:theme="@style/Theme.AppCompat.Light">
+            android:theme="@style/Theme.AppCompat.Light" >
+        </activity>
+        <activity
+            android:name=".activities.ResumeBuyActivity"
+            android:label="@string/title_activity_resume_buy" >
         </activity>
     </application>
 

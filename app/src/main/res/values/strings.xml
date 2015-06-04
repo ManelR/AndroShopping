@@ -163,6 +163,7 @@
     <string name="error_product_preu_incorrect">El precio no es correcto</string>
     <string name="error_product_stock_empty">El Stock no puede estar vacío</string>
     <string name="error_product_stock_incorrect">El Stock no es correcto</string>
+    <string name="error_pass_length">La contraseña tiene que tener mínimo 6 caracteres.</string>
 
 
 </resources>

@@ -90,8 +90,6 @@ public class RegisterActivity extends BaseActivity {
                                 DBTask.setResultListener(new IResult<Boolean>() {
                                     @Override
                                     public void onSuccess(Boolean IRresult) {
-                                        Intent i = new Intent(RegisterActivity.this, LoginActivity.class);
-                                        startActivity(i);
                                         finish();
                                     }
 
@@ -137,6 +135,10 @@ public class RegisterActivity extends BaseActivity {
         Editable passText = this.txtPassword.getText();
         if (passText.toString().matches("") && result){
             errorMessage = this.getString(R.string.error_pass_empty);
+            result = false;
+        }
+        if (passText.toString().length() < 6 && result){
+            errorMessage = this.getString(R.string.error_pass_length);
             result = false;
         }
         Editable repeatPassText = this.txtRepeatPass.getText();

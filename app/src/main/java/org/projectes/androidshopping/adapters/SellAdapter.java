@@ -82,7 +82,7 @@ public class SellAdapter extends BaseAdapter {
         Date date = new Date(dv * 1000);
         txtData.setText(new SimpleDateFormat("dd/MM/yyyy hh:mm").format(date));
 
-        txtPreu.setText(Float.toString(aVenta.get(position).getPreu()) + " €");
+        txtPreu.setText(String.format("%.2f", aVenta.get(position).getPreu()) + " €");
         txtProducte.setText(aVenta.get(position).getNomProducte());
         txtQuantitat.setText(Integer.toString(aVenta.get(position).getQuantitat()));
         txtUser.setText(aVenta.get(position).getClient());

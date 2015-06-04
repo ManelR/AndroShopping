@@ -52,7 +52,7 @@ public class ShowUserActivity extends BaseActivity {
                 public void onSuccess(Usuari IRresult) {
                     txtEmail.setText(IRresult.getEmail());
                     txtAge.setText(IRresult.getEdat() + " años");
-                    txtTotalAmount.setText("N/A");
+                    txtTotalAmount.setText(String.format("%.2f", IRresult.getTotalAmount()) + " €");
                     radioGenere.check(IRresult.getGenere() == 2 ? R.id.activity_showUser_radioFemale : R.id.activity_showUser_radioMale);
                 }
 

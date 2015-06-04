@@ -86,7 +86,7 @@ public class PurchaseHistoryAdapter extends BaseAdapter {
         }
 
         if(txtPreu != null){
-            txtPreu.setText(Float.toString(aCompres.get(position).getPrice()));
+            txtPreu.setText(String.format("%.2f", aCompres.get(position).getPrice()) + " €");
         }
 
         if(txtProducte != null){

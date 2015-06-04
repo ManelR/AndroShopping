@@ -10,8 +10,6 @@ import org.projectes.androidshopping.DAObject.Compra;
 import org.projectes.androidshopping.DAObject.Producte;
 import org.projectes.androidshopping.MyApplication;
 
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 /**
@@ -47,6 +45,24 @@ public class DAOCompras extends DAOBase<Compra>{
         return listT;
     }
 
+    public ArrayList<Compra> selectAllFromUser(int id_user) {
+        ArrayList<Compra> listT = new ArrayList<Compra>();
+
+        openReadOnly();
+        String sql = "SELECT c.id AS id, c.data AS data, chp.preu AS preu, chp.quantitat AS quantitat, hp.nom as nom FROM " + TABLE_COMPRAS + " AS c, " + TABLE_COMPRA_HISTORIAL_PRODUCTE + " AS chp, " + TABLE_HISTORIAL_PRODUCTE + " AS hp WHERE c.id = chp.id_compra AND chp.id_historialProducte = hp.id AND c.id_usuari = " + id_user + " order by c.data desc";
+        Cursor cursor = myDB.rawQuery(sql, null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            Compra element = LoadFromCursor(cursor);
+            listT.add(element);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        this.closeDatabase();
+        return listT;
+    }
+
+
     @Override
     public void delete(Compra obj) {
         //No s'utilitza perquè MAI BORRARÀS UNA COMPRA (Christian)
@@ -72,9 +88,8 @@ public class DAOCompras extends DAOBase<Compra>{
                 historialProducte_id = statement.executeInsert();
                 sql = "INSERT INTO " + TABLE_COMPRA_HISTORIAL_PRODUCTE + " (id_compra,id_historialProducte,quantitat,preu) VALUES (?,?,?,?)";
                 statement = this.myDB.compileStatement(sql);
-                DecimalFormat df = new DecimalFormat("#.##");
-                df.setRoundingMode(RoundingMode.CEILING);
-                statement.bindAllArgsAsStrings(new String[]{Long.toString(compra_id),Long.toString(historialProducte_id),Integer.toString(p.getQuantitat()),df.format(p.getQuantitat() * p.getPrecio())});
+                Log.d("INSERT COMPRA:", String.format("%.2f", p.getPrecio() * p.getQuantitat()).replace(",", "."));
+                statement.bindAllArgsAsStrings(new String[]{Long.toString(compra_id),Long.toString(historialProducte_id),Integer.toString(p.getQuantitat()),String.format("%.2f", p.getPrecio() * p.getQuantitat()).replace(",", ".")});
                 statement.executeInsert();
             }
         }catch(Exception ex){
@@ -102,7 +117,6 @@ public class DAOCompras extends DAOBase<Compra>{
             result.setPrice(cursor.getFloat(cursor.getColumnIndex("preu")));
             auxProducte.setQuantitat(cursor.getInt(cursor.getColumnIndex("quantitat")));
             result.setProducteShow(auxProducte);
-            Log.d("INFO",auxProducte.getNombre() + " - " + auxProducte.getPrecio() + auxProducte.getQuantitat());
         }
         return result;
     }

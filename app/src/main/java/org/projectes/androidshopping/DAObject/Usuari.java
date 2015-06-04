@@ -13,6 +13,7 @@ public class Usuari extends DAObjectBase {
     private int rol;
     private int logged_in;
     private int deleted;
+    private float totalAmount;
 
     public Usuari() {
         super();
@@ -125,5 +126,13 @@ public class Usuari extends DAObjectBase {
 
     public void setPass(String pass) {
         this.pass = pass;
+    }
+
+    public float getTotalAmount() {
+        return totalAmount;
+    }
+
+    public void setTotalAmount(float totalAmount) {
+        this.totalAmount = totalAmount;
     }
 }

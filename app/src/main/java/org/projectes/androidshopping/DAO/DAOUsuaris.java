@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteStatement;
 import android.util.Log;
 
 import org.projectes.androidshopping.Constants.MD5;
+import org.projectes.androidshopping.DAObject.Compra;
 import org.projectes.androidshopping.DAObject.Usuari;
 
 import java.util.ArrayList;
@@ -15,9 +16,11 @@ import java.util.ArrayList;
  */
 public class DAOUsuaris extends DAOBase<Usuari> {
     private static final String TABLE_NAME_USER = "usuaris";
+    private Context context;
 
     public DAOUsuaris(Context context) {
         super(context, TABLE_NAME_USER);
+        this.context = context;
     }
 
     public Usuari selectByEmail(String email){
@@ -29,6 +32,32 @@ public class DAOUsuaris extends DAOBase<Usuari> {
         cursor.close();
         closeDatabase();
         return element;
+    }
+
+    @Override
+    public Usuari selectByID(long id){
+        openReadOnly();
+        String sql="SELECT * FROM " + TABLE_NAME + " where id = ? LIMIT 1" ;
+        Cursor cursor = myDB.rawQuery(sql, new String []{Long.toString(id)});
+        cursor.moveToFirst();
+        Usuari element = LoadFromCursor(cursor);
+        getAmount(element);
+        cursor.close();
+        closeDatabase();
+        return element;
+    }
+
+    private void getAmount(Usuari element) {
+        DAOCompras daoCompra = new DAOCompras(this.context);
+        ArrayList<Compra> list;
+        list = daoCompra.selectAllFromUser(element.getId());
+        float totalAmount = 0;
+        if (list != null){
+            for(Compra c : list){
+                totalAmount += c.getPrice();
+            }
+        }
+        element.setTotalAmount(totalAmount);
     }
 
     public Usuari selectByLogged_in(){

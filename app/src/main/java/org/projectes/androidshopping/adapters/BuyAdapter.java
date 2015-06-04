@@ -1,7 +1,10 @@
 package org.projectes.androidshopping.adapters;
 
+import android.app.ActionBar;
 import android.content.Context;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,10 +12,12 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import org.projectes.androidshopping.DAObject.Producte;
+import org.projectes.androidshopping.DAObject.Tag;
 import org.projectes.androidshopping.R;
 
 import java.security.Timestamp;
@@ -28,6 +33,7 @@ public class BuyAdapter extends BaseAdapter {
 
     private static ArrayList<Producte> aCompres;
     private Context context = null;
+    private String searchPAttern = null;
 
     public BuyAdapter(Context context, ArrayList<Producte> aCompres){
         this.aCompres = aCompres;
@@ -63,6 +69,11 @@ public class BuyAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         View item = convertView;
         Spinner spinQuantitat = null;
+        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+        float dp = 100f;
+        float fpixel = metrics.density * dp;
+        int pixels = (int)(fpixel + 0.5f);
+
         if (item == null) {
             //Inflem la vista de l'objecte amb el layout definit per cadascún dels items a pintar
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -145,7 +156,46 @@ public class BuyAdapter extends BaseAdapter {
             item.setBackgroundColor(0xFFFFFFFF);
         }
 
+        if (searchPAttern != null){
+            if (!hasToBeShown(position)){
+                item.setVisibility(View.GONE);
+                item.getLayoutParams().height = 1;
+            }else{
+                item.setVisibility(View.VISIBLE);
+                item.getLayoutParams().height = pixels;
+            }
+        }else{
+            item.setVisibility(View.VISIBLE);
+            item.getLayoutParams().height = pixels;
+        }
+
         return item;
     }
 
+    private boolean hasToBeShown(int position) {
+        boolean result = false;
+        //Comprovar el nom
+        if (aCompres.get(position).getNombre().toLowerCase().contains(this.searchPAttern)){
+            return true;
+        }
+        for (Tag t : aCompres.get(position).getDB_tags()){
+            if (t.getNom().toLowerCase().contains(this.searchPAttern)){
+                return true;
+            }
+        }
+        return result;
+    }
+
+    public void setSearchPattern(String p){
+        if (p != null){
+            this.searchPAttern = p.toLowerCase();
+        }else{
+            this.searchPAttern = null;
+        }
+        notifyDataSetChanged();
+    }
+
+    public void setList(ArrayList<Producte> compraUsuari) {
+        this.aCompres = compraUsuari;
+    }
 }

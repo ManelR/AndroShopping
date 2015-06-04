@@ -1,9 +1,11 @@
 package org.projectes.androidshopping.activities;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -49,7 +51,14 @@ public class BuyActivity extends BaseActivity {
         if (flagOnCreate == 0){
             compraUsuari = new ArrayList<Producte>();
         }
-        changeFragment(R.id.activity_buy_fragmentContainer,fragmentNormal);
+        switch (fragmentId){
+            case 0:
+                changeFragment(R.id.activity_buy_fragmentContainer,fragmentNormal);
+                break;
+            case 1:
+                changeFragment(R.id.activity_buy_fragmentContainer,fragmentSearch);
+                break;
+        }
         associateControls();
     }
 
@@ -67,6 +76,18 @@ public class BuyActivity extends BaseActivity {
         compraListView.setAdapter(adapter);
     }
 
+    @Override
+    public void onBackPressed(){
+        super.onBackPressed();
+        fragmentId = 0;
+    }
+
+    @Override
+    public void onPause(){
+        super.onPause();
+        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(findViewById(R.id.activity_buy_listView).getWindowToken(), 0);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -109,6 +130,8 @@ public class BuyActivity extends BaseActivity {
                     changeFragment(R.id.activity_buy_fragmentContainer,fragmentSearch);
                     fragmentId = 1;
                 }else{
+                    adapter.setSearchPattern(null);
+                    fragmentSearch.setTxtSearchToNull();
                     changeFragment(R.id.activity_buy_fragmentContainer,fragmentNormal);
                     fragmentId = 0;
                 }
@@ -119,6 +142,7 @@ public class BuyActivity extends BaseActivity {
     }
 
     private void associateControls(){
+        adapter = new BuyAdapter(BuyActivity.this, compraUsuari);
         compraListView = (ListView) findViewById(R.id.activity_buy_listView);
         daoProductes = new DAOProductes(this);
         daoCompras = new DAOCompras(this);
@@ -132,7 +156,7 @@ public class BuyActivity extends BaseActivity {
                             compraUsuari.add(p);
                             flagOnCreate = 1;
                         }
-                        adapter = new BuyAdapter(BuyActivity.this, compraUsuari);
+                        adapter.setList(compraUsuari);
                         compraListView.setAdapter(adapter);
                     }
 
@@ -149,4 +173,8 @@ public class BuyActivity extends BaseActivity {
         taskProduct.execute(this, Constants.BBDD_SELECT_ID, daoProductes);
     }
 
+
+    public BuyAdapter getAdapter() {
+        return adapter;
+    }
 }

@@ -3,6 +3,7 @@ package org.projectes.androidshopping.activities;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,6 +14,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.projectes.androidshopping.Constants.Constants;
@@ -34,6 +36,7 @@ public class RegisterActivity extends BaseActivity {
     private EditText txtRepeatPass;
     private EditText txtName;
     private CheckBox chckTerm;
+    private TextView termsAndConditions = null;
     private String errorMessage = null;
     private DAOUsuaris BBDDUsers = null;
 
@@ -63,8 +66,22 @@ public class RegisterActivity extends BaseActivity {
         this.txtPassword = (EditText)findViewById(R.id.activity_register_txtPassword);
         this.txtRepeatPass = (EditText)findViewById(R.id.activity_register_txtRepeatPassword);
         this.txtName = (EditText)findViewById(R.id.activity_register_txtName);
+        this.termsAndConditions = (TextView) findViewById(R.id.activity_register_lblTermsAndConditions);
 
         this.chckTerm = (CheckBox)findViewById(R.id.activity_register_chckTerms);
+
+        if(termsAndConditions != null){
+            termsAndConditions.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    AlertDialog.Builder confirmation = new AlertDialog.Builder(RegisterActivity.this, R.style.Theme_AppCompat_Light_Dialog_Alert);
+                    confirmation.setTitle(getString(R.string.termsAndConditions_lblTitle));
+                    confirmation.setMessage(R.string.termsAndConditions_lblBody);
+                    confirmation.setNeutralButton(getString(R.string.termsAndConditions_lblOK), null);
+                    confirmation.show();
+                }
+            });
+        }
 
         Button btnRegister = (Button) findViewById(R.id.activity_register_btnRegister);
         btnRegister.setOnClickListener(new View.OnClickListener() {

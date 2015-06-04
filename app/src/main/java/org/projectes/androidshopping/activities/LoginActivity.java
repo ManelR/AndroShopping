@@ -1,7 +1,9 @@
 package org.projectes.androidshopping.activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.util.Log;
 import android.view.Menu;
@@ -38,6 +40,7 @@ public class LoginActivity extends BaseActivity {
     private EditText txtEmail = null;
     private EditText txtPass = null;
     private CheckBox chckRecordar = null;
+    private TextView lblTermsAndCondition = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +51,7 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void associateControls() {
-        this.link = (TextView) findViewById(R.id.actvity_login_lblRegister);
+        this.link = (TextView) findViewById(R.id.activity_login_lblRegister);
         this.link.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -62,6 +65,7 @@ public class LoginActivity extends BaseActivity {
         this.chckRecordar = (CheckBox)findViewById(R.id.activity_login_chckRemember);
 
         this.btnLogin = (Button)findViewById(R.id.activity_login_btnEntrar);
+
         this.btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

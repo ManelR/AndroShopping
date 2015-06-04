@@ -84,7 +84,13 @@ Finalment, cal destacar que els requeriments tècnics a nivell de Android són q
 \begin{center}
 	\includegraphics[scale=0.5]{img/1.png}
 	 \end{center}
+		El conjunt de classes anteriors representen els objectes utilitzats per tal de gestionar les dades de la base de dades.
 
+Aquests objectes contenen els mateixos atributs que la taula corresponent a SQLite.
+
+La seva utilitat és persistir en memòria principal la informació recuperada de la base de dades i poder operar amb aquesta.
+
+Tots els objectes utilitzats en aquest paquet hereten de DAObjectBase, que bàsicament conté l'atribut "id", comú en tots els objectes de la base de dades.
 	\begin{center}
 	\includegraphics[scale=0.5]{img/2.png}
 	 \end{center}
@@ -103,18 +109,41 @@ Finalment, cal destacar que els requeriments tècnics a nivell de Android són q
 	Com es pot apreciar, totes les classes dels nostres fragments, hereten de la classe Fragment que proporciona Android. D'aquesta manera, podem fer que dins d'una mateixa activitat, se'ns canviï el contingut mostrat a l'usuari, sense necessitat de carregar una altra activitat o quadre de diàleg.\\
 \begin{center}
 	\includegraphics[scale=0.5]{img/5.png}
+	\end{center}
+	La gestió d'informació amb la base de dades, tant per consultar, com per modificar les dades, havia d'estar en un thread independent del thread que controla les vistes de l'aplicació. Aquest requeriment és degut al fet que mentre s'executen les comandes amb la base de dades, l'aplicació no podria gestionar els elements visuals que es mostren a l'activitat. Per solucionar aquest problema es genera una AsyncTask quan es vol interactuar amb la base de dades.\\
+
+Aquesta interfície de comunicació amb les dades s'ha fet creant classes que heretaven de la classe AsyncTask. Es va intentar crear una AsyncTask personalitzada per cadascuna de les funcionalitats que es podien realitzar.\\
+
+La majoria de classes d'aquest grup són Templates. Això vol dir que creant una sola classe es podia utilitzar per diversos tipus de dades diferents. Per realitzar això el que es va fer és definir un Tipus T que havia d'heretar del DAOBase. La classe DAOBase té els mètodes abstractes que han d'implementar totes les classes DAO que deriven d'aquesta. D'aquesta manera es podia cridar als diferents mètodes dins de l'AsyncTask. També es va definir un tipus E que heretava del DAObjectBase, per tal de passar a l'AsyncTask el tipus de dada on s'ompliria el contingut de la consulta.
+	\begin{center}
 	\includegraphics[scale=0.5]{img/6.png}
+	\end{center}
+Les classes amb el prefix DAO serveixen com ha connexió entre les dades de la base de dades i les dades carregades en memòria.
+
+Aquestes classes fan tenen els mètodes necessaris per moure la informació d'un costat a un altre. Totes hereten de DAOBase que té, com s'ha comentat abans, els tots els mètodes bàsics que han d'implementar les diferents classes. Totes elles acaben hereten de SQLiteOpenHelper, una classe d'Android.
+
+Les operacions més bàsiques són: select by id, select all, insert, update i delete.
+	\begin{center}
 	\includegraphics[scale=0.5]{img/7.png}
 \end{center}
 	Finalment, a l'hora d'organitzar les classes que fan referència a les activitats de la nostre aplicació, vàrem creure oportú definir una classe base \textit{BaseActivity} la qual definís les característiques principals i comunes a cada activitat (per poder-les heretar) així com també implementar mètodes per realitzar tasques comunes a les activitats, com per exemple, mètodes que permetessin l'intercanvi de fragments, l'actualització d'informació a la \textit{ActionBar...}
 	
 \begin{center}
 \end{center}
-
+\newpage
 \section{Diagrama BBDD}
 \begin{center}
 	\includegraphics[scale=0.5]{img/Android_DB_Schema.png}
 \end{center}
+La nostra aplicació necessita persistir les dades en memòria un cop es tanca, així que s'ha utilitzat un sistema de bases de dades natiu d'Android, SQLite.\\
+
+Per resoldre la pràctica s'han utilitzat les taules que es mostren a la figura anterior.\\
+
+En primer lloc tenim la taula usuaris que guarda el correu i la contrasenya dels usuaris. Aquesta informació s'utilitza posteriorment per verificar i controlar l'accés a l'aplicació. El camp contrasenya utilitza la codificació SHA-256 per encriptar les dades.\\
+
+La taula usuaris es relaciona amb la taula compra que serveix per emmagatzemar les diferents operacions de compra que realitza l'usuari.\\
+
+La taula producte guarda la informació recuperada del WS i creada per l'usuari. Aquesta taula es relaciona amb la taula tag a través de la taula relacional producte{\_}tag. Dins la mateixa taula producte no es podia guarda la id que es proporcionava com a identificador de la fila, ja que al poder generar informació des de dues opcions diferents, podien col·lidir els identificadors. Es va solucionar el problema creant un identificador únic per la nostra base de dades local i emmagatzemant la id del servidor remot en una columna anomenada id{\_}remot.
 
 \newpage
 \section{Conclusions}

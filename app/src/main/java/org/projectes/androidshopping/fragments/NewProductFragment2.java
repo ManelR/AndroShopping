@@ -16,7 +16,6 @@ import com.squareup.picasso.Picasso;
 
 import org.projectes.androidshopping.R;
 
-
 public class NewProductFragment2 extends Fragment {
     private View fragmentView;
     private Button btnImage;

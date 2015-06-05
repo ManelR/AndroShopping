@@ -1,6 +1,8 @@
 package org.projectes.androidshopping.activities;
 
+import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -67,6 +69,7 @@ public class BaseActivity extends AppCompatActivity {
             aBar.setIcon(R.mipmap.ic_launcher);
             aBar.setDisplayShowHomeEnabled(true);
             aBar.setDisplayHomeAsUpEnabled(true);
+            aBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#9ccc65")));
         }
 
         //Import Typefaces

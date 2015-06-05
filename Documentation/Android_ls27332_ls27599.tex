@@ -1,4 +1,4 @@
-\documentclass{article}
+\documentclass{article}[]
 
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
@@ -76,7 +76,7 @@ A l'hora de parlar de funcionalitats de la nostre App, hem de definir primeramen
 	Aquest tipus d'usuari estarà reservat només als responsables de l'establiment. D'aquesta manera, les funcionalitats que presenta són lleugerament diferents a les citades anteriorment. Per ser més concrets, aquest rol d'usuari permetrà manegar els usuaris de la aplicació, manegar els productes de l'establiment i tenir un seguiment de totes les ventes realitzades amb la possibilitat de consultar quin client ha fet cada compra.
 \end{itemize}
 
-Finalment, cal destacar que els requeriments tècnics a nivell de Android són que la nostre App ha de ser compatible amb la SDK 15 en amunt i una versió de Android 4.4.0 o superior. No obstant, se'ns ha demanat un disseny i programació optimitzats per a la SDK 22 i versió de Android 5 o superior.
+Finalment, cal destacar que els requeriments tècnics a nivell de Android són que la nostre App ha de ser compatible amb la SDK 15 en amunt i una versió de Android 4.4.0 o superior. No obstant, se'ns ha demanat un disseny i programació optimitzats per a la SDK 22 i versió de Android 5 o superior. 
 
 
 \section{Diagrama de classes}
@@ -90,10 +90,12 @@ Aquests objectes contenen els mateixos atributs que la taula corresponent a SQLi
 
 La seva utilitat és persistir en memòria principal la informació recuperada de la base de dades i poder operar amb aquesta.
 
-Tots els objectes utilitzats en aquest paquet hereten de DAObjectBase, que bàsicament conté l'atribut "id", comú en tots els objectes de la base de dades.
+Tots els objectes utilitzats en aquest paquet hereten de DAObjectBase, que bàsicament conté l'atribut id, comú en tots els objectes de la base de dades.
 	\begin{center}
 	\includegraphics[scale=0.5]{img/2.png}
 	 \end{center}
+	 
+	 \newpage
 	 	 Tal i com es pot apreciar a la imatge anterior, per a la realització de la nostre pràctica, ens hem ajudat dels adapters per tal d'inflar de forma dinàmica i eficient diversos Layouts o ListViews.\\
 	
 	Per fer-ho, hem hagut d'heretar d'una de les classes base d'Adapters que proporciona Android que, en el nostre cas, ha estat la classe BaseAdapter.
@@ -141,11 +143,12 @@ Per resoldre la pràctica s'han utilitzat les taules que es mostren a la figura 
 
 En primer lloc tenim la taula usuaris que guarda el correu i la contrasenya dels usuaris. Aquesta informació s'utilitza posteriorment per verificar i controlar l'accés a l'aplicació. El camp contrasenya utilitza la codificació SHA-256 per encriptar les dades.\\
 
+\newpage
+
 La taula usuaris es relaciona amb la taula compra que serveix per emmagatzemar les diferents operacions de compra que realitza l'usuari.\\
 
 La taula producte guarda la informació recuperada del WS i creada per l'usuari. Aquesta taula es relaciona amb la taula tag a través de la taula relacional producte{\_}tag. Dins la mateixa taula producte no es podia guarda la id que es proporcionava com a identificador de la fila, ja que al poder generar informació des de dues opcions diferents, podien col·lidir els identificadors. Es va solucionar el problema creant un identificador únic per la nostra base de dades local i emmagatzemant la id del servidor remot en una columna anomenada id{\_}remot.
 
-\newpage
 \section{Conclusions}
 Les conclusions de la realització d'aquesta pràctica de llenguatges de programació són:\\
 

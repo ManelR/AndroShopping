@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="org.projectes.androidshopping.activities.ManageUsersActivity">
 
-    <item android:id="@+id/activity_manageUsers_menu_addItem" android:icon="@android:drawable/ic_input_add" android:title="@string/activity_manageUsers_menu_addItem"
+    <item android:id="@+id/activity_manageUsers_menu_addItem" android:icon="@mipmap/ic_add_button" android:title="@string/activity_manageUsers_menu_addItem"
         android:orderInCategory="1" app:showAsAction="ifRoom" />
 
 </menu>
